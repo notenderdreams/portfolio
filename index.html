@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Archive of Sajid Al Nahian — CSE undergraduate, low-level systems programmer (Rust, C), 3D environment designer, music composer, and film colorist."
+    />
+    <meta name="theme-color" content="#050507" />
+    <title>Sajid Al Nahian — systems &amp; sound</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=Plus+Jakarta+Sans:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- Film Grain Layer -->
+    <div class="film-grain" aria-hidden="true"></div>
+
+    <!-- Header Navigation -->
+    <header class="site-header">
+      <a class="brand-mark" href="#top">sajid al nahian</a>
+      <nav class="site-nav" aria-label="Main Navigation">
+        <a href="#work">work</a>
+        <a href="#about">about</a>
+        <a href="#toolbox">toolbox</a>
+        <a href="#contact">contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <!-- Hero Section -->
+      <section class="container hero-section">
+        <!-- Flowing Custom Calligraphy Signature Image Overlapping Banner -->
+        <div class="letterbox-wrapper">
+          <img
+            class="hero-signature-img"
+            src="sajid.png"
+            alt="Sajid Al Nahian Calligraphy Signature"
+          />
+          <img
+            class="letterbox-banner"
+            src="blurry_cropped.jpg"
+            alt="Abstract urban twilight with motion blur light trails"
+          />
+        </div>
+
+        <!-- Quiet Metadata Row directly below image -->
+        <div class="hero-meta-row">
+          <span>げつようび (dhaka, bd)</span>
+          <span id="archive-hero-date">01 12 26</span>
+          <span>archived by sajid</span>
+        </div>
+
+        <!-- Tracked All-Caps Block Prose -->
+        <div class="all-caps-prose">
+          BUILDING LOW-LEVEL SYSTEMS IN RUST AND C, UNDERSTANDING THAT MASTERY TAKES TIME. NOT EVERY LINE SHOWS IMMEDIATE PROGRESS, YET NOTHING IS WASTED. GROWTH IS HAPPENING EVEN WHEN BARE-METAL CODE, 3D SCENES, AND AMBIENT SOUNDSCAPES FEEL INVISIBLE.
+        </div>
+      </section>
+
+      <!-- Selected Works / Pet Projects -->
+      <section id="work" class="container section-spacer">
+        <div class="section-label">01 / selected pet projects</div>
+
+        <div class="works-list">
+          <!-- Work 01 -->
+          <article class="work-item">
+            <span class="work-num">01</span>
+            <div class="work-title-group">
+              <h3>VaporDSP Engine</h3>
+              <p>A real-time SIMD audio synthesis engine built in Rust with C-ABI bindings for low-latency audio processing.</p>
+            </div>
+            <div class="work-meta">
+              <span class="fav-tag">Rust · C API</span>
+              <span>Audio DSP / Systems</span>
+            </div>
+          </article>
+
+          <!-- Work 02 -->
+          <article class="work-item">
+            <span class="work-num">02</span>
+            <div class="work-title-group">
+              <h3>Obsidian Citadel</h3>
+              <p>A cinematic 3D environment study created in Blender and rendered real-time in Unreal Engine 5 with Nanite &amp; Lumen.</p>
+            </div>
+            <div class="work-meta">
+              <span>Unreal Engine 5</span>
+              <span>Blender 3D</span>
+            </div>
+          </article>
+
+          <!-- Work 03 -->
+          <article class="work-item">
+            <span class="work-num">03</span>
+            <div class="work-title-group">
+              <h3>NullKern</h3>
+              <p>A bare-metal x86-64 microkernel written in C and Assembly featuring virtual memory paging and thread scheduling.</p>
+            </div>
+            <div class="work-meta">
+              <span class="fav-tag">C · Assembly</span>
+              <span>x86-64 OS Kernel</span>
+            </div>
+          </article>
+
+          <!-- Work 04 -->
+          <article class="work-item">
+            <span class="work-num">04</span>
+            <div class="work-title-group">
+              <h3>Noiseless Night EP</h3>
+              <p>Ambient electronic compositions crafted with analog synthesis, granular textures, and spatial mixing in Ableton Live.</p>
+            </div>
+            <div class="work-meta">
+              <span>Ableton Live</span>
+              <span>Sound Composition</span>
+            </div>
+          </article>
+
+          <!-- Work 05 -->
+          <article class="work-item">
+            <span class="work-num">05</span>
+            <div class="work-title-group">
+              <h3>Monochrome Solitude</h3>
+              <p>Short film cinematic edit and ACES color grading exploring film print emulation and color science in DaVinci Resolve.</p>
+            </div>
+            <div class="work-meta">
+              <span>DaVinci Resolve</span>
+              <span>Affinity</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- About Section -->
+      <section id="about" class="container section-spacer">
+        <div class="section-label">02 / about &amp; note</div>
+        
+        <div class="about-block">
+          <p>
+            I am a <b>computer science &amp; engineering undergraduate</b> based in Dhaka, BD.
+          </p>
+          <p class="about-quote">
+            "Technology and art live in the same space—one is the structure of memory, the other is how it feels."
+          </p>
+          <p>
+            My work moves quietly between low-level systems (profiling memory allocations in <b>Rust</b> and <b>C</b>), scoring music in <b>Ableton Live</b>, shaping 3D environments in <b>Blender</b> and <b>Unreal Engine</b>, grading film frames in <b>DaVinci Resolve</b>, and writing code in <b>Zed</b>.
+          </p>
+        </div>
+      </section>
+
+      <!-- Toolbox & Software Section -->
+      <section id="toolbox" class="container section-spacer">
+        <div class="section-label">03 / drawer inventory</div>
+
+        <div class="toolbox-grid">
+          <div class="toolbox-column">
+            <h4>Programming Languages</h4>
+            <ul class="tool-list">
+              <li><b>Rust</b> <span class="fav-star">* favorite</span></li>
+              <li><b>C</b> <span class="fav-star">* favorite</span></li>
+              <li>C++</li>
+              <li>Zig</li>
+              <li>Go</li>
+              <li>Python</li>
+              <li>TypeScript</li>
+              <li>JavaScript</li>
+              <li>Java</li>
+            </ul>
+          </div>
+
+          <div class="toolbox-column">
+            <h4>Creative &amp; Workspace Tools</h4>
+            <ul class="tool-list">
+              <li><b>Ableton Live</b> — audio composition</li>
+              <li><b>Blender</b> — 3D modeling &amp; geometry</li>
+              <li><b>Unreal Engine</b> — realtime scenes</li>
+              <li><b>DaVinci Resolve</b> — video edit &amp; color grade</li>
+              <li><b>Affinity</b> — graphic asset design</li>
+              <li><b>Zed</b> — daily driver code editor</li>
+              <li>Linux / Git / Neovim</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section id="contact" class="container contact-block">
+        <div class="section-label">04 / connect</div>
+        <div>
+          <a class="contact-email" href="mailto:sajidalnahian@example.com">
+            sajidalnahian@example.com
+          </a>
+          <div class="contact-links">
+            <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://artstation.com" target="_blank" rel="noopener">ArtStation</a>
+            <a href="https://soundcloud.com" target="_blank" rel="noopener">SoundCloud</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Quiet Footer -->
+    <footer class="site-footer">
+      <div>
+        archived by <img class="footer-signature-img" src="sajid.png" alt="Sajid Al Nahian Signature" />
+      </div>
+      <div id="archive-date">01 12 26</div>
+    </footer>
+  </body>
+</html>
