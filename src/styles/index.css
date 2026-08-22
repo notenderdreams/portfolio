@@ -1,5 +1,5 @@
 /* ==========================================================================
-   SAJID AL NAHIAN — TYPOGRAPHY & CINEMATIC EDITORIAL PORTFOLIO
+   SAJID AL NAHIAN — NOTENDERDREAMS PORTFOLIO STYLES
    ========================================================================== */
 
 :root {
@@ -168,8 +168,9 @@ a:hover {
 
 /* Hero Section */
 .hero-section {
-  padding: clamp(2rem, 5vh, 4rem) 0 2.5rem;
   position: relative;
+  z-index: 1;
+  padding: clamp(2rem, 5vh, 4rem) 0 2.5rem;
   max-width: min(88rem, 96vw);
 }
 

@@ -1,1 +1,16 @@
+# Dependencies
+node_modules/
+
+# Production build outputs
+dist/
+dist-ssr/
+
+# TypeScript build cache
+tsconfig.tsbuildinfo
+*.tsbuildinfo
+
+# OS / Editor
 .DS_Store
+.vscode/
+.idea/
+*.local

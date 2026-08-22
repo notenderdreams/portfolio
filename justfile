@@ -1,22 +1,24 @@
-# Justfile for running the static portfolio site
+# Justfile for notenderdreams (React + Vite + Bun)
 
 # Default recipe: list available commands
 default:
     @just --list
 
-# Start a local network development server accessible from your phone and computer
-serve port="8000":
-    @python3 -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); (s.connect(('8.8.8.8', 80)), print('\n' + '='*50 + '\n🚀 Server running!\n💻 Local (Mac):   http://localhost:{{port}}\n📱 Phone (Wi-Fi): http://' + s.getsockname()[0] + ':{{port}}\n' + '='*50 + '\n'), s.close())"
-    python3 -m http.server {{port}} --bind 0.0.0.0
+# Install project dependencies with bun
+install:
+    bun install
 
-# Start the server, open the browser on your Mac, and print phone URL
+# Start local and network dev server with bun (accessible on Mac and Phone)
 dev port="8000":
-    @python3 -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); (s.connect(('8.8.8.8', 80)), print('\n' + '='*50 + '\n🚀 Server running!\n💻 Local (Mac):   http://localhost:{{port}}\n📱 Phone (Wi-Fi): http://' + s.getsockname()[0] + ':{{port}}\n' + '='*50 + '\n'), s.close())"
-    @open http://localhost:{{port}} || true
-    python3 -m http.server {{port}} --bind 0.0.0.0
+    @python3 -c "import socket; s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM); (s.connect(('8.8.8.8', 80)), print('\n' + '='*50 + '\n🚀 notenderdreams running with bun!\n💻 Local (Mac):   http://localhost:{{port}}\n📱 Phone (Wi-Fi): http://' + s.getsockname()[0] + ':{{port}}\n' + '='*50 + '\n'), s.close())"
+    bun run dev --port {{port}}
 
 alias run := dev
 
-# Alternative server using Node/npx serve
-serve-node port="8000":
-    npx -y serve . -l {{port}}
+# Build production bundle with bun
+build:
+    bun run build
+
+# Preview production build locally and on network
+preview port="8000":
+    bun run preview --port {{port}}
