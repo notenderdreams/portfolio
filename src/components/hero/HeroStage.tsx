@@ -17,7 +17,7 @@ export const HeroStage: React.FC = () => {
         <img
           ref={bannerRef}
           className="letterbox-banner"
-          src="/banner.png"
+          src="/images/banner.png"
           alt="Artistic collage: shader nodes, soundscapes, cinematography, and Bengali calligraphy"
         />
       </div>

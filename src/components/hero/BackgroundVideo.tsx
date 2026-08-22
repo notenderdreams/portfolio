@@ -34,14 +34,14 @@ export const BackgroundVideo: React.FC = () => {
         loop
         muted
         playsInline
-        poster="/landing_poster.jpg"
+        poster="/images/landing_poster.jpg"
         preload="auto"
         disablePictureInPicture
         // @ts-expect-error standard webkit / non-standard attribute
         disableremoteplayback="true"
       >
-        <source src="/landing_bg.webm" type="video/webm" />
-        <source src="/landing_bg.mp4" type="video/mp4" />
+        <source src="/video/landing_bg.webm" type="video/webm" />
+        <source src="/video/landing_bg.mp4" type="video/mp4" />
       </video>
       <div className="landing-bg-overlay" />
     </div>
