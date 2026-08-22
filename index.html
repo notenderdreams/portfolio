@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=Plus+Jakarta+Sans:wght@300;400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=JetBrains+Mono:wght@300;400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;1,6..72,300&family=Plus+Jakarta+Sans:wght@300;400&family=Reenie+Beanie&display=swap"
       rel="stylesheet"
     />
 
@@ -25,32 +25,86 @@
     <!-- Film Grain Layer -->
     <div class="film-grain" aria-hidden="true"></div>
 
-    <!-- Header Navigation -->
-    <header class="site-header">
-      <a class="brand-mark" href="#top">sajid al nahian</a>
-      <nav class="site-nav" aria-label="Main Navigation">
-        <a href="#work">work</a>
-        <a href="#about">about</a>
-        <a href="#toolbox">toolbox</a>
-        <a href="#contact">contact</a>
-      </nav>
-    </header>
+    <!-- Landing Screen with Cinematic Animated Looping Background Video -->
+    <div class="landing-screen">
+      <!-- Background Animated Video & Cinematic Overlay -->
+      <div class="landing-bg-media" aria-hidden="true">
+        <video
+          class="landing-bg-video"
+          autoplay
+          loop
+          muted
+          playsinline
+          poster="landing_poster.jpg"
+          preload="auto"
+          disablePictureInPicture
+          disableremoteplayback
+        >
+          <source src="landing_bg.webm" type="video/webm" />
+          <source src="landing_bg.mp4" type="video/mp4" />
+        </video>
+        <div class="landing-bg-overlay"></div>
+      </div>
 
-    <main id="top">
+      <!-- Header Navigation -->
+      <header class="site-header">
+        <a class="brand-mark" href="#top">sajid al nahian</a>
+        <nav class="site-nav" aria-label="Main Navigation">
+          <a href="#work">work</a>
+          <a href="#about">about</a>
+          <a href="#toolbox">toolbox</a>
+          <a href="#contact">contact</a>
+        </nav>
+      </header>
+
       <!-- Hero Section -->
-      <section class="container hero-section">
-        <!-- Flowing Custom Calligraphy Signature Image Overlapping Banner -->
-        <div class="letterbox-wrapper">
-          <img
-            class="hero-signature-img"
-            src="sajid.png"
-            alt="Sajid Al Nahian Calligraphy Signature"
-          />
-          <img
-            class="letterbox-banner"
-            src="blurry_cropped.jpg"
-            alt="Abstract urban twilight with motion blur light trails"
-          />
+      <section id="top" class="container hero-section">
+        <!-- Top Handwritten Thoughts Row -->
+        <div class="hero-top-thoughts" aria-hidden="true">
+          <div class="top-thought thought-left tilt-left-2">
+            <span>turned up volume density and my GPU started crying</span>
+            <img class="doodle-icon doodle-down-right doodle-md" src="assets/doodles/arrows/arrow-11.svg" alt="" />
+          </div>
+          <div class="top-thought thought-right tilt-right-1">
+            <img class="doodle-icon doodle-down-left doodle-md" src="assets/doodles/arrows/arrow-13.svg" alt="" />
+            <span>i don't know color grading I just play with random nodes</span>
+          </div>
+        </div>
+
+        <!-- Hero Stage with Flanking Thought Notes -->
+        <div class="hero-stage">
+          <!-- Left Side Flank Notes -->
+          <aside class="hero-flank hero-flank-left" aria-hidden="true">
+            <div class="flank-note tilt-left-1">
+              <span>UE5 crashed without saving · rebuilding the fog from memory</span>
+              <img class="doodle-icon doodle-arrow-right doodle-lg" src="assets/doodles/arrows/arrow-1.svg" alt="" />
+            </div>
+            <div class="flank-note tilt-left-3">
+              <span>segfault at 3 AM · borrow checker fighting for its life</span>
+              <img class="doodle-icon doodle-arrow-right doodle-md" src="assets/doodles/arrows/arrow-14.svg" alt="" />
+            </div>
+          </aside>
+
+          <!-- Center Collage Image -->
+          <div class="letterbox-wrapper">
+            <img
+              class="letterbox-banner"
+              src="banner.png"
+              alt="Artistic collage: shader nodes, soundscapes, cinematography, and Bengali calligraphy"
+            />
+          </div>
+
+          <!-- Right Side Flank Notes -->
+          <aside class="hero-flank hero-flank-right" aria-hidden="true">
+            <div class="flank-note tilt-right-2">
+              <img class="doodle-icon doodle-arrow-left doodle-curve" src="assets/doodles/arrows/arrow-31.svg" alt="" />
+              <span>made a 4-bar loop and listened to it for 6 hours straight</span>
+            </div>
+            <div class="flank-note note-small tilt-right-4">
+              <img class="doodle-icon doodle-star doodle-accent" src="assets/doodles/misc/misc-10.svg" alt="" />
+              <span>not a designer · just moving pixels by 1px until it looks less broken</span>
+            </div>
+          </aside>
         </div>
 
         <!-- Quiet Metadata Row directly below image -->
@@ -65,7 +119,9 @@
           BUILDING LOW-LEVEL SYSTEMS IN RUST AND C, UNDERSTANDING THAT MASTERY TAKES TIME. NOT EVERY LINE SHOWS IMMEDIATE PROGRESS, YET NOTHING IS WASTED. GROWTH IS HAPPENING EVEN WHEN BARE-METAL CODE, 3D SCENES, AND AMBIENT SOUNDSCAPES FEEL INVISIBLE.
         </div>
       </section>
+    </div>
 
+    <main>
       <!-- Selected Works / Pet Projects -->
       <section id="work" class="container section-spacer">
         <div class="section-label">01 / selected pet projects</div>
@@ -209,9 +265,7 @@
 
     <!-- Quiet Footer -->
     <footer class="site-footer">
-      <div>
-        archived by <img class="footer-signature-img" src="sajid.png" alt="Sajid Al Nahian Signature" />
-      </div>
+      <div>archived by sajid al nahian</div>
       <div id="archive-date">01 12 26</div>
     </footer>
   </body>

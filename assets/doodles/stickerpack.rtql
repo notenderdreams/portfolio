@@ -1,0 +1,1393 @@
+{
+  "id": "dddoodle-pack",
+  "name": "Dddoodle Pack",
+  "stickers": [
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-48.svg",
+      "id": "dddoodle-pack_misc_misc-48",
+      "name": "misc misc 48",
+      "path": "misc/misc-48.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-49.svg",
+      "id": "dddoodle-pack_misc_misc-49",
+      "name": "misc misc 49",
+      "path": "misc/misc-49.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-58.svg",
+      "id": "dddoodle-pack_misc_misc-58",
+      "name": "misc misc 58",
+      "path": "misc/misc-58.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-14.svg",
+      "id": "dddoodle-pack_misc_misc-14",
+      "name": "misc misc 14",
+      "path": "misc/misc-14.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-28.svg",
+      "id": "dddoodle-pack_misc_misc-28",
+      "name": "misc misc 28",
+      "path": "misc/misc-28.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-29.svg",
+      "id": "dddoodle-pack_misc_misc-29",
+      "name": "misc misc 29",
+      "path": "misc/misc-29.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-15.svg",
+      "id": "dddoodle-pack_misc_misc-15",
+      "name": "misc misc 15",
+      "path": "misc/misc-15.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-17.svg",
+      "id": "dddoodle-pack_misc_misc-17",
+      "name": "misc misc 17",
+      "path": "misc/misc-17.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-16.svg",
+      "id": "dddoodle-pack_misc_misc-16",
+      "name": "misc misc 16",
+      "path": "misc/misc-16.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-12.svg",
+      "id": "dddoodle-pack_misc_misc-12",
+      "name": "misc misc 12",
+      "path": "misc/misc-12.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-13.svg",
+      "id": "dddoodle-pack_misc_misc-13",
+      "name": "misc misc 13",
+      "path": "misc/misc-13.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-8.svg",
+      "id": "dddoodle-pack_misc_misc-8",
+      "name": "misc misc 8",
+      "path": "misc/misc-8.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-39.svg",
+      "id": "dddoodle-pack_misc_misc-39",
+      "name": "misc misc 39",
+      "path": "misc/misc-39.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-11.svg",
+      "id": "dddoodle-pack_misc_misc-11",
+      "name": "misc misc 11",
+      "path": "misc/misc-11.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-10.svg",
+      "id": "dddoodle-pack_misc_misc-10",
+      "name": "misc misc 10",
+      "path": "misc/misc-10.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-38.svg",
+      "id": "dddoodle-pack_misc_misc-38",
+      "name": "misc misc 38",
+      "path": "misc/misc-38.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-9.svg",
+      "id": "dddoodle-pack_misc_misc-9",
+      "name": "misc misc 9",
+      "path": "misc/misc-9.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-4.svg",
+      "id": "dddoodle-pack_misc_misc-4",
+      "name": "misc misc 4",
+      "path": "misc/misc-4.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-21.svg",
+      "id": "dddoodle-pack_misc_misc-21",
+      "name": "misc misc 21",
+      "path": "misc/misc-21.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-35.svg",
+      "id": "dddoodle-pack_misc_misc-35",
+      "name": "misc misc 35",
+      "path": "misc/misc-35.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-34.svg",
+      "id": "dddoodle-pack_misc_misc-34",
+      "name": "misc misc 34",
+      "path": "misc/misc-34.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-20.svg",
+      "id": "dddoodle-pack_misc_misc-20",
+      "name": "misc misc 20",
+      "path": "misc/misc-20.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-5.svg",
+      "id": "dddoodle-pack_misc_misc-5",
+      "name": "misc misc 5",
+      "path": "misc/misc-5.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-7.svg",
+      "id": "dddoodle-pack_misc_misc-7",
+      "name": "misc misc 7",
+      "path": "misc/misc-7.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-36.svg",
+      "id": "dddoodle-pack_misc_misc-36",
+      "name": "misc misc 36",
+      "path": "misc/misc-36.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-22.svg",
+      "id": "dddoodle-pack_misc_misc-22",
+      "name": "misc misc 22",
+      "path": "misc/misc-22.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-23.svg",
+      "id": "dddoodle-pack_misc_misc-23",
+      "name": "misc misc 23",
+      "path": "misc/misc-23.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-37.svg",
+      "id": "dddoodle-pack_misc_misc-37",
+      "name": "misc misc 37",
+      "path": "misc/misc-37.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-6.svg",
+      "id": "dddoodle-pack_misc_misc-6",
+      "name": "misc misc 6",
+      "path": "misc/misc-6.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-2.svg",
+      "id": "dddoodle-pack_misc_misc-2",
+      "name": "misc misc 2",
+      "path": "misc/misc-2.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-33.svg",
+      "id": "dddoodle-pack_misc_misc-33",
+      "name": "misc misc 33",
+      "path": "misc/misc-33.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-27.svg",
+      "id": "dddoodle-pack_misc_misc-27",
+      "name": "misc misc 27",
+      "path": "misc/misc-27.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-26.svg",
+      "id": "dddoodle-pack_misc_misc-26",
+      "name": "misc misc 26",
+      "path": "misc/misc-26.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-32.svg",
+      "id": "dddoodle-pack_misc_misc-32",
+      "name": "misc misc 32",
+      "path": "misc/misc-32.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-3.svg",
+      "id": "dddoodle-pack_misc_misc-3",
+      "name": "misc misc 3",
+      "path": "misc/misc-3.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-1.svg",
+      "id": "dddoodle-pack_misc_misc-1",
+      "name": "misc misc 1",
+      "path": "misc/misc-1.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-18.svg",
+      "id": "dddoodle-pack_misc_misc-18",
+      "name": "misc misc 18",
+      "path": "misc/misc-18.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-24.svg",
+      "id": "dddoodle-pack_misc_misc-24",
+      "name": "misc misc 24",
+      "path": "misc/misc-24.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-30.svg",
+      "id": "dddoodle-pack_misc_misc-30",
+      "name": "misc misc 30",
+      "path": "misc/misc-30.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-31.svg",
+      "id": "dddoodle-pack_misc_misc-31",
+      "name": "misc misc 31",
+      "path": "misc/misc-31.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-25.svg",
+      "id": "dddoodle-pack_misc_misc-25",
+      "name": "misc misc 25",
+      "path": "misc/misc-25.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-19.svg",
+      "id": "dddoodle-pack_misc_misc-19",
+      "name": "misc misc 19",
+      "path": "misc/misc-19.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-42.svg",
+      "id": "dddoodle-pack_misc_misc-42",
+      "name": "misc misc 42",
+      "path": "misc/misc-42.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-56.svg",
+      "id": "dddoodle-pack_misc_misc-56",
+      "name": "misc misc 56",
+      "path": "misc/misc-56.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-57.svg",
+      "id": "dddoodle-pack_misc_misc-57",
+      "name": "misc misc 57",
+      "path": "misc/misc-57.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-43.svg",
+      "id": "dddoodle-pack_misc_misc-43",
+      "name": "misc misc 43",
+      "path": "misc/misc-43.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-55.svg",
+      "id": "dddoodle-pack_misc_misc-55",
+      "name": "misc misc 55",
+      "path": "misc/misc-55.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-41.svg",
+      "id": "dddoodle-pack_misc_misc-41",
+      "name": "misc misc 41",
+      "path": "misc/misc-41.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-40.svg",
+      "id": "dddoodle-pack_misc_misc-40",
+      "name": "misc misc 40",
+      "path": "misc/misc-40.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-54.svg",
+      "id": "dddoodle-pack_misc_misc-54",
+      "name": "misc misc 54",
+      "path": "misc/misc-54.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-50.svg",
+      "id": "dddoodle-pack_misc_misc-50",
+      "name": "misc misc 50",
+      "path": "misc/misc-50.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-44.svg",
+      "id": "dddoodle-pack_misc_misc-44",
+      "name": "misc misc 44",
+      "path": "misc/misc-44.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-45.svg",
+      "id": "dddoodle-pack_misc_misc-45",
+      "name": "misc misc 45",
+      "path": "misc/misc-45.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-51.svg",
+      "id": "dddoodle-pack_misc_misc-51",
+      "name": "misc misc 51",
+      "path": "misc/misc-51.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-47.svg",
+      "id": "dddoodle-pack_misc_misc-47",
+      "name": "misc misc 47",
+      "path": "misc/misc-47.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-53.svg",
+      "id": "dddoodle-pack_misc_misc-53",
+      "name": "misc misc 53",
+      "path": "misc/misc-53.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-52.svg",
+      "id": "dddoodle-pack_misc_misc-52",
+      "name": "misc misc 52",
+      "path": "misc/misc-52.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "misc",
+      "defaultColor": "#1E293B",
+      "file": "misc/misc-46.svg",
+      "id": "dddoodle-pack_misc_misc-46",
+      "name": "misc misc 46",
+      "path": "misc/misc-46.svg",
+      "tags": [
+        "misc"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-18.svg",
+      "id": "dddoodle-pack_circles_circle-18",
+      "name": "circles circle 18",
+      "path": "circles/circle-18.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-1.svg",
+      "id": "dddoodle-pack_circles_circle-1",
+      "name": "circles circle 1",
+      "path": "circles/circle-1.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-3.svg",
+      "id": "dddoodle-pack_circles_circle-3",
+      "name": "circles circle 3",
+      "path": "circles/circle-3.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-2.svg",
+      "id": "dddoodle-pack_circles_circle-2",
+      "name": "circles circle 2",
+      "path": "circles/circle-2.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-6.svg",
+      "id": "dddoodle-pack_circles_circle-6",
+      "name": "circles circle 6",
+      "path": "circles/circle-6.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-7.svg",
+      "id": "dddoodle-pack_circles_circle-7",
+      "name": "circles circle 7",
+      "path": "circles/circle-7.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-5.svg",
+      "id": "dddoodle-pack_circles_circle-5",
+      "name": "circles circle 5",
+      "path": "circles/circle-5.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-4.svg",
+      "id": "dddoodle-pack_circles_circle-4",
+      "name": "circles circle 4",
+      "path": "circles/circle-4.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-11.svg",
+      "id": "dddoodle-pack_circles_circle-11",
+      "name": "circles circle 11",
+      "path": "circles/circle-11.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-9.svg",
+      "id": "dddoodle-pack_circles_circle-9",
+      "name": "circles circle 9",
+      "path": "circles/circle-9.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-8.svg",
+      "id": "dddoodle-pack_circles_circle-8",
+      "name": "circles circle 8",
+      "path": "circles/circle-8.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-10.svg",
+      "id": "dddoodle-pack_circles_circle-10",
+      "name": "circles circle 10",
+      "path": "circles/circle-10.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-12.svg",
+      "id": "dddoodle-pack_circles_circle-12",
+      "name": "circles circle 12",
+      "path": "circles/circle-12.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-13.svg",
+      "id": "dddoodle-pack_circles_circle-13",
+      "name": "circles circle 13",
+      "path": "circles/circle-13.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-17.svg",
+      "id": "dddoodle-pack_circles_circle-17",
+      "name": "circles circle 17",
+      "path": "circles/circle-17.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-16.svg",
+      "id": "dddoodle-pack_circles_circle-16",
+      "name": "circles circle 16",
+      "path": "circles/circle-16.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-14.svg",
+      "id": "dddoodle-pack_circles_circle-14",
+      "name": "circles circle 14",
+      "path": "circles/circle-14.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "circles",
+      "defaultColor": "#1E293B",
+      "file": "circles/circle-15.svg",
+      "id": "dddoodle-pack_circles_circle-15",
+      "name": "circles circle 15",
+      "path": "circles/circle-15.svg",
+      "tags": [
+        "circles"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-6.svg",
+      "id": "dddoodle-pack_arrows_arrow-6",
+      "name": "arrows arrow 6",
+      "path": "arrows/arrow-6.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-7.svg",
+      "id": "dddoodle-pack_arrows_arrow-7",
+      "name": "arrows arrow 7",
+      "path": "arrows/arrow-7.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-5.svg",
+      "id": "dddoodle-pack_arrows_arrow-5",
+      "name": "arrows arrow 5",
+      "path": "arrows/arrow-5.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-4.svg",
+      "id": "dddoodle-pack_arrows_arrow-4",
+      "name": "arrows arrow 4",
+      "path": "arrows/arrow-4.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-1.svg",
+      "id": "dddoodle-pack_arrows_arrow-1",
+      "name": "arrows arrow 1",
+      "path": "arrows/arrow-1.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-3.svg",
+      "id": "dddoodle-pack_arrows_arrow-3",
+      "name": "arrows arrow 3",
+      "path": "arrows/arrow-3.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-2.svg",
+      "id": "dddoodle-pack_arrows_arrow-2",
+      "name": "arrows arrow 2",
+      "path": "arrows/arrow-2.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-26.svg",
+      "id": "dddoodle-pack_arrows_arrow-26",
+      "name": "arrows arrow 26",
+      "path": "arrows/arrow-26.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-32.svg",
+      "id": "dddoodle-pack_arrows_arrow-32",
+      "name": "arrows arrow 32",
+      "path": "arrows/arrow-32.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-33.svg",
+      "id": "dddoodle-pack_arrows_arrow-33",
+      "name": "arrows arrow 33",
+      "path": "arrows/arrow-33.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-27.svg",
+      "id": "dddoodle-pack_arrows_arrow-27",
+      "name": "arrows arrow 27",
+      "path": "arrows/arrow-27.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-31.svg",
+      "id": "dddoodle-pack_arrows_arrow-31",
+      "name": "arrows arrow 31",
+      "path": "arrows/arrow-31.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-25.svg",
+      "id": "dddoodle-pack_arrows_arrow-25",
+      "name": "arrows arrow 25",
+      "path": "arrows/arrow-25.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-19.svg",
+      "id": "dddoodle-pack_arrows_arrow-19",
+      "name": "arrows arrow 19",
+      "path": "arrows/arrow-19.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-18.svg",
+      "id": "dddoodle-pack_arrows_arrow-18",
+      "name": "arrows arrow 18",
+      "path": "arrows/arrow-18.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-24.svg",
+      "id": "dddoodle-pack_arrows_arrow-24",
+      "name": "arrows arrow 24",
+      "path": "arrows/arrow-24.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-30.svg",
+      "id": "dddoodle-pack_arrows_arrow-30",
+      "name": "arrows arrow 30",
+      "path": "arrows/arrow-30.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-34.svg",
+      "id": "dddoodle-pack_arrows_arrow-34",
+      "name": "arrows arrow 34",
+      "path": "arrows/arrow-34.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-20.svg",
+      "id": "dddoodle-pack_arrows_arrow-20",
+      "name": "arrows arrow 20",
+      "path": "arrows/arrow-20.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-21.svg",
+      "id": "dddoodle-pack_arrows_arrow-21",
+      "name": "arrows arrow 21",
+      "path": "arrows/arrow-21.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-35.svg",
+      "id": "dddoodle-pack_arrows_arrow-35",
+      "name": "arrows arrow 35",
+      "path": "arrows/arrow-35.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-23.svg",
+      "id": "dddoodle-pack_arrows_arrow-23",
+      "name": "arrows arrow 23",
+      "path": "arrows/arrow-23.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-36.svg",
+      "id": "dddoodle-pack_arrows_arrow-36",
+      "name": "arrows arrow 36",
+      "path": "arrows/arrow-36.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-22.svg",
+      "id": "dddoodle-pack_arrows_arrow-22",
+      "name": "arrows arrow 22",
+      "path": "arrows/arrow-22.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-13.svg",
+      "id": "dddoodle-pack_arrows_arrow-13",
+      "name": "arrows arrow 13",
+      "path": "arrows/arrow-13.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-12.svg",
+      "id": "dddoodle-pack_arrows_arrow-12",
+      "name": "arrows arrow 12",
+      "path": "arrows/arrow-12.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-10.svg",
+      "id": "dddoodle-pack_arrows_arrow-10",
+      "name": "arrows arrow 10",
+      "path": "arrows/arrow-10.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-11.svg",
+      "id": "dddoodle-pack_arrows_arrow-11",
+      "name": "arrows arrow 11",
+      "path": "arrows/arrow-11.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-29.svg",
+      "id": "dddoodle-pack_arrows_arrow-29",
+      "name": "arrows arrow 29",
+      "path": "arrows/arrow-29.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-15.svg",
+      "id": "dddoodle-pack_arrows_arrow-15",
+      "name": "arrows arrow 15",
+      "path": "arrows/arrow-15.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-14.svg",
+      "id": "dddoodle-pack_arrows_arrow-14",
+      "name": "arrows arrow 14",
+      "path": "arrows/arrow-14.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-28.svg",
+      "id": "dddoodle-pack_arrows_arrow-28",
+      "name": "arrows arrow 28",
+      "path": "arrows/arrow-28.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-16.svg",
+      "id": "dddoodle-pack_arrows_arrow-16",
+      "name": "arrows arrow 16",
+      "path": "arrows/arrow-16.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-17.svg",
+      "id": "dddoodle-pack_arrows_arrow-17",
+      "name": "arrows arrow 17",
+      "path": "arrows/arrow-17.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-9.svg",
+      "id": "dddoodle-pack_arrows_arrow-9",
+      "name": "arrows arrow 9",
+      "path": "arrows/arrow-9.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "arrows",
+      "defaultColor": "#1E293B",
+      "file": "arrows/arrow-8.svg",
+      "id": "dddoodle-pack_arrows_arrow-8",
+      "name": "arrows arrow 8",
+      "path": "arrows/arrow-8.svg",
+      "tags": [
+        "arrows"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-6.svg",
+      "id": "dddoodle-pack_lines_line-6",
+      "name": "lines line 6",
+      "path": "lines/line-6.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-7.svg",
+      "id": "dddoodle-pack_lines_line-7",
+      "name": "lines line 7",
+      "path": "lines/line-7.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-5.svg",
+      "id": "dddoodle-pack_lines_line-5",
+      "name": "lines line 5",
+      "path": "lines/line-5.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-4.svg",
+      "id": "dddoodle-pack_lines_line-4",
+      "name": "lines line 4",
+      "path": "lines/line-4.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-1.svg",
+      "id": "dddoodle-pack_lines_line-1",
+      "name": "lines line 1",
+      "path": "lines/line-1.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-3.svg",
+      "id": "dddoodle-pack_lines_line-3",
+      "name": "lines line 3",
+      "path": "lines/line-3.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-2.svg",
+      "id": "dddoodle-pack_lines_line-2",
+      "name": "lines line 2",
+      "path": "lines/line-2.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-9.svg",
+      "id": "dddoodle-pack_lines_line-9",
+      "name": "lines line 9",
+      "path": "lines/line-9.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "lines",
+      "defaultColor": "#1E293B",
+      "file": "lines/line-8.svg",
+      "id": "dddoodle-pack_lines_line-8",
+      "name": "lines line 8",
+      "path": "lines/line-8.svg",
+      "tags": [
+        "lines"
+      ]
+    },
+    {
+      "category": "boxes",
+      "defaultColor": "#1E293B",
+      "file": "boxes/box-3.svg",
+      "id": "dddoodle-pack_boxes_box-3",
+      "name": "boxes box 3",
+      "path": "boxes/box-3.svg",
+      "tags": [
+        "boxes"
+      ]
+    },
+    {
+      "category": "boxes",
+      "defaultColor": "#1E293B",
+      "file": "boxes/box-2.svg",
+      "id": "dddoodle-pack_boxes_box-2",
+      "name": "boxes box 2",
+      "path": "boxes/box-2.svg",
+      "tags": [
+        "boxes"
+      ]
+    },
+    {
+      "category": "boxes",
+      "defaultColor": "#1E293B",
+      "file": "boxes/box-1.svg",
+      "id": "dddoodle-pack_boxes_box-1",
+      "name": "boxes box 1",
+      "path": "boxes/box-1.svg",
+      "tags": [
+        "boxes"
+      ]
+    },
+    {
+      "category": "boxes",
+      "defaultColor": "#1E293B",
+      "file": "boxes/box-5.svg",
+      "id": "dddoodle-pack_boxes_box-5",
+      "name": "boxes box 5",
+      "path": "boxes/box-5.svg",
+      "tags": [
+        "boxes"
+      ]
+    },
+    {
+      "category": "boxes",
+      "defaultColor": "#1E293B",
+      "file": "boxes/box-4.svg",
+      "id": "dddoodle-pack_boxes_box-4",
+      "name": "boxes box 4",
+      "path": "boxes/box-4.svg",
+      "tags": [
+        "boxes"
+      ]
+    }
+  ],
+  "tags": []
+}
