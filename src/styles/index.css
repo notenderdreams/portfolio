@@ -246,6 +246,78 @@ a:hover {
   transition: transform 0.4s var(--ease-smooth), filter 0.4s var(--ease-smooth);
 }
 
+/* Standalone DaVinci Resolve-inspired clip below the landing page */
+.landing-clip-section {
+  width: min(30rem, calc(100% - (2 * var(--pad))));
+  margin: clamp(3rem, 7vw, 6rem) auto 0;
+}
+
+.resolve-clip {
+  --resolve-blue: #4d86b2;
+  overflow: hidden;
+  margin: 0;
+  padding: 2px 2px 0;
+  background: #11161a;
+  border: 1px solid var(--resolve-blue);
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    0 12px 36px rgba(0, 0, 0, 0.42);
+}
+
+.resolve-clip-viewport {
+  position: relative;
+  aspect-ratio: 3.25 / 1;
+  overflow: hidden;
+  background: #080b0e;
+  border: 1px solid rgba(0, 0, 0, 0.95);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+.resolve-clip-viewport::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.22);
+}
+
+.resolve-clip-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  filter: contrast(1.02) saturate(0.96);
+}
+
+.resolve-clip-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 1.75rem;
+  margin: 2px -2px 0;
+  padding: 0 0.65rem;
+  color: #f5f8fb;
+  background: var(--resolve-blue);
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.resolve-link-icon {
+  width: 0.9rem;
+  height: 0.9rem;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 /* Flank Columns strictly on the Left & Right sides of the image */
 .hero-flank {
   display: flex;
