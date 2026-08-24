@@ -87,6 +87,7 @@ export const MidiPreview: React.FC<MidiPreviewProps> = ({ embedded = false }) =>
       <button
         ref={previewRef}
         className={`midi-preview${isPlaying ? ' is-playing' : ''}`}
+        data-cursor="play"
         type="button"
         aria-label="Play Gatekeeper MIDI composition"
         onPointerEnter={startPlayback}

@@ -49,6 +49,103 @@ body {
   min-height: 100vh;
 }
 
+@media (hover: hover) and (pointer: fine) {
+  body.custom-cursor-active,
+  body.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+.cursor-follower {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.cursor-circle {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  margin: -0.35rem 0 0 -0.35rem;
+  opacity: 0;
+  background: #ffffff;
+  border-radius: 50%;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  will-change: transform;
+  transition:
+    width 260ms var(--ease-out-expo),
+    height 260ms var(--ease-out-expo),
+    margin 260ms var(--ease-out-expo),
+    background-color 260ms ease,
+    opacity 150ms ease;
+}
+
+.cursor-play-copy,
+.cursor-headphones {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 180ms ease;
+}
+
+.cursor-play-copy {
+  inset: 0.28rem;
+  width: calc(100% - 0.56rem);
+  height: calc(100% - 0.56rem);
+  overflow: visible;
+  fill: #000000;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  animation: cursorCopySpin 10s linear infinite;
+}
+
+.cursor-headphones {
+  top: 50%;
+  left: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: #000000;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transform: translate(-50%, -50%);
+}
+
+.cursor-circle.is-visible {
+  opacity: 1;
+}
+
+.cursor-circle.is-interactive {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: -1.25rem 0 0 -1.25rem;
+}
+
+.cursor-circle.is-play {
+  width: 6.5rem;
+  height: 6.5rem;
+  margin: -3.25rem 0 0 -3.25rem;
+}
+
+.cursor-circle.is-play .cursor-play-copy,
+.cursor-circle.is-play .cursor-headphones {
+  opacity: 1;
+}
+
+@keyframes cursorCopySpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 ::selection {
   background: var(--ink);
   color: var(--bg);

@@ -1,5 +1,6 @@
 import React from 'react';
 import { FilmGrain } from './components/layout/FilmGrain';
+import { CursorFollower } from './components/layout/CursorFollower';
 import { LandingScreen } from './components/hero/LandingScreen';
 import { SelectedWorks } from './components/sections/SelectedWorks';
 import { AboutSection } from './components/sections/AboutSection';
@@ -15,6 +16,7 @@ export const App: React.FC = () => {
     <>
       {/* Film Grain Layer */}
       <FilmGrain />
+      <CursorFollower />
 
       {/* Landing Screen with Animated Video Background */}
       <LandingScreen />
