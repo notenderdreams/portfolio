@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-export const MidiPreview: React.FC = () => {
+interface MidiPreviewProps {
+  embedded?: boolean;
+}
+
+export const MidiPreview: React.FC<MidiPreviewProps> = ({ embedded = false }) => {
   const previewRef = useRef<HTMLButtonElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const animationFrameRef = useRef<number>();
@@ -76,14 +80,17 @@ export const MidiPreview: React.FC = () => {
   }, []);
 
   return (
-    <section className="midi-preview-section scroll-reveal" aria-label="Gatekeeper MIDI composition">
+    <section
+      className={`midi-preview-section${embedded ? ' is-embedded' : ' scroll-reveal'}`}
+      aria-label="Gatekeeper MIDI composition"
+    >
       <button
         ref={previewRef}
         className={`midi-preview${isPlaying ? ' is-playing' : ''}`}
         type="button"
         aria-label="Play Gatekeeper MIDI composition"
-        onMouseEnter={startPlayback}
-        onMouseLeave={stopPlayback}
+        onPointerEnter={startPlayback}
+        onPointerLeave={stopPlayback}
         onClick={() => {
           if (!isPlaying) startPlayback();
         }}

@@ -1,29 +1,19 @@
-import React, { useRef } from 'react';
-import { leftFlankThoughts, rightFlankThoughts } from '../../data/thoughts';
-import { FlankThoughts } from './FlankThoughts';
-import { useParallax } from '../../hooks/useParallax';
+import React from 'react';
+import { CreativeWorkbench } from '../sections/CreativeWorkbench';
 
 export const HeroStage: React.FC = () => {
-  const bannerRef = useRef<HTMLImageElement>(null);
-  useParallax(bannerRef, 0.05);
-
   return (
     <div className="hero-stage">
-      {/* Left Side Flank Notes */}
-      <FlankThoughts thoughts={leftFlankThoughts} side="left" />
+      {/* Reserved left flank; annotations temporarily hidden */}
+      <div className="hero-flank hero-flank-left" aria-hidden="true" />
 
-      {/* Center Collage Image */}
+      {/* Center collage assembled from live, independent components */}
       <div className="letterbox-wrapper">
-        <img
-          ref={bannerRef}
-          className="letterbox-banner"
-          src="/images/banner.png"
-          alt="Artistic collage: shader nodes, soundscapes, cinematography, and Bengali calligraphy"
-        />
+        <CreativeWorkbench embedded />
       </div>
 
-      {/* Right Side Flank Notes */}
-      <FlankThoughts thoughts={rightFlankThoughts} side="right" />
+      {/* Reserved right flank; annotations temporarily hidden */}
+      <div className="hero-flank hero-flank-right" aria-hidden="true" />
     </div>
   );
 };

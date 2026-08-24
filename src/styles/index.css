@@ -246,6 +246,172 @@ a:hover {
   transition: transform 0.4s var(--ease-smooth), filter 0.4s var(--ease-smooth);
 }
 
+/* Layered creative workbench — every object remains its own live component */
+.creative-workbench {
+  width: min(76rem, calc(100% - (2 * var(--pad))));
+  margin: clamp(4rem, 9vw, 8rem) auto 0;
+}
+
+.creative-workbench.is-hero {
+  width: 100%;
+  margin: 0;
+}
+
+.workbench-stage {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+}
+
+.workbench-viewer,
+.workbench-portrait {
+  margin: 0;
+}
+
+.workbench-viewer {
+  position: absolute;
+  z-index: 1;
+  top: 24%;
+  left: 2%;
+  width: 96%;
+  filter: drop-shadow(0 1.4rem 2rem rgba(0, 0, 0, 0.36));
+}
+
+.workbench-viewer img,
+.workbench-portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.workbench-nodes {
+  position: absolute;
+  z-index: 3;
+  top: -6%;
+  left: -38%;
+  width: 112%;
+  pointer-events: none;
+}
+
+.node-graph-section {
+  width: min(72rem, calc(100% - (2 * var(--pad))));
+  margin: clamp(3.5rem, 8vw, 7rem) auto 0;
+}
+
+.node-graph-section.is-embedded {
+  width: 100%;
+  margin: 0;
+}
+
+.node-graph-svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.node-graph-wire,
+.node-graph-flow {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+
+.node-graph-wire-purple { stroke: #765b9d; }
+.node-graph-wire-green { stroke: #68bf51; }
+
+.node-graph-flow {
+  stroke-dasharray: 18 92;
+  stroke-width: 8;
+}
+
+.node-graph-flow-purple { stroke: #b78cf2; }
+.node-graph-flow-green { stroke: #a0ed72; }
+
+.workbench-midi {
+  position: absolute;
+  z-index: 4;
+  top: 10.5%;
+  left: 52.5%;
+  width: 40%;
+}
+
+.midi-preview-section.is-embedded,
+.landing-clip-section.is-embedded,
+.signature-section.is-embedded {
+  width: 100%;
+  margin: 0;
+}
+
+.workbench-midi .midi-preview {
+  border-color: rgba(120, 164, 194, 0.6);
+  box-shadow: 0 0.75rem 1.6rem rgba(0, 0, 0, 0.42);
+  animation: midiPanelDepth 15s ease-in-out infinite;
+}
+
+.workbench-midi .midi-preview-image {
+  filter: none;
+}
+
+.workbench-portrait {
+  position: absolute;
+  z-index: 5;
+  top: 29%;
+  left: 86.5%;
+  width: 30%;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.workbench-portrait:hover {
+  transform: translateY(-0.35rem) rotate(0.35deg);
+}
+
+.workbench-portrait img {
+  transform-origin: 48% 52%;
+  animation: portraitDrift 17s ease-in-out infinite;
+}
+
+.workbench-clip {
+  position: absolute;
+  z-index: 6;
+  top: 77%;
+  left: -6%;
+  width: 36%;
+  transform: rotate(-0.2deg);
+  transform-origin: 52% 48%;
+  animation: resolveClipDrift 12s ease-in-out infinite;
+}
+
+.workbench-signature {
+  position: absolute;
+  z-index: 7;
+  top: 81%;
+  left: 53%;
+  width: 37%;
+  pointer-events: none;
+}
+
+.signature-mark {
+  position: relative;
+  width: 100%;
+  transform-origin: 46% 54%;
+  animation: signatureDrift 19s ease-in-out infinite;
+}
+
+.signature-image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.signature-image-glow {
+  position: absolute;
+  inset: 0;
+  opacity: 0.2;
+  filter: blur(0.35rem);
+}
+
 /* Standalone DaVinci Resolve-inspired clip below the landing page */
 .landing-clip-section {
   width: min(30rem, calc(100% - (2 * var(--pad))));
@@ -822,6 +988,55 @@ a:hover {
   }
 }
 
+@keyframes resolveClipDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-0.2deg);
+  }
+  35% {
+    transform: translate3d(0.22rem, -0.14rem, 0) rotate(0.12deg);
+  }
+  70% {
+    transform: translate3d(-0.12rem, 0.18rem, 0) rotate(-0.32deg);
+  }
+}
+
+@keyframes midiPanelDepth {
+  0%,
+  100% {
+    box-shadow: 0 0.75rem 1.6rem rgba(0, 0, 0, 0.42);
+  }
+  50% {
+    box-shadow: 0.08rem 0.95rem 1.85rem rgba(0, 0, 0, 0.48);
+  }
+}
+
+@keyframes portraitDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  38% {
+    transform: translate3d(-0.08rem, -0.12rem, 0) rotate(-0.07deg);
+  }
+  72% {
+    transform: translate3d(0.1rem, 0.06rem, 0) rotate(0.06deg);
+  }
+}
+
+@keyframes signatureDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  40% {
+    transform: translate3d(0.1rem, -0.08rem, 0) rotate(0.08deg);
+  }
+  73% {
+    transform: translate3d(-0.07rem, 0.11rem, 0) rotate(-0.06deg);
+  }
+}
+
 @media (max-width: 900px) {
   .hero-top-thoughts {
     display: none;
@@ -835,6 +1050,43 @@ a:hover {
 }
 
 @media (max-width: 768px) {
+  .creative-workbench {
+    width: calc(100% - 1.5rem);
+    margin-top: 3rem;
+  }
+  .workbench-stage {
+    aspect-ratio: 4 / 5;
+  }
+  .workbench-viewer {
+    top: 23%;
+    left: -20%;
+    width: 140%;
+  }
+  .workbench-nodes {
+    top: -6%;
+    left: -70%;
+    width: 165%;
+  }
+  .workbench-midi {
+    top: 8%;
+    left: 48.5%;
+    width: 58%;
+  }
+  .workbench-portrait {
+    top: 36%;
+    left: 78.5%;
+    width: 44%;
+  }
+  .workbench-clip {
+    top: 76%;
+    left: -12%;
+    width: 61%;
+  }
+  .workbench-signature {
+    top: 89%;
+    left: 44%;
+    width: 55%;
+  }
   .work-item {
     grid-template-columns: 1fr;
     gap: 0.5rem;

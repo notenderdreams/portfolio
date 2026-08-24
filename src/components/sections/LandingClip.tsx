@@ -1,6 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 
-export const LandingClip: React.FC = () => {
+interface LandingClipProps {
+  embedded?: boolean;
+}
+
+export const LandingClip: React.FC<LandingClipProps> = ({ embedded = false }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -19,7 +23,10 @@ export const LandingClip: React.FC = () => {
   }, []);
 
   return (
-    <section className="landing-clip-section scroll-reveal" aria-label="Featured film clip">
+    <section
+      className={`landing-clip-section${embedded ? ' is-embedded' : ' scroll-reveal'}`}
+      aria-label="Featured film clip"
+    >
       <figure className="resolve-clip" aria-label="Selected video clip clip-preview.mov">
         <div className="resolve-clip-viewport">
           <video
