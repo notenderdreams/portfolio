@@ -318,6 +318,81 @@ a:hover {
   stroke-linejoin: round;
 }
 
+/* Interactive MIDI preview — playback reveals the bright layer in real time */
+.midi-preview-section {
+  width: min(64rem, calc(100% - (2 * var(--pad))));
+  margin: clamp(3.5rem, 8vw, 7rem) auto 0;
+}
+
+.midi-preview {
+  --midi-progress: 0%;
+  appearance: none;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  padding: 0;
+  color: inherit;
+  background: #050507;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.32);
+  cursor: crosshair;
+  text-align: left;
+}
+
+.midi-preview:focus-visible {
+  outline: 1px solid #78a8ca;
+  outline-offset: 5px;
+}
+
+.midi-preview-visual {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 2913 / 838;
+  overflow: hidden;
+}
+
+.midi-preview-image {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+  pointer-events: none;
+}
+
+.midi-preview-image-dim {
+  filter: none;
+}
+
+.midi-preview-image-bright {
+  filter: brightness(1.16) saturate(1.03);
+  clip-path: inset(0 calc(100% - var(--midi-progress)) 0 0);
+  transition: clip-path 80ms linear;
+}
+
+.midi-preview-playhead {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  left: var(--midi-progress);
+  width: 1px;
+  opacity: 0;
+  background: rgba(231, 246, 255, 0.78);
+  box-shadow: 0 0 8px rgba(130, 205, 255, 0.58);
+  transform: translateX(-0.5px);
+  transition: left 80ms linear, opacity 180ms ease;
+  pointer-events: none;
+}
+
+.midi-preview.is-playing .midi-preview-playhead {
+  opacity: 1;
+}
+
 /* Flank Columns strictly on the Left & Right sides of the image */
 .hero-flank {
   display: flex;

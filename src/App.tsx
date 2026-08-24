@@ -3,6 +3,7 @@ import { FilmGrain } from './components/layout/FilmGrain';
 import { LandingScreen } from './components/hero/LandingScreen';
 import { SelectedWorks } from './components/sections/SelectedWorks';
 import { LandingClip } from './components/sections/LandingClip';
+import { MidiPreview } from './components/sections/MidiPreview';
 import { AboutSection } from './components/sections/AboutSection';
 import { ToolboxSection } from './components/sections/ToolboxSection';
 import { ContactSection } from './components/sections/ContactSection';
@@ -23,6 +24,7 @@ export const App: React.FC = () => {
       {/* Main Sections */}
       <main>
         <LandingClip />
+        <MidiPreview />
         <SelectedWorks />
         <AboutSection />
         <ToolboxSection />
