@@ -74,16 +74,31 @@ body {
   margin: -0.35rem 0 0 -0.35rem;
   opacity: 0;
   background: #ffffff;
+  border: 1.5px solid transparent;
   border-radius: 50%;
   mix-blend-mode: difference;
   pointer-events: none;
   will-change: transform;
   transition:
-    width 280ms var(--ease-out-expo),
-    height 280ms var(--ease-out-expo),
-    margin 280ms var(--ease-out-expo),
-    background-color 220ms ease,
-    opacity 150ms ease;
+    width 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    height 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    margin 180ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 150ms ease,
+    border-color 150ms ease,
+    opacity 120ms ease;
+}
+
+.cursor-circle.is-visible {
+  opacity: 1;
+}
+
+/* On hover over links, buttons, and draggable nodes: becomes a stroked ring, slightly bigger */
+.cursor-circle.is-interactive {
+  width: 1.75rem;
+  height: 1.75rem;
+  margin: -0.875rem 0 0 -0.875rem;
+  background: transparent;
+  border-color: #ffffff;
 }
 
 .cursor-play-copy,
@@ -123,22 +138,13 @@ body {
   filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85));
 }
 
-.cursor-circle.is-visible {
-  opacity: 1;
-}
-
-.cursor-circle.is-interactive {
-  width: 2.5rem;
-  height: 2.5rem;
-  margin: -1.25rem 0 0 -1.25rem;
-}
-
 .cursor-circle.is-play {
   width: 6.5rem;
   height: 6.5rem;
   margin: -3.25rem 0 0 -3.25rem;
   background: transparent;
   mix-blend-mode: normal;
+  opacity: 1 !important;
 }
 
 .cursor-circle.is-play .cursor-play-copy,
@@ -412,6 +418,25 @@ a:hover {
   width: 100%;
   height: auto;
   overflow: visible;
+  pointer-events: none;
+}
+
+.node-graph-node {
+  pointer-events: all;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: filter 0.22s var(--ease-out-expo);
+}
+
+.node-graph-node:hover {
+  filter: none;
+}
+
+.node-graph-node.is-dragging {
+  cursor: grabbing;
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.5));
 }
 
 .node-graph-wire,
@@ -419,6 +444,7 @@ a:hover {
   fill: none;
   stroke-width: 6;
   stroke-linecap: round;
+  pointer-events: none;
 }
 
 .node-graph-wire-purple { stroke: #765b9d; }
@@ -427,10 +453,17 @@ a:hover {
 .node-graph-flow {
   stroke-dasharray: 18 92;
   stroke-width: 8;
+  animation: nodeFlowDash 2s linear infinite;
 }
 
 .node-graph-flow-purple { stroke: #b78cf2; }
 .node-graph-flow-green { stroke: #a0ed72; }
+
+@keyframes nodeFlowDash {
+  to {
+    stroke-dashoffset: -110;
+  }
+}
 
 .midi-preview-section.is-embedded,
 .landing-clip-section.is-embedded,

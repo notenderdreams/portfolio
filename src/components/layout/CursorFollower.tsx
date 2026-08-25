@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select';
+const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select, .node-graph-node, [data-cursor="grab"]';
 
 export const CursorFollower: React.FC = () => {
   const cursorRef = useRef<HTMLSpanElement>(null);
@@ -19,37 +19,59 @@ export const CursorFollower: React.FC = () => {
     let cursorX = -100;
     let cursorY = -100;
     let animationFrame = 0;
+    let isMouseDown = false;
 
     document.body.classList.add('custom-cursor-active');
 
     const animateCursor = () => {
-      cursorX += (targetX - cursorX) * 0.22;
-      cursorY += (targetY - cursorY) * 0.22;
-      cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+      cursorX += (targetX - cursorX) * 0.6;
+      cursorY += (targetY - cursorY) * 0.6;
+      cursor.style.transform = `translate3d(${cursorX.toFixed(2)}px, ${cursorY.toFixed(2)}px, 0)`;
       animationFrame = window.requestAnimationFrame(animateCursor);
+    };
+
+    const updateCursorState = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) return;
+
+      const isPlayTarget = Boolean(target.closest('[data-cursor="play"]'));
+      const isInteractiveTarget = !isPlayTarget && Boolean(target.closest(INTERACTIVE_SELECTOR));
+
+      cursor.classList.toggle('is-play', isPlayTarget);
+      cursor.classList.toggle('is-interactive', isInteractiveTarget);
+      cursor.classList.toggle('is-down', isMouseDown);
     };
 
     const handlePointerMove = (event: PointerEvent) => {
       targetX = event.clientX;
       targetY = event.clientY;
       cursor.classList.add('is-visible');
+      updateCursorState(event.target);
+    };
+
+    const handlePointerDown = (event: PointerEvent) => {
+      isMouseDown = true;
+      cursor.classList.add('is-down');
+      updateCursorState(event.target);
+    };
+
+    const handlePointerUp = (event: PointerEvent) => {
+      isMouseDown = false;
+      cursor.classList.remove('is-down');
+      updateCursorState(event.target);
     };
 
     const handlePointerOver = (event: PointerEvent) => {
-      const target = event.target;
-      const isInteractive = target instanceof Element && target.closest(INTERACTIVE_SELECTOR);
-      const isPlayTarget = target instanceof Element && target.closest('[data-cursor="play"]');
-      cursor.classList.toggle('is-interactive', Boolean(isInteractive));
-      cursor.classList.toggle('is-play', Boolean(isPlayTarget));
+      updateCursorState(event.target);
     };
 
     const handlePointerLeave = () => {
-      cursor.classList.remove('is-visible');
-      cursor.classList.remove('is-interactive', 'is-play');
+      cursor.classList.remove('is-visible', 'is-play', 'is-interactive', 'is-down');
     };
 
     animationFrame = window.requestAnimationFrame(animateCursor);
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
+    window.addEventListener('pointerdown', handlePointerDown, { passive: true });
+    window.addEventListener('pointerup', handlePointerUp, { passive: true });
     document.addEventListener('pointerover', handlePointerOver, { passive: true });
     document.documentElement.addEventListener('mouseleave', handlePointerLeave);
 
@@ -57,6 +79,8 @@ export const CursorFollower: React.FC = () => {
       document.body.classList.remove('custom-cursor-active');
       window.cancelAnimationFrame(animationFrame);
       window.removeEventListener('pointermove', handlePointerMove);
+      window.removeEventListener('pointerdown', handlePointerDown);
+      window.removeEventListener('pointerup', handlePointerUp);
       document.removeEventListener('pointerover', handlePointerOver);
       document.documentElement.removeEventListener('mouseleave', handlePointerLeave);
     };
@@ -65,6 +89,7 @@ export const CursorFollower: React.FC = () => {
   return (
     <div className="cursor-follower" aria-hidden="true">
       <span ref={cursorRef} className="cursor-circle">
+        {/* Play dial for Gatekeeper MIDI preview */}
         <svg className="cursor-play-copy" viewBox="0 0 100 100">
           <defs>
             <path
