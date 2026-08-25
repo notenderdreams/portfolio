@@ -79,10 +79,10 @@ body {
   pointer-events: none;
   will-change: transform;
   transition:
-    width 260ms var(--ease-out-expo),
-    height 260ms var(--ease-out-expo),
-    margin 260ms var(--ease-out-expo),
-    background-color 260ms ease,
+    width 280ms var(--ease-out-expo),
+    height 280ms var(--ease-out-expo),
+    margin 280ms var(--ease-out-expo),
+    background-color 220ms ease,
     opacity 150ms ease;
 }
 
@@ -90,33 +90,37 @@ body {
 .cursor-headphones {
   position: absolute;
   opacity: 0;
-  transition: opacity 180ms ease;
+  pointer-events: none;
+  transition: opacity 220ms ease;
 }
 
 .cursor-play-copy {
-  inset: 0.28rem;
-  width: calc(100% - 0.56rem);
-  height: calc(100% - 0.56rem);
+  inset: 0.25rem;
+  width: calc(100% - 0.5rem);
+  height: calc(100% - 0.5rem);
   overflow: visible;
-  fill: #000000;
+  fill: #ffffff;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 700;
-  letter-spacing: 1.1px;
+  letter-spacing: 1.15px;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85));
   animation: cursorCopySpin 10s linear infinite;
+  transform-origin: center center;
 }
 
 .cursor-headphones {
   top: 50%;
   left: 50%;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1.3rem;
+  height: 1.3rem;
   fill: none;
-  stroke: #000000;
-  stroke-width: 1.7;
+  stroke: #ffffff;
+  stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
   transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.85));
 }
 
 .cursor-circle.is-visible {
@@ -133,6 +137,8 @@ body {
   width: 6.5rem;
   height: 6.5rem;
   margin: -3.25rem 0 0 -3.25rem;
+  background: transparent;
+  mix-blend-mode: normal;
 }
 
 .cursor-circle.is-play .cursor-play-copy,
@@ -426,14 +432,6 @@ a:hover {
 .node-graph-flow-purple { stroke: #b78cf2; }
 .node-graph-flow-green { stroke: #a0ed72; }
 
-.workbench-midi {
-  position: absolute;
-  z-index: 4;
-  top: 10.5%;
-  left: 52.5%;
-  width: 40%;
-}
-
 .midi-preview-section.is-embedded,
 .landing-clip-section.is-embedded,
 .signature-section.is-embedded {
@@ -441,10 +439,31 @@ a:hover {
   margin: 0;
 }
 
+.workbench-midi {
+  position: absolute;
+  z-index: 4;
+  top: 10.5%;
+  left: 52.5%;
+  width: 40%;
+  transform-origin: 50% 50%;
+  transition: transform 0.5s var(--ease-out-expo), z-index 0s;
+}
+
+.workbench-midi:hover {
+  z-index: 12;
+  transform: scale(1.08) translateY(-0.35rem);
+}
+
 .workbench-midi .midi-preview {
   border-color: rgba(120, 164, 194, 0.6);
   box-shadow: 0 0.75rem 1.6rem rgba(0, 0, 0, 0.42);
   animation: midiPanelDepth 15s ease-in-out infinite;
+  transition: border-color 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo);
+}
+
+.workbench-midi:hover .midi-preview {
+  border-color: rgba(160, 208, 245, 0.95);
+  box-shadow: 0 1.25rem 2.8rem rgba(0, 0, 0, 0.6), 0 0 28px rgba(120, 164, 194, 0.35);
 }
 
 .workbench-midi .midi-preview-image {
@@ -461,12 +480,12 @@ a:hover {
 }
 
 .workbench-portrait:hover {
-  transform: translateY(-0.35rem) rotate(0.35deg);
+  transform: translateY(-0.45rem) rotate(0.4deg);
 }
 
 .workbench-portrait img {
   transform-origin: 48% 52%;
-  animation: portraitDrift 17s ease-in-out infinite;
+  animation: portraitDrift 8.5s ease-in-out infinite;
 }
 
 .workbench-clip {
@@ -475,9 +494,16 @@ a:hover {
   top: 77%;
   left: -6%;
   width: 36%;
-  transform: rotate(-0.2deg);
-  transform-origin: 52% 48%;
-  animation: resolveClipDrift 12s ease-in-out infinite;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.workbench-clip:hover {
+  transform: translateY(-0.45rem) rotate(0.4deg);
+}
+
+.workbench-clip .resolve-clip {
+  transform-origin: 48% 52%;
+  animation: clipDrift 9.5s ease-in-out infinite;
 }
 
 .workbench-signature {
@@ -486,14 +512,18 @@ a:hover {
   top: 81%;
   left: 53%;
   width: 37%;
-  pointer-events: none;
+  transition: transform 0.5s var(--ease-out-expo);
+}
+
+.workbench-signature:hover {
+  transform: translateY(-0.45rem) rotate(0.4deg);
 }
 
 .signature-mark {
   position: relative;
   width: 100%;
-  transform-origin: 46% 54%;
-  animation: signatureDrift 19s ease-in-out infinite;
+  transform-origin: 48% 52%;
+  animation: signatureDrift 8.8s ease-in-out infinite;
 }
 
 .signature-image {
@@ -507,6 +537,7 @@ a:hover {
   inset: 0;
   opacity: 0.2;
   filter: blur(0.35rem);
+  animation: glowPulse 5s ease-in-out infinite;
 }
 
 /* Standalone DaVinci Resolve-inspired clip below the landing page */
@@ -601,6 +632,17 @@ a:hover {
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.32);
   cursor: crosshair;
   text-align: left;
+  transition: transform 0.5s var(--ease-out-expo), box-shadow 0.5s var(--ease-out-expo), border-color 0.5s var(--ease-out-expo);
+}
+
+.midi-preview:hover {
+  transform: scale(1.025) translateY(-0.2rem);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.52), 0 0 26px rgba(120, 164, 194, 0.25);
+  border-color: rgba(120, 164, 194, 0.6);
+}
+
+.workbench-midi .midi-preview:hover {
+  transform: none;
 }
 
 .midi-preview:focus-visible {
@@ -1085,19 +1127,6 @@ a:hover {
   }
 }
 
-@keyframes resolveClipDrift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) rotate(-0.2deg);
-  }
-  35% {
-    transform: translate3d(0.22rem, -0.14rem, 0) rotate(0.12deg);
-  }
-  70% {
-    transform: translate3d(-0.12rem, 0.18rem, 0) rotate(-0.32deg);
-  }
-}
-
 @keyframes midiPanelDepth {
   0%,
   100% {
@@ -1113,11 +1142,24 @@ a:hover {
   100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
-  38% {
-    transform: translate3d(-0.08rem, -0.12rem, 0) rotate(-0.07deg);
+  33% {
+    transform: translate3d(-5px, -7px, 0) rotate(-0.75deg);
+  }
+  66% {
+    transform: translate3d(6px, 4px, 0) rotate(0.65deg);
+  }
+}
+
+@keyframes clipDrift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  36% {
+    transform: translate3d(7px, -6px, 0) rotate(0.85deg);
   }
   72% {
-    transform: translate3d(0.1rem, 0.06rem, 0) rotate(0.06deg);
+    transform: translate3d(-5px, 5px, 0) rotate(-0.7deg);
   }
 }
 
@@ -1126,11 +1168,23 @@ a:hover {
   100% {
     transform: translate3d(0, 0, 0) rotate(0deg);
   }
-  40% {
-    transform: translate3d(0.1rem, -0.08rem, 0) rotate(0.08deg);
+  30% {
+    transform: translate3d(-6px, 5px, 0) rotate(0.7deg);
   }
-  73% {
-    transform: translate3d(-0.07rem, 0.11rem, 0) rotate(-0.06deg);
+  68% {
+    transform: translate3d(5px, -6px, 0) rotate(-0.8deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.16;
+    filter: blur(0.3rem);
+  }
+  50% {
+    opacity: 0.34;
+    filter: blur(0.48rem);
   }
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const INTERACTIVE_SELECTOR = 'a, button, [role="button"], input, textarea, select';
+const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select';
 
 export const CursorFollower: React.FC = () => {
   const cursorRef = useRef<HTMLSpanElement>(null);
