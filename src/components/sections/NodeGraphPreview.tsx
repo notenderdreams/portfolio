@@ -200,7 +200,10 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
   };
 
   const handlePointerDown = (nodeKey: NodeKey, event: React.PointerEvent<SVGGElement>) => {
-    event.preventDefault();
+    if (event.pointerType === 'mouse') {
+      if (event.button !== 0) return;
+      event.preventDefault();
+    }
     const coords = getSVGCoordinates(event.clientX, event.clientY);
     const node = nodesRef.current[nodeKey];
 
@@ -216,15 +219,15 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
 
   // Global bulletproof pointer tracking on window
   useEffect(() => {
-    const DRAG_THRESHOLD = 5;
+    const DRAG_THRESHOLD = 8;
     const SOFT_LIMIT_RADIUS = 260;
 
     const handleGlobalPointerMove = (event: PointerEvent) => {
       const activeKey = activeNodeKeyRef.current;
       if (!activeKey) return;
 
-      // If user released mouse buttons anywhere, immediately release drag
-      if (event.buttons === 0) {
+      // If mouse released buttons anywhere, immediately release drag
+      if (event.pointerType === 'mouse' && event.buttons === 0) {
         handleGlobalPointerUp();
         return;
       }
