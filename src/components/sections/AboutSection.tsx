@@ -19,7 +19,7 @@ export const AboutSection: React.FC = () => {
             />
           </div>
           <figcaption className="about-portrait-caption">
-            <span className="caption-text">fig. 01 — him</span>
+            <span className="caption-text">fig. 01 — notenderdreams</span>
           </figcaption>
         </figure>
 
@@ -34,7 +34,7 @@ export const AboutSection: React.FC = () => {
             <div className="about-role-tag">
               <span className="reveal-mask">
                 <span className="reveal-text reveal-delay-1">
-                  systems programming · 3d graphics · audio dsp
+                  low-level software, real-time shaders &amp; electronic music
                 </span>
               </span>
             </div>
@@ -68,17 +68,8 @@ export const AboutSection: React.FC = () => {
           <div className="about-bio-text">
             <p className="reveal-item reveal-delay-7">
               I am a CSE undergraduate from Dhaka, building software from first principles. My work
-              gravitates toward <b>systems programming</b>, <b>real-time audio DSP</b>, and{' '}
-              <b>computer graphics</b>.
-            </p>
-            <blockquote className="about-quote reveal-item reveal-delay-8">
-              &ldquo;Computers are fast, but memory is slow. Understanding the hardware is the only
-              way to make things truly sing.&rdquo;
-            </blockquote>
-            <p className="reveal-item reveal-delay-9">
-              When not staring at disassembly or GDB, I explore 3D worldbuilding in Unreal Engine 5,
-              compose ambient soundscapes in Ableton, and experiment with film print emulation in
-              DaVinci Resolve.
+              gravitates toward <b>low-level software</b>, <b>real-time shaders</b>, and{' '}
+              <b>electronic music</b>.
             </p>
           </div>
         </div>

@@ -22,7 +22,7 @@
   --ease-cinematic: cubic-bezier(0.19, 1, 0.22, 1);
   --ease-gentle: cubic-bezier(0.25, 1, 0.5, 1);
 
-  --max-w: 48rem;
+  --max-w: 58rem;
   --pad: clamp(1.8rem, 6vw, 5.5rem);
 }
 
@@ -197,7 +197,7 @@ a:hover {
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  padding-bottom: 2rem;
+  padding-bottom: clamp(2.5rem, 5vh, 4rem);
   background-color: var(--bg);
 }
 
@@ -268,9 +268,31 @@ a:hover {
 
 .site-nav a {
   position: relative;
+  display: inline-block;
   color: rgba(240, 240, 245, 0.82);
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.7);
+  padding-bottom: 2px;
   transition: color 0.3s var(--ease-smooth), opacity 0.3s ease, text-shadow 0.3s ease;
+}
+
+.site-nav a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #ffffff;
+  box-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+  pointer-events: none;
+}
+
+.site-nav a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .site-nav a:nth-child(1) { animation: fadeInDown 1.1s var(--ease-cinematic) 0.15s both; }
@@ -1047,10 +1069,14 @@ a:hover {
 }
 
 /* About & Profile Section */
+.about-section {
+  padding-top: clamp(8.5rem, 18vh, 15rem);
+}
+
 .about-profile-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
-  gap: clamp(2.5rem, 5.5vw, 5rem);
+  grid-template-columns: minmax(13rem, 16.5rem) 1fr;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
   align-items: start;
 }
 
@@ -1122,7 +1148,7 @@ a:hover {
 
 .about-name {
   font-family: var(--font-serif);
-  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-size: clamp(1.95rem, 3.3vw, 2.95rem);
   font-weight: 300;
   letter-spacing: -0.025em;
   color: var(--ink);

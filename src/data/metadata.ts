@@ -1,7 +1,7 @@
 import { NavLink, SocialLink } from '../types';
 
 export const siteMetadata = {
-  name: 'sajid al nahian',
+  name: 'sajid al nahian mugdho',
   brandMark: 'sajid al nahian',
   location: 'dhaka, bd',
   locationBangla: 'ঢাকা',
