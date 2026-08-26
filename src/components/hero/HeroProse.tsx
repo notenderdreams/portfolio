@@ -8,18 +8,12 @@ export const HeroProse: React.FC = () => {
   const dhakaTime = useDhakaTime();
 
   return (
-    <>
-      {/* Quiet Metadata Row directly below image */}
-      <div className="hero-meta-row">
-        <span>
-          {siteMetadata.locationBangla} ({siteMetadata.location})
-        </span>
-        <span id="archive-hero-date">{formattedDate}</span>
-        <span id="dhaka-time">{dhakaTime}</span>
-      </div>
-
-      {/* Tracked All-Caps Block Prose */}
-      <div className="all-caps-prose">{siteMetadata.heroProse}</div>
-    </>
+    <div className="hero-meta-row">
+      <span>
+        {siteMetadata.locationBangla} ({siteMetadata.location})
+      </span>
+      <span id="archive-hero-date">{formattedDate}</span>
+      <span id="dhaka-time">{dhakaTime}</span>
+    </div>
   );
 };

@@ -5,14 +5,16 @@ export const siteMetadata = {
   brandMark: 'sajid al nahian',
   location: 'dhaka, bd',
   locationBangla: 'ঢাকা',
-  heroProse:
-    'BUILDING LOW-LEVEL SYSTEMS IN RUST AND C, UNDERSTANDING THAT MASTERY TAKES TIME. NOT EVERY LINE SHOWS IMMEDIATE PROGRESS, YET NOTHING IS WASTED. GROWTH IS HAPPENING EVEN WHEN BARE-METAL CODE, 3D SCENES, AND AMBIENT SOUNDSCAPES FEEL INVISIBLE.',
+  age: 22,
+  university: 'Islamic University of Technology',
+  degree: 'B.Sc. in Computer Science and Engineering',
+  term: 'Year 2, Semester 2',
   email: 'sajidalnahian@gmail.com',
 };
 
 export const navLinks: NavLink[] = [
-  { label: 'work', href: '#work' },
   { label: 'about', href: '#about' },
+  { label: 'work', href: '#work' },
   { label: 'toolbox', href: '#toolbox' },
   { label: 'contact', href: '#contact' },
 ];

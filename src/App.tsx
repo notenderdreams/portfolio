@@ -23,8 +23,8 @@ export const App: React.FC = () => {
 
       {/* Main Sections */}
       <main>
-        <SelectedWorks />
         <AboutSection />
+        <SelectedWorks />
         <ToolboxSection />
         <ContactSection />
       </main>
