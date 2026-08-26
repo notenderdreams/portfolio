@@ -4,7 +4,7 @@ export const siteMetadata = {
   name: 'sajid al nahian',
   brandMark: 'sajid al nahian',
   location: 'dhaka, bd',
-  locationJapanese: 'げつようび',
+  locationBangla: 'ঢাকা',
   heroProse:
     'BUILDING LOW-LEVEL SYSTEMS IN RUST AND C, UNDERSTANDING THAT MASTERY TAKES TIME. NOT EVERY LINE SHOWS IMMEDIATE PROGRESS, YET NOTHING IS WASTED. GROWTH IS HAPPENING EVEN WHEN BARE-METAL CODE, 3D SCENES, AND AMBIENT SOUNDSCAPES FEEL INVISIBLE.',
   email: 'sajidalnahian@gmail.com',
