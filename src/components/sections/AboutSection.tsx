@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import { siteMetadata } from '../../data/metadata';
 import { SectionLabel } from '../common/SectionLabel';
 
