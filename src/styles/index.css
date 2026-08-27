@@ -1259,6 +1259,64 @@ a:hover {
   font-weight: 400;
 }
 
+.about-inline-photo-stack {
+  display: inline-block;
+  position: relative;
+  width: 8rem;
+  height: 5.25rem;
+  margin: 0 0.34em;
+  vertical-align: middle;
+  animation: about-photo-stack-drift 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.about-inline-photo-stack:hover {
+  animation-play-state: paused;
+}
+
+@keyframes about-photo-stack-drift {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.35deg); }
+  50% { transform: translate3d(0, -0.16rem, 0) rotate(0.35deg); }
+}
+
+.about-inline-photo-card {
+  position: absolute;
+  display: block;
+  padding: 0.2rem;
+  overflow: hidden;
+  background: #f7f7f4;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: 0.42rem;
+  box-shadow: 0 0.55rem 1.1rem rgba(0, 0, 0, 0.3);
+  will-change: transform;
+}
+
+.about-inline-photo-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.22rem;
+  object-fit: cover;
+}
+
+.about-inline-photo-card-car {
+  z-index: 1;
+  top: 0.08rem;
+  left: 0.08rem;
+  width: 43%;
+  height: 85%;
+  transform: rotate(-5deg);
+}
+
+.about-inline-photo-card-falling {
+  right: 0;
+  bottom: 0.08rem;
+  width: 70%;
+  height: 67%;
+  transform: rotate(4deg);
+}
+
+
 .about-quote {
   font-family: var(--font-serif);
   font-style: italic;

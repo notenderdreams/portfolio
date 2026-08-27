@@ -2,6 +2,128 @@ import React from 'react';
 import { siteMetadata } from '../../data/metadata';
 import { SectionLabel } from '../common/SectionLabel';
 
+const PhotoManipulationStack: React.FC = () => {
+  const stackRef = useRef<HTMLSpanElement>(null);
+  const carRef = useRef<HTMLSpanElement>(null);
+  const fallingRef = useRef<HTMLSpanElement>(null);
+  const timelineRef = useRef<gsap.core.Timeline | null>(null);
+  const returnTimelineRef = useRef<gsap.core.Timeline | null>(null);
+
+  useEffect(() => {
+    const stack = stackRef.current;
+    const car = carRef.current;
+    const falling = fallingRef.current;
+    if (!stack || !car || !falling || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const context = gsap.context(() => {
+      gsap.set(car, { x: 0, y: 0, rotation: -5, scale: 1, zIndex: 1, transformOrigin: 'center center' });
+      gsap.set(falling, { x: 0, y: 0, rotation: 4, scale: 1, zIndex: 0, transformOrigin: 'center center' });
+
+      timelineRef.current = gsap.timeline({ paused: true })
+        .to(car, {
+          x: -15,
+          y: -8,
+          rotation: -8,
+          scale: 1.04,
+          duration: 0.18,
+          ease: 'power2.out',
+        }, 0)
+        .to(falling, {
+          x: 15,
+          y: 8,
+          rotation: 8,
+          scale: 0.96,
+          duration: 0.18,
+          ease: 'power2.out',
+        }, 0)
+        .set(car, { zIndex: 0 }, 0.2)
+        .set(falling, { zIndex: 2 }, 0.2)
+        .to(car, {
+          x: 38,
+          y: 19,
+          rotation: 4,
+          scale: 0.97,
+          boxShadow: '0 0.3rem 0.75rem rgba(0, 0, 0, 0.22)',
+          duration: 0.38,
+          ease: 'power3.out',
+        }, 0.18)
+        .to(falling, {
+          x: -27,
+          y: -15,
+          rotation: -4,
+          scale: 1.035,
+          boxShadow: '0 0.85rem 1.65rem rgba(0, 0, 0, 0.42)',
+          duration: 0.38,
+          ease: 'power3.out',
+        }, 0.18);
+
+      returnTimelineRef.current = gsap.timeline({ paused: true })
+        .to(car, {
+          x: 52,
+          y: 27,
+          rotation: 8,
+          scale: 0.95,
+          duration: 0.18,
+          ease: 'power2.out',
+        }, 0)
+        .to(falling, {
+          x: -40,
+          y: -23,
+          rotation: -8,
+          scale: 1.06,
+          duration: 0.18,
+          ease: 'power2.out',
+        }, 0)
+        .set(car, { zIndex: 1 }, 0.2)
+        .set(falling, { zIndex: 0 }, 0.2)
+        .to(car, {
+          x: 0,
+          y: 0,
+          rotation: -5,
+          scale: 1,
+          boxShadow: '0 0.55rem 1.1rem rgba(0, 0, 0, 0.3)',
+          duration: 0.38,
+          ease: 'power3.out',
+        }, 0.18)
+        .to(falling, {
+          x: 0,
+          y: 0,
+          rotation: 4,
+          scale: 1,
+          boxShadow: '0 0.55rem 1.1rem rgba(0, 0, 0, 0.3)',
+          duration: 0.38,
+          ease: 'power3.out',
+        }, 0.18);
+    }, stack);
+
+    return () => context.revert();
+  }, []);
+
+  return (
+    <span
+      ref={stackRef}
+      className="about-inline-photo-stack"
+      role="img"
+      aria-label="Two photo manipulation artworks"
+      onMouseEnter={() => {
+        returnTimelineRef.current?.pause();
+        timelineRef.current?.restart();
+      }}
+      onMouseLeave={() => {
+        timelineRef.current?.pause();
+        returnTimelineRef.current?.restart();
+      }}
+    >
+    <span ref={carRef} className="about-inline-photo-card about-inline-photo-card-car">
+      <img src="/images/photo-manipulation-car.jpg" alt="" />
+    </span>
+    <span ref={fallingRef} className="about-inline-photo-card about-inline-photo-card-falling">
+      <img src="/images/photo-manipulation-falling.png" alt="" />
+    </span>
+    </span>
+  );
+};
+
 export const AboutSection: React.FC = () => {
   return (
     <section id="about" className="container section-spacer about-section scroll-reveal">
