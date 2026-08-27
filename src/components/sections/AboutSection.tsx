@@ -196,6 +196,19 @@ const PhotoManipulationStack: React.FC = () => {
   );
 };
 
+const RelightingCube: React.FC = () => (
+  <span className="about-lighting-cube" role="img" aria-label="A rotating liquid-metal cube">
+    <span className="about-lighting-cube-object" aria-hidden="true">
+      <span className="about-cube-face about-cube-front" />
+      <span className="about-cube-face about-cube-back" />
+      <span className="about-cube-face about-cube-right" />
+      <span className="about-cube-face about-cube-left" />
+      <span className="about-cube-face about-cube-top" />
+      <span className="about-cube-face about-cube-bottom" />
+    </span>
+  </span>
+);
+
 export const AboutSection: React.FC = () => {
   return (
     <section id="about" className="container section-spacer about-section scroll-reveal">
