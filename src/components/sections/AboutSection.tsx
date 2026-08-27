@@ -2,6 +2,78 @@ import React from 'react';
 import { siteMetadata } from '../../data/metadata';
 import { SectionLabel } from '../common/SectionLabel';
 
+const waveformBars = [30, 40, 36, 52, 64, 57, 72, 88, 100, 94, 96, 92, 90, 94, 96, 98, 100, 100];
+
+const MusicPlayButton: React.FC = () => {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  const togglePlayback = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (audio.paused) {
+      if (audio.ended) {
+        audio.currentTime = 0;
+        setProgress(0);
+      }
+      void audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+      return;
+    }
+
+    audio.pause();
+    setIsPlaying(false);
+  };
+
+  const updateProgress = () => {
+    const audio = audioRef.current;
+    if (!audio || !Number.isFinite(audio.duration) || audio.duration <= 0) return;
+    setProgress(audio.currentTime / audio.duration);
+  };
+
+  return (
+    <>
+      <span className="about-music-control-wrap">
+        <button
+          className={`about-music-control${isPlaying ? ' is-playing' : ''}`}
+          type="button"
+          aria-label={isPlaying ? 'Pause music' : 'Play music'}
+          aria-pressed={isPlaying}
+          onClick={togglePlayback}
+        >
+          <span className="about-music-play" aria-hidden="true">
+            <svg className="about-music-note" viewBox="0 0 24 24">
+              <path d="M9 18.5a2.5 2.5 0 1 1-2.5-2.5A2.5 2.5 0 0 1 9 18.5Zm0 0V6l10-2v11.5a2.5 2.5 0 1 1-2.5-2.5A2.5 2.5 0 0 1 19 15.5" />
+            </svg>
+            <i />
+            <i />
+          </span>
+          <span className="about-music-waveform" aria-hidden="true">
+            {waveformBars.map((height, index) => (
+              <i
+                key={index}
+                className={index / waveformBars.length < progress ? 'is-played' : ''}
+                style={{ height: `${height}%` }}
+              />
+            ))}
+          </span>
+        </button>
+      </span>
+      <audio
+        ref={audioRef}
+        src="/audio/2013.mp3"
+        preload="metadata"
+        onTimeUpdate={updateProgress}
+        onEnded={() => {
+          setIsPlaying(false);
+          setProgress(1);
+        }}
+      />
+    </>
+  );
+};
+
 const PhotoManipulationStack: React.FC = () => {
   const stackRef = useRef<HTMLSpanElement>(null);
   const carRef = useRef<HTMLSpanElement>(null);
