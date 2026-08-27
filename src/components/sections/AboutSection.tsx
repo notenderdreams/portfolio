@@ -209,6 +209,25 @@ const RelightingCube: React.FC = () => (
   </span>
 );
 
+const ResolveColorWheels: React.FC = () => (
+  <span className="about-resolve-clip-stack" role="img" aria-label="Three colour grading wheels with video and audio timeline clips">
+    <span className="about-resolve-clip about-resolve-video-clip" aria-hidden="true">
+      <img src="/images/resolve-video-clip.png" alt="" />
+    </span>
+    <span className="about-resolve-clip about-resolve-video-clip-alt" aria-hidden="true">
+      <img src="/images/resolve-video-clip-alt.png" alt="" />
+    </span>
+    <span className="about-resolve-wheels" aria-hidden="true">
+      <span className="about-resolve-wheel about-resolve-wheel-shadow" />
+      <span className="about-resolve-wheel about-resolve-wheel-mid" />
+      <span className="about-resolve-wheel about-resolve-wheel-highlight" />
+    </span>
+    <span className="about-resolve-clip about-resolve-audio-clip" aria-hidden="true">
+      <img src="/images/resolve-audio-clip.png" alt="" />
+    </span>
+  </span>
+);
+
 export const AboutSection: React.FC = () => {
   return (
     <section id="about" className="container section-spacer about-section scroll-reveal">
