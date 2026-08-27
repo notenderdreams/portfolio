@@ -4,6 +4,21 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const waveformBars = [30, 40, 36, 52, 64, 57, 72, 88, 100, 94, 96, 92, 90, 94, 96, 98, 100, 100];
 
+type StoryIconType = 'realtime' | 'code';
+
+const StoryIcon: React.FC<{ type: StoryIconType }> = ({ type }) => {
+  const paths = {
+    realtime: <><path d="m13 2-8 12h6l-1 8 9-13h-6z" /></>,
+    code: <><path d="m9 6-6 6 6 6M15 6l6 6-6 6" /></>,
+  };
+
+  return (
+    <svg className="about-story-icon" viewBox="0 0 24 24" aria-hidden="true">
+      {paths[type]}
+    </svg>
+  );
+};
+
 const MusicPlayButton: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -300,6 +315,14 @@ export const AboutSection: React.FC = () => {
           </div>
         </div>
       </div>
+
+      <p className="about-origin-story reveal-item reveal-delay-8">
+        I started learning music <MusicPlayButton /> when I was 15. I wanted to make covers for my tracks, so I
+        learned photo <PhotoManipulationStack /> manipulation. I kept getting stuck trying to relight images <RelightingCube />, which is why I
+        picked up Blender. Then I learned DaVinci Resolve <ResolveColorWheels /> to edit videos and grade them properly.
+        Blender rendered slowly, so I moved into Unreal <StoryIcon type="realtime" />. In Unreal I found things I wanted to fix,
+        and that is how I ended up learning programming <StoryIcon type="code" />. That is pretty much how I got here.
+      </p>
     </section>
   );
 };

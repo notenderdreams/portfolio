@@ -1259,6 +1259,32 @@ a:hover {
   font-weight: 400;
 }
 
+.about-origin-story {
+  width: 100%;
+  margin: clamp(3rem, 7vw, 5.5rem) 0 0;
+  padding-top: 1.35rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-family: var(--font-sans);
+  font-size: clamp(1.05rem, 1.65vw, 1.35rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 1.65;
+}
+
+.about-story-icon {
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0 0.08em;
+  fill: none;
+  stroke: var(--ink);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.75;
+  vertical-align: -0.07em;
+}
+
 .about-music-control-wrap {
   display: inline-flex;
   margin: 0 0.4em;
@@ -1732,6 +1758,28 @@ a:hover {
   to { background-position: -120% 0; }
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .about-inline-photo-stack {
+    animation: none;
+  }
+
+  .about-music-control {
+    animation: none;
+  }
+
+  .about-music-control-wrap {
+    animation: none;
+  }
+
+  .about-lighting-cube-object {
+    transform: translate(-50%, -50%) rotateZ(45deg) rotateX(-35.264deg) rotateY(0deg);
+    transition: none;
+  }
+
+  .about-cube-face {
+    transition: none;
+  }
+}
 
 .about-quote {
   font-family: var(--font-serif);
