@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { siteMetadata } from '../../data/metadata';
 import { SectionLabel } from '../common/SectionLabel';
 
@@ -397,6 +398,44 @@ const UnrealRealtimeViewport: React.FC = () => (
 );
 
 export const AboutSection: React.FC = () => {
+  const storyRef = useRef<HTMLDivElement>(null);
+
+  useLayoutEffect(() => {
+    const story = storyRef.current;
+    if (!story) return;
+
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const beats = story.querySelectorAll<HTMLElement>('.about-story-beat');
+
+    if (reducedMotion) {
+      gsap.set(beats, { clearProps: 'all' });
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const context = gsap.context(() => {
+      gsap.fromTo(
+        beats,
+        { autoAlpha: 0.16, filter: 'blur(4px)' },
+        {
+          autoAlpha: 1,
+          filter: 'blur(0px)',
+          stagger: 0.13,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: story,
+            start: 'top 82%',
+            end: 'bottom 42%',
+            scrub: 0.65,
+          },
+        }
+      );
+    }, story);
+
+    return () => context.revert();
+  }, []);
+
   return (
     <section id="about" className="container section-spacer about-section scroll-reveal">
       <SectionLabel label="01 / about &amp; profile" />
@@ -469,13 +508,18 @@ export const AboutSection: React.FC = () => {
         </div>
       </div>
 
-      <p className="about-origin-story reveal-item reveal-delay-8">
-        I started learning music <MusicPlayButton /> when I was 15. I wanted to make covers for my tracks, so I
-        learned photo <PhotoManipulationStack /> manipulation. I kept getting stuck trying to relight images <RelightingCube />, which is why I
-        picked up Blender. Then I learned DaVinci Resolve <ResolveColorWheels /> to edit videos and grade them properly.
-        Blender rendered slowly, so I moved into Unreal <UnrealRealtimeViewport />. In Unreal I found things I wanted to fix,
-        and that is how I ended up learning programming <RustCrabVim />. That is pretty much how I got here.
-      </p>
+      <div className="about-story" ref={storyRef}>
+        <span className="about-story-label" aria-hidden="true">My story</span>
+        <p className="about-origin-story">
+          <span className="about-story-beat">When I was 15, I started learning music <MusicPlayButton />. </span>
+          <span className="about-story-beat">I wanted to make covers for my tracks, so I learned photo <PhotoManipulationStack /> manipulation. </span>
+          <span className="about-story-beat">I kept getting stuck trying to relight images <RelightingCube />, which is why I picked up Blender. </span>
+          <span className="about-story-beat">Then I learned DaVinci Resolve to edit videos and grade them <ResolveColorWheels /> properly. </span>
+          <span className="about-story-beat">Blender rendered slowly, so I moved into Unreal <UnrealRealtimeViewport />. </span>
+          <span className="about-story-beat">In Unreal I found things I wanted to fix, and that is how I ended up learning programming <RustCrabVim />. </span>
+          <span className="about-story-beat">That is pretty much how I got here.</span>
+        </p>
+      </div>
     </section>
   );
 };
