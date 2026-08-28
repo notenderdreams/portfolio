@@ -1272,17 +1272,118 @@ a:hover {
   line-height: 1.65;
 }
 
-.about-story-icon {
+/* ==========================================================================
+   Rust Mascot Ferris & Vim Interactive Story Element
+   ========================================================================== */
+
+.about-crab-viewport {
   display: inline-block;
-  width: 0.9em;
-  height: 0.9em;
-  margin: 0 0.08em;
-  fill: none;
-  stroke: var(--ink);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.75;
-  vertical-align: -0.07em;
+  position: relative;
+  width: 3.9rem;
+  height: 2.85rem;
+  margin: 0 0.35em;
+  vertical-align: -0.65rem;
+  overflow: visible;
+  cursor: pointer;
+  transform: translateY(-0.02rem);
+  transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-crab-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Official Ferris Legs */
+.about-crab-legs {
+  transition: transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Official Vim Logo (Hidden by default; pops up on hover) */
+.about-crab-vim-wrap {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(40px) scale(0.4);
+  transform-origin: 600px 520px;
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 440ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    filter 320ms ease;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.85));
+}
+
+.about-crab-vim-rim {
+  fill: #003610;
+}
+
+.about-crab-vim-base {
+  fill: #ffffff;
+}
+
+.about-crab-vim-path {
+  fill: #016824; /* deep, rich, slightly darker official emerald green */
+}
+
+/* Official Ferris Body */
+.about-crab-body-wrap {
+  transition: transform 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about-crab-pupil {
+  transition: transform 350ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Official Ferris Claws */
+.about-crab-claw-left,
+.about-crab-claw-right {
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.about-crab-claw-left {
+  transform-origin: 320px 650px;
+  transform: rotate(0deg) translate(0, 0);
+}
+
+.about-crab-claw-right {
+  transform-origin: 880px 650px;
+  transform: rotate(0deg) translate(0, 0);
+}
+
+/* Hover Interaction: Ferris grabs the official Vim icon and hoists it UP */
+.about-crab-viewport:hover {
+  transform: translateY(-0.2rem) scale(1.15);
+}
+
+.about-crab-viewport:hover .about-crab-legs {
+  transform: translateY(-8px) scaleY(1.06);
+}
+
+.about-crab-viewport:hover .about-crab-body-wrap {
+  transform: translateY(-16px);
+}
+
+.about-crab-viewport:hover .about-crab-pupil {
+  transform: translateY(-20px);
+}
+
+.about-crab-viewport:hover .about-crab-vim-wrap {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(-285px) scale(1.4);
+  filter:
+    drop-shadow(0 0 24px rgba(1, 104, 36, 0.95))
+    drop-shadow(0 12px 30px rgba(0, 0, 0, 0.95));
+}
+
+.about-crab-viewport:hover .about-crab-claw-left {
+  transform: translate(-45px, -270px) rotate(-35deg) scale(1.15);
+}
+
+.about-crab-viewport:hover .about-crab-claw-right {
+  transform: translate(45px, -270px) rotate(35deg) scale(1.15);
 }
 
 .about-music-control-wrap {
@@ -1710,6 +1811,159 @@ a:hover {
   filter: saturate(1.13) brightness(1.08);
 }
 
+.about-unreal-viewport {
+  display: inline-block;
+  position: relative;
+  width: 5.6rem;
+  height: 4.7rem;
+  margin: 0 0.3em;
+  overflow: visible;
+  color: rgba(229, 233, 237, 0.72);
+  background: none;
+  border: 0;
+  box-shadow: none;
+  vertical-align: middle;
+  transform: translateY(-0.06rem);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: crosshair;
+}
+
+.about-unreal-logo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  transform: scale(1.12);
+  transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-unreal-metal {
+  opacity: 1;
+  transform: scale(1) rotate(0);
+  transform-origin: 265px 218px;
+  transition:
+    opacity 350ms ease,
+    transform 600ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 350ms ease;
+}
+
+.about-unreal-sheen {
+  opacity: 0.5;
+  animation: about-unreal-metal-sheen 3.8s ease-in-out infinite alternate;
+}
+
+/* 3D Coordinate Transform Axes (Rendered behind the logo) */
+.about-unreal-gizmo {
+  opacity: 0;
+  transform: scale(0.5);
+  transform-origin: 265px 218px;
+  transition:
+    opacity 240ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 380ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: auto;
+  filter: drop-shadow(0 4px 14px rgba(0, 0, 0, 0.95));
+}
+
+.about-unreal-axis {
+  cursor: pointer;
+  transition: filter 180ms ease;
+}
+
+.about-unreal-axis-line {
+  stroke-width: 9;
+  stroke-linecap: round;
+  transition: stroke 180ms ease, stroke-width 180ms ease;
+}
+
+.about-unreal-axis-cone {
+  stroke-width: 3;
+  stroke-linejoin: round;
+  transition: fill 180ms ease, stroke 180ms ease;
+}
+
+.about-unreal-axis-label {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 20px;
+  font-weight: 900;
+  text-anchor: middle;
+  dominant-baseline: central;
+  user-select: none;
+  transition: fill 180ms ease, filter 180ms ease;
+}
+
+/* Red X-Axis (Forward) */
+.about-unreal-axis-x .about-unreal-axis-line {
+  stroke: #ff3355;
+}
+.about-unreal-axis-x .about-unreal-axis-cone {
+  fill: #ff3355;
+  stroke: #ff7088;
+}
+.about-unreal-axis-x .about-unreal-axis-label {
+  fill: #ff4d6d;
+}
+
+/* Green Y-Axis (Right) */
+.about-unreal-axis-y .about-unreal-axis-line {
+  stroke: #22c55e;
+}
+.about-unreal-axis-y .about-unreal-axis-cone {
+  fill: #22c55e;
+  stroke: #4ade80;
+}
+.about-unreal-axis-y .about-unreal-axis-label {
+  fill: #22c55e;
+}
+
+/* Blue Z-Axis (Up) */
+.about-unreal-axis-z .about-unreal-axis-line {
+  stroke: #38bdf8;
+}
+.about-unreal-axis-z .about-unreal-axis-cone {
+  fill: #38bdf8;
+  stroke: #93c5fd;
+}
+.about-unreal-axis-z .about-unreal-axis-label {
+  fill: #38bdf8;
+}
+
+/* Viewport Hover State */
+.about-unreal-viewport:hover {
+  transform: translateY(-0.16rem) scale(1.1);
+}
+
+.about-unreal-viewport:hover .about-unreal-metal {
+  filter:
+    drop-shadow(0 0 8px rgba(245, 158, 11, 0.35))
+    drop-shadow(0 0 18px rgba(245, 158, 11, 0.15));
+}
+
+.about-unreal-viewport:hover .about-unreal-gizmo {
+  opacity: 1;
+  transform: scale(1.08);
+}
+
+/* Interactive individual axis hover in viewport (highlights active handle yellow like UE) */
+.about-unreal-axis:hover .about-unreal-axis-line {
+  stroke: #fde047;
+  stroke-width: 12;
+}
+.about-unreal-axis:hover .about-unreal-axis-cone {
+  fill: #fde047;
+  stroke: #fef08a;
+  filter: drop-shadow(0 0 8px rgba(253, 224, 71, 0.9));
+}
+.about-unreal-axis:hover .about-unreal-axis-label {
+  fill: #fde047;
+  filter: drop-shadow(0 0 6px rgba(253, 224, 71, 0.95));
+}
+
+@keyframes about-unreal-metal-sheen {
+  from { transform: translateX(0) skewX(-16deg); }
+  to { transform: translateX(900px) skewX(-16deg); }
+}
+
 .about-cube-face::after {
   position: absolute;
   inset: 0;
@@ -1777,6 +2031,22 @@ a:hover {
   }
 
   .about-cube-face {
+    transition: none;
+  }
+
+  .about-unreal-viewport,
+  .about-unreal-logo,
+  .about-unreal-metal,
+  .about-unreal-gizmo,
+  .about-unreal-sheen,
+  .about-crab-viewport,
+  .about-crab-legs,
+  .about-crab-vim-wrap,
+  .about-crab-body-wrap,
+  .about-crab-pupil,
+  .about-crab-claw-left,
+  .about-crab-claw-right {
+    animation: none;
     transition: none;
   }
 }
