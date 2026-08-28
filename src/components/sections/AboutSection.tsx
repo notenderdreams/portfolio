@@ -6,9 +6,9 @@ import { SectionLabel } from '../common/SectionLabel';
 
 const waveformBars = [30, 40, 36, 52, 64, 57, 72, 88, 100, 94, 96, 92, 90, 94, 96, 98, 100, 100];
 
-const RustCrabVim: React.FC = () => (
+const RustCrabVim: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => (
   <span
-    className="about-crab-viewport"
+    className={`about-crab-viewport${isStoryActive ? ' is-story-active' : ''}`}
     role="img"
     aria-label="Official Rust mascot Ferris holding and lifting the Vim logo"
   >
@@ -108,7 +108,7 @@ const RustCrabVim: React.FC = () => (
   </span>
 );
 
-const MusicPlayButton: React.FC = () => {
+const MusicPlayButton: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -138,7 +138,7 @@ const MusicPlayButton: React.FC = () => {
 
   return (
     <>
-      <span className="about-music-control-wrap">
+      <span className={`about-music-control-wrap${isStoryActive ? ' is-story-active' : ''}`}>
         <button
           className={`about-music-control${isPlaying ? ' is-playing' : ''}`}
           type="button"
@@ -178,12 +178,13 @@ const MusicPlayButton: React.FC = () => {
   );
 };
 
-const PhotoManipulationStack: React.FC = () => {
+const PhotoManipulationStack: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => {
   const stackRef = useRef<HTMLSpanElement>(null);
   const carRef = useRef<HTMLSpanElement>(null);
   const fallingRef = useRef<HTMLSpanElement>(null);
   const timelineRef = useRef<gsap.core.Timeline | null>(null);
   const returnTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const hasStoryActivatedRef = useRef(false);
 
   useEffect(() => {
     const stack = stackRef.current;
@@ -275,6 +276,21 @@ const PhotoManipulationStack: React.FC = () => {
     return () => context.revert();
   }, []);
 
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    if (isStoryActive) {
+      hasStoryActivatedRef.current = true;
+      returnTimelineRef.current?.pause();
+      timelineRef.current?.restart();
+      return;
+    }
+
+    if (!hasStoryActivatedRef.current) return;
+    timelineRef.current?.pause();
+    returnTimelineRef.current?.restart();
+  }, [isStoryActive]);
+
   return (
     <span
       ref={stackRef}
@@ -300,8 +316,8 @@ const PhotoManipulationStack: React.FC = () => {
   );
 };
 
-const RelightingCube: React.FC = () => (
-  <span className="about-lighting-cube" role="img" aria-label="A rotating liquid-metal cube">
+const RelightingCube: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => (
+  <span className={`about-lighting-cube${isStoryActive ? ' is-story-active' : ''}`} role="img" aria-label="A rotating liquid-metal cube">
     <span className="about-lighting-cube-object" aria-hidden="true">
       <span className="about-cube-face about-cube-front" />
       <span className="about-cube-face about-cube-back" />
@@ -313,8 +329,8 @@ const RelightingCube: React.FC = () => (
   </span>
 );
 
-const ResolveColorWheels: React.FC = () => (
-  <span className="about-resolve-clip-stack" role="img" aria-label="Three colour grading wheels with video and audio timeline clips">
+const ResolveColorWheels: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => (
+  <span className={`about-resolve-clip-stack${isStoryActive ? ' is-story-active' : ''}`} role="img" aria-label="Three colour grading wheels with video and audio timeline clips">
     <span className="about-resolve-clip about-resolve-video-clip" aria-hidden="true">
       <img src="/images/resolve-video-clip.png" alt="" />
     </span>
@@ -332,9 +348,9 @@ const ResolveColorWheels: React.FC = () => (
   </span>
 );
 
-const UnrealRealtimeViewport: React.FC = () => (
+const UnrealRealtimeViewport: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => (
   <span
-    className="about-unreal-viewport"
+    className={`about-unreal-viewport${isStoryActive ? ' is-story-active' : ''}`}
     role="img"
     aria-label="Unreal Engine emblem with 3D coordinate transform gizmo"
   >
@@ -397,47 +413,134 @@ const UnrealRealtimeViewport: React.FC = () => (
   </span>
 );
 
+const StoryText: React.FC<{ text: string }> = ({ text }) => (
+  <>
+    {text.split(/(\s+)/).map((token, tokenIndex) =>
+      /^\s+$/.test(token) ? token : (
+        <span className="about-story-word" key={`${token}-${tokenIndex}`}>
+          {Array.from(token).map((character, characterIndex) => (
+            <span className="about-story-character" key={`${character}-${characterIndex}`}>{character}</span>
+          ))}
+        </span>
+      )
+    )}
+  </>
+);
+
 export const AboutSection: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLDivElement>(null);
+  const [activeStoryIcon, setActiveStoryIcon] = useState(-1);
 
   useLayoutEffect(() => {
+    const section = sectionRef.current;
     const story = storyRef.current;
-    if (!story) return;
+    if (!section || !story) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const beats = story.querySelectorAll<HTMLElement>('.about-story-beat');
+    const isDesktop = window.matchMedia('(min-width: 900px)').matches;
+    const characters = Array.from(story.querySelectorAll<HTMLElement>('.about-story-character'));
+    const iconMarkers = Array.from(story.querySelectorAll<HTMLElement>('.about-story-icon-marker'));
 
     if (reducedMotion) {
-      gsap.set(beats, { clearProps: 'all' });
+      story.classList.remove('is-scroll-driven');
       return;
     }
 
     gsap.registerPlugin(ScrollTrigger);
 
     const context = gsap.context(() => {
+      const introTargets = [
+        section.querySelector('.section-label'),
+        section.querySelector('.about-profile-grid'),
+      ].filter((target): target is Element => target !== null);
+
       gsap.fromTo(
-        beats,
-        { autoAlpha: 0.16, filter: 'blur(4px)' },
+        introTargets,
+        { autoAlpha: 0, y: 28, filter: 'blur(14px)' },
         {
           autoAlpha: 1,
+          y: 0,
           filter: 'blur(0px)',
-          stagger: 0.13,
-          ease: 'none',
+          duration: 1.15,
+          stagger: 0.12,
+          ease: 'power3.out',
+          clearProps: 'opacity,visibility,transform,filter',
           scrollTrigger: {
-            trigger: story,
+            trigger: section,
             start: 'top 82%',
-            end: 'bottom 42%',
-            scrub: 0.65,
+            once: true,
           },
         }
       );
+
+      gsap.fromTo(
+        story,
+        { opacity: 0.55, filter: 'blur(10px)' },
+        {
+          opacity: 1,
+          filter: 'blur(0px)',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: story,
+            start: 'top 88%',
+            end: 'top 62%',
+            scrub: 0.35,
+          },
+        }
+      );
+
+      if (!isDesktop) return;
+
+      story.classList.add('is-scroll-driven');
+
+      const iconCharacterOffsets = iconMarkers.map((marker) =>
+        characters.filter((character) =>
+          Boolean(character.compareDocumentPosition(marker) & Node.DOCUMENT_POSITION_FOLLOWING)
+        ).length
+      );
+
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: story,
+          start: 'top 18%',
+          end: '+=300%',
+          scrub: 0.45,
+          pin: true,
+          pinSpacing: true,
+          anticipatePin: 1,
+          onLeaveBack: () => setActiveStoryIcon(-1),
+        },
+      });
+
+      timeline.eventCallback('onUpdate', () => {
+        const timelineProgress = timeline.progress();
+        const characterOffset = Math.floor(timelineProgress * characters.length);
+        const nextIcon = timelineProgress >= 0.999
+          ? -1
+          : iconCharacterOffsets.reduce(
+              (activeIcon, iconOffset, index) => (characterOffset >= iconOffset ? index : activeIcon),
+              -1
+            );
+        setActiveStoryIcon((currentIcon) => currentIcon === nextIcon ? currentIcon : nextIcon);
+      });
+
+      timeline.to(characters, {
+        color: getComputedStyle(story).getPropertyValue('--ink-warm').trim(),
+        duration: 0.035,
+        stagger: { amount: 0.965 },
+        ease: 'none',
+      });
     }, story);
 
-    return () => context.revert();
+    return () => {
+      story.classList.remove('is-scroll-driven');
+      context.revert();
+    };
   }, []);
 
   return (
-    <section id="about" className="container section-spacer about-section scroll-reveal">
+    <section ref={sectionRef} id="about" className="container section-spacer about-section is-revealed">
       <SectionLabel label="01 / about &amp; profile" />
 
       <div className="about-profile-grid">
@@ -511,13 +614,13 @@ export const AboutSection: React.FC = () => {
       <div className="about-story" ref={storyRef}>
         <span className="about-story-label" aria-hidden="true">My story</span>
         <p className="about-origin-story">
-          <span className="about-story-beat">When I was 15, I started learning music <MusicPlayButton />. </span>
-          <span className="about-story-beat">I wanted to make covers for my tracks, so I learned photo <PhotoManipulationStack /> manipulation. </span>
-          <span className="about-story-beat">I kept getting stuck trying to relight images <RelightingCube />, which is why I picked up Blender. </span>
-          <span className="about-story-beat">Then I learned DaVinci Resolve to edit videos and grade them <ResolveColorWheels /> properly. </span>
-          <span className="about-story-beat">Blender rendered slowly, so I moved into Unreal <UnrealRealtimeViewport />. </span>
-          <span className="about-story-beat">In Unreal I found things I wanted to fix, and that is how I ended up learning programming <RustCrabVim />. </span>
-          <span className="about-story-beat">That is pretty much how I got here.</span>
+          <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
+          <span className="about-story-beat"><StoryText text="I wanted to make covers for my tracks, so I learned photo " /><span className="about-story-icon-marker"><PhotoManipulationStack isStoryActive={activeStoryIcon === 1} /></span><StoryText text=" manipulation. " /></span>
+          <span className="about-story-beat"><StoryText text="I kept getting stuck trying to relight images " /><span className="about-story-icon-marker"><RelightingCube isStoryActive={activeStoryIcon === 2} /></span><StoryText text=", which is why I picked up Blender. " /></span>
+          <span className="about-story-beat"><StoryText text="Then I learned DaVinci Resolve to edit videos and grade them " /><span className="about-story-icon-marker"><ResolveColorWheels isStoryActive={activeStoryIcon === 3} /></span><StoryText text=" properly. " /></span>
+          <span className="about-story-beat"><StoryText text="Blender rendered slowly, so I moved into Unreal " /><span className="about-story-icon-marker"><UnrealRealtimeViewport isStoryActive={activeStoryIcon === 4} /></span><StoryText text=". " /></span>
+          <span className="about-story-beat"><StoryText text="In Unreal I found things I wanted to fix, and that is how I ended up learning programming " /><span className="about-story-icon-marker"><RustCrabVim isStoryActive={activeStoryIcon === 5} /></span><StoryText text=". " /></span>
+          <span className="about-story-beat"><StoryText text="That is pretty much how I got here." /></span>
         </p>
       </div>
     </section>
