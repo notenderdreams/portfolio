@@ -520,20 +520,18 @@ export const AboutSection: React.FC = () => {
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: story,
-          start: 'top top',
-          end: '+=140%',
-          scrub: 0.3,
-          pin: true,
-          pinSpacing: true,
-          anticipatePin: 1,
+          start: 'top 62%',
+          end: 'top -28%',
+          scrub: 0.18,
           onLeaveBack: () => setActiveStoryIcon(-1),
         },
       });
 
       timeline.eventCallback('onUpdate', () => {
         const timelineProgress = timeline.progress();
-        const characterOffset = Math.floor(timelineProgress * characters.length);
-        const nextIcon = timelineProgress >= 0.999
+        const revealProgress = Math.min(timelineProgress / 0.78, 1);
+        const characterOffset = Math.floor(revealProgress * characters.length);
+        const nextIcon = timelineProgress >= 0.98
           ? -1
           : iconCharacterOffsets.reduce(
               (activeIcon, iconOffset, index) => (characterOffset >= iconOffset ? index : activeIcon),
@@ -545,9 +543,11 @@ export const AboutSection: React.FC = () => {
       timeline.to(characters, {
         color: getComputedStyle(story).getPropertyValue('--ink-warm').trim(),
         duration: 0.035,
-        stagger: { amount: 0.965 },
+        stagger: { amount: 0.745 },
         ease: 'none',
       });
+
+      timeline.to({}, { duration: 0.22 });
 
     }, story);
 
@@ -635,16 +635,18 @@ export const AboutSection: React.FC = () => {
             <source src="/video/story-ascii-animation.mp4" type="video/mp4" />
           </video>
         </div>
-        <span className="about-story-label" aria-hidden="true">My story</span>
-        <p className="about-origin-story">
-          <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
-          <span className="about-story-beat"><StoryText text="I wanted to make covers for my tracks, so I learned photo " /><span className="about-story-icon-marker"><PhotoManipulationStack isStoryActive={activeStoryIcon === 1} /></span><StoryText text=" manipulation. " /></span>
-          <span className="about-story-beat"><StoryText text="I kept getting stuck trying to relight images " /><span className="about-story-icon-marker"><RelightingCube isStoryActive={activeStoryIcon === 2} /></span><StoryText text=", which is why I picked up Blender. " /></span>
-          <span className="about-story-beat"><StoryText text="Then I learned DaVinci Resolve to edit videos and grade them " /><span className="about-story-icon-marker"><ResolveColorWheels isStoryActive={activeStoryIcon === 3} /></span><StoryText text=" properly. " /></span>
-          <span className="about-story-beat"><StoryText text="Blender rendered slowly, so I moved into Unreal " /><span className="about-story-icon-marker"><UnrealRealtimeViewport isStoryActive={activeStoryIcon === 4} /></span><StoryText text=". " /></span>
-          <span className="about-story-beat"><StoryText text="In Unreal I found things I wanted to fix, and that is how I ended up learning programming " /><span className="about-story-icon-marker"><RustCrabVim isStoryActive={activeStoryIcon === 5} /></span><StoryText text=". " /></span>
-          <span className="about-story-beat"><StoryText text="That is pretty much how I got here." /></span>
-        </p>
+        <div className="about-story-content">
+          <span className="about-story-label" aria-hidden="true">My story</span>
+          <p className="about-origin-story">
+            <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
+            <span className="about-story-beat"><StoryText text="I wanted to make covers for my tracks, so I learned photo " /><span className="about-story-icon-marker"><PhotoManipulationStack isStoryActive={activeStoryIcon === 1} /></span><StoryText text=" manipulation. " /></span>
+            <span className="about-story-beat"><StoryText text="I kept getting stuck trying to relight images " /><span className="about-story-icon-marker"><RelightingCube isStoryActive={activeStoryIcon === 2} /></span><StoryText text=", which is why I picked up Blender. " /></span>
+            <span className="about-story-beat"><StoryText text="Then I learned DaVinci Resolve to edit videos and grade them " /><span className="about-story-icon-marker"><ResolveColorWheels isStoryActive={activeStoryIcon === 3} /></span><StoryText text=" properly. " /></span>
+            <span className="about-story-beat"><StoryText text="Blender rendered slowly, so I moved into Unreal " /><span className="about-story-icon-marker"><UnrealRealtimeViewport isStoryActive={activeStoryIcon === 4} /></span><StoryText text=". " /></span>
+            <span className="about-story-beat"><StoryText text="In Unreal I found things I wanted to fix, and that is how I ended up learning programming " /><span className="about-story-icon-marker"><RustCrabVim isStoryActive={activeStoryIcon === 5} /></span><StoryText text=". " /></span>
+            <span className="about-story-beat"><StoryText text="That is pretty much how I got here." /></span>
+          </p>
+        </div>
       </div>
     </section>
   );
