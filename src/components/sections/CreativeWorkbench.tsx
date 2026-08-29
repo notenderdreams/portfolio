@@ -3,6 +3,7 @@ import { LandingClip } from './LandingClip';
 import { MidiPreview } from './MidiPreview';
 import { NodeGraphPreview } from './NodeGraphPreview';
 import { SignatureMark } from './SignatureMark';
+import { DraggableWorkbenchItem } from './DraggableWorkbenchItem';
 
 interface CreativeWorkbenchProps {
   embedded?: boolean;
@@ -27,18 +28,24 @@ export const CreativeWorkbench: React.FC<CreativeWorkbenchProps> = ({ embedded =
         </div>
 
         <div className="workbench-midi">
-          <MidiPreview embedded />
+          <DraggableWorkbenchItem>
+            <MidiPreview embedded />
+          </DraggableWorkbenchItem>
         </div>
 
         <figure className="workbench-portrait">
-          <img
-            src="/images/pro-pic.png"
-            alt="Sajid photographing his reflection in a night-time garden"
-          />
+          <DraggableWorkbenchItem>
+            <img
+              src="/images/pro-pic.png"
+              alt="Sajid photographing his reflection in a night-time garden"
+            />
+          </DraggableWorkbenchItem>
         </figure>
 
         <div className="workbench-clip">
-          <LandingClip embedded />
+          <DraggableWorkbenchItem>
+            <LandingClip embedded />
+          </DraggableWorkbenchItem>
         </div>
 
         <div className="workbench-signature">

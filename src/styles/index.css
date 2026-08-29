@@ -449,6 +449,26 @@ a:hover {
   height: auto;
 }
 
+.workbench-draggable {
+  width: 100%;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  will-change: transform;
+  transition: transform 1s var(--ease-smooth);
+}
+
+.workbench-draggable.is-dragging {
+  cursor: grabbing;
+  z-index: 20;
+  transition: none;
+}
+
+.workbench-draggable img {
+  -webkit-user-drag: none;
+}
+
 .workbench-nodes {
   position: absolute;
   z-index: 3;
@@ -620,6 +640,16 @@ a:hover {
   align-items: center;
   gap: 0.85rem;
   width: 100%;
+}
+
+.signature-mark-draggable {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.signature-badge-draggable {
+  width: auto;
+  flex: 0 0 auto;
 }
 
 .signature-mark {
