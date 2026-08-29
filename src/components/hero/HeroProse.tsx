@@ -1,18 +1,15 @@
 import React from 'react';
-import { siteMetadata } from '../../data/metadata';
-import { useDynamicDate } from '../../hooks/useDynamicDate';
 import { useDhakaTime } from '../../hooks/useDhakaTime';
 
 export const HeroProse: React.FC = () => {
-  const formattedDate = useDynamicDate();
   const dhakaTime = useDhakaTime();
 
   return (
     <div className="hero-meta-row">
       <span>
-        {siteMetadata.locationBangla} ({siteMetadata.location})
+        DHAKA, BD
       </span>
-      <span id="archive-hero-date">{formattedDate}</span>
+      <span id="archive-hero-date">08 29 26</span>
       <span id="dhaka-time">{dhakaTime}</span>
     </div>
   );

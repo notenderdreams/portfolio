@@ -430,12 +430,14 @@ const StoryText: React.FC<{ text: string }> = ({ text }) => (
 export const AboutSection: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const storyRef = useRef<HTMLDivElement>(null);
+  const storyBackdropRef = useRef<HTMLDivElement>(null);
   const [activeStoryIcon, setActiveStoryIcon] = useState(-1);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const story = storyRef.current;
-    if (!section || !story) return;
+    const storyBackdrop = storyBackdropRef.current;
+    if (!section || !story || !storyBackdrop) return;
 
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const isDesktop = window.matchMedia('(min-width: 900px)').matches;
@@ -490,6 +492,21 @@ export const AboutSection: React.FC = () => {
         }
       );
 
+      gsap.fromTo(
+        storyBackdrop,
+        { autoAlpha: 0 },
+        {
+          autoAlpha: 1,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: story,
+            start: 'top 90%',
+            end: 'top 55%',
+            scrub: 0.5,
+          },
+        }
+      );
+
       if (!isDesktop) return;
 
       story.classList.add('is-scroll-driven');
@@ -503,9 +520,9 @@ export const AboutSection: React.FC = () => {
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: story,
-          start: 'top 18%',
-          end: '+=300%',
-          scrub: 0.45,
+          start: 'top top',
+          end: '+=140%',
+          scrub: 0.3,
           pin: true,
           pinSpacing: true,
           anticipatePin: 1,
@@ -531,6 +548,7 @@ export const AboutSection: React.FC = () => {
         stagger: { amount: 0.965 },
         ease: 'none',
       });
+
     }, story);
 
     return () => {
@@ -612,6 +630,11 @@ export const AboutSection: React.FC = () => {
       </div>
 
       <div className="about-story" ref={storyRef}>
+        <div ref={storyBackdropRef} className="about-story-backdrop" aria-hidden="true">
+          <video className="about-story-video" autoPlay muted loop playsInline preload="metadata">
+            <source src="/video/story-ascii-animation.mp4" type="video/mp4" />
+          </video>
+        </div>
         <span className="about-story-label" aria-hidden="true">My story</span>
         <p className="about-origin-story">
           <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
