@@ -1076,7 +1076,7 @@ a:hover {
 
 /* About & Profile Section */
 .about-section {
-  padding-top: clamp(8.5rem, 18vh, 15rem);
+  padding-top: clamp(11rem, 23vh, 19rem);
 }
 
 .about-profile-grid {
@@ -1274,7 +1274,7 @@ a:hover {
   width: 100%;
   min-height: 100vh;
   min-height: 100svh;
-  margin: clamp(3rem, 7vw, 5.5rem) 0 0;
+  margin: clamp(5.5rem, 11vw, 8.5rem) 0 0;
   padding: clamp(3rem, 8vh, 6rem) 0;
 }
 
