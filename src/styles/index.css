@@ -1066,6 +1066,8 @@ a:hover {
   grid-template-columns: minmax(3.5rem, 1fr) min(var(--max-w), calc(100% - (2 * var(--pad)))) minmax(3.5rem, 1fr);
   width: 100%;
   align-items: start;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .works-center-track {
@@ -1080,9 +1082,8 @@ a:hover {
 
 .works-sticky-flank {
   position: sticky;
-  top: 50vh;
-  transform: translateY(-50%);
-  padding: 0 clamp(1rem, 2.5vw, 2.5rem);
+  top: clamp(8rem, 35vh, 45vh);
+  padding: clamp(3rem, 6vh, 5rem) clamp(1rem, 2.5vw, 2.5rem);
 }
 
 .works-flank-left {
@@ -1163,7 +1164,8 @@ a:hover {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-left: 1px solid rgba(255, 255, 255, 0.16);
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .work-item {
