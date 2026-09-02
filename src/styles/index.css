@@ -1170,6 +1170,7 @@ a:hover {
   border-right: 1px solid rgba(255, 255, 255, 0.16);
 }
 
+/* Work Item - Editorial Layout with Cinematic #CCC Film Burn Effect */
 .work-item {
   border: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.16);
@@ -1183,95 +1184,184 @@ a:hover {
   position: relative;
   isolation: isolate;
   cursor: pointer;
-}
-
-/* Obscura-Style Bottom-Up Curtain Reveal (Inverted for dark aesthetic: #cccccc fill with #08080c text) */
-.work-item::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: #cccccc;
-  pointer-events: none;
-  z-index: -1;
-  clip-path: inset(100% 0 0% 0);
-  transition: clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: clip-path;
+  background-color: transparent;
+  opacity: 0.35;
+  filter: blur(0.2px);
+  transition:
+    opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.75s ease;
 }
 
 .work-item:last-child {
   border-bottom: none;
 }
 
-.work-item.is-upcoming::before {
-  clip-path: inset(100% 0 0% 0);
+.work-item:hover {
+  opacity: 0.65;
+  filter: blur(0);
 }
 
-.work-item.is-selected::before,
-.work-item:hover::before {
-  clip-path: inset(0% 0 0% 0);
+.work-item.is-selected {
+  opacity: 1;
+  filter: blur(0);
 }
 
-.work-item.is-passed::before {
-  clip-path: inset(0% 0 100% 0);
+/* The Clean #CCC Surface Fade */
+.work-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: #cccccc;
+  opacity: 0;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity;
 }
 
-.work-item.is-passed:hover::before {
-  clip-path: inset(0% 0 0% 0);
+.work-item.is-selected::before {
+  opacity: 1;
 }
 
+/* Typography - Kinetic Rolling Box Title */
 .work-title-group h3 {
   font-family: var(--font-serif);
   font-size: clamp(2.2rem, 4.5vw, 3.8rem);
   font-weight: 300;
-  line-height: 1.1;
+  line-height: 1.15;
   letter-spacing: -0.025em;
-  color: var(--ink);
   margin-bottom: 0.8rem;
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.work-item.is-selected .work-title-group h3,
-.work-item:hover .work-title-group h3 {
+.roll-word {
+  display: inline-block;
+  white-space: pre;
+}
+
+.roll-box {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  vertical-align: bottom;
+  line-height: 1.15;
+  padding-bottom: 0.06em;
+}
+
+.roll-line {
+  display: block;
+  transition: transform 1.15s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.roll-line-1 {
+  transform: translate3d(0, 0%, 0);
+  color: var(--ink);
+}
+
+/* Direction: UP (Line 2 starts below, rolls up) */
+.roll-dir-up .roll-line-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translate3d(0, 105%, 0);
   color: #08080c;
-  text-shadow: none;
 }
 
+/* Direction: DOWN (Line 2 starts above, rolls down) */
+.roll-dir-down .roll-line-2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translate3d(0, -105%, 0);
+  color: #08080c;
+}
+
+/* When selected: UP word rolls up through top */
+.work-item.is-selected .roll-dir-up .roll-line-1 {
+  transform: translate3d(0, -105%, 0);
+}
+
+.work-item.is-selected .roll-dir-up .roll-line-2 {
+  transform: translate3d(0, 0%, 0);
+}
+
+/* When selected: DOWN word rolls down through bottom */
+.work-item.is-selected .roll-dir-down .roll-line-1 {
+  transform: translate3d(0, 105%, 0);
+}
+
+.work-item.is-selected .roll-dir-down .roll-line-2 {
+  transform: translate3d(0, 0%, 0);
+}
+
+/* Description - Hidden when unselected, blur-fade in when selected */
 .work-title-group p {
   font-size: 0.78rem;
-  color: var(--muted);
+  color: #2b2d35;
   line-height: 1.7;
   max-width: 26rem;
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(14px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    filter 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s 0.4s;
 }
 
-.work-item.is-selected .work-title-group p,
-.work-item:hover .work-title-group p {
-  color: #383a42;
+.work-item.is-selected .work-title-group p {
+  visibility: visible;
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    filter 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    visibility 0s 0s;
 }
 
+/* Right-Side Meta / Tech Stack - Hidden when unselected, blur-fade in when selected */
 .work-meta {
   text-align: right;
   font-size: 0.7rem;
-  color: var(--muted);
+  color: #4a4d56;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   letter-spacing: 0.05em;
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  visibility: hidden;
+  opacity: 0;
+  filter: blur(12px);
+  transform: translateY(14px);
+  pointer-events: none;
+  transition:
+    opacity 0.4s ease,
+    filter 0.4s ease,
+    transform 0.4s ease,
+    visibility 0s 0.4s;
 }
 
-.work-item.is-selected .work-meta,
-.work-item:hover .work-meta {
-  color: #4a4d56;
+.work-item.is-selected .work-meta {
+  visibility: visible;
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+  pointer-events: auto;
+  transition:
+    opacity 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    filter 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    transform 0.95s cubic-bezier(0.22, 1, 0.36, 1) 0.15s,
+    visibility 0s 0s;
 }
 
 .work-meta .fav-tag {
-  color: var(--ink);
-  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.work-item.is-selected .work-meta .fav-tag,
-.work-item:hover .work-meta .fav-tag {
   color: #08080c;
   font-weight: 500;
 }

@@ -4,7 +4,7 @@ import { SectionLabel } from '../common/SectionLabel';
 import { WorkItem } from './WorkItem';
 
 export const SelectedWorks: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -12,7 +12,30 @@ export const SelectedWorks: React.FC = () => {
 
     const calculateActiveProject = () => {
       const centerY = window.innerHeight / 2;
-      let closestIndex = 0;
+      const firstEl = itemRefs.current[0];
+      const lastEl = itemRefs.current[itemRefs.current.length - 1];
+
+      // If entirely above the works section
+      if (firstEl) {
+        const firstRect = firstEl.getBoundingClientRect();
+        if (firstRect.top > centerY + 80) {
+          setActiveIndex(-1);
+          ticking = false;
+          return;
+        }
+      }
+
+      // If entirely below the works section
+      if (lastEl) {
+        const lastRect = lastEl.getBoundingClientRect();
+        if (lastRect.bottom < centerY - 80) {
+          setActiveIndex(-1);
+          ticking = false;
+          return;
+        }
+      }
+
+      let closestIndex = -1;
       let minDistance = Infinity;
 
       itemRefs.current.forEach((el, index) => {
@@ -57,7 +80,7 @@ export const SelectedWorks: React.FC = () => {
   };
 
   const total = projects.length;
-  const currentNum = activeIndex + 1;
+  const currentNum = activeIndex >= 0 ? activeIndex + 1 : 1;
 
   return (
     <section id="work" className="section-spacer selected-works-section">
@@ -80,19 +103,20 @@ export const SelectedWorks: React.FC = () => {
         {/* Center: project cards in continuous grid stroke */}
         <div className="works-center-track">
           <div className="works-list">
-            {projects.map((project, index) => (
-              <WorkItem
-                key={project.id}
-                ref={(el) => {
-                  itemRefs.current[index] = el;
-                }}
-                project={project}
-                delayIndex={index}
-                isSelected={index === activeIndex}
-                isPassed={index < activeIndex}
-                onSelect={() => scrollToProject(index)}
-              />
-            ))}
+            {projects.map((project, index) => {
+              const isSelected = index === activeIndex;
+              return (
+                <WorkItem
+                  key={project.id}
+                  ref={(el) => {
+                    itemRefs.current[index] = el;
+                  }}
+                  project={project}
+                  isSelected={isSelected}
+                  onSelect={() => scrollToProject(index)}
+                />
+              );
+            })}
           </div>
         </div>
 
