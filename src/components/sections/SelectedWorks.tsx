@@ -5,6 +5,7 @@ import { WorkItem } from './WorkItem';
 
 export const SelectedWorks: React.FC = () => {
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [displayIndex, setDisplayIndex] = useState(0);
   const itemRefs = useRef<(HTMLElement | null)[]>([]);
 
   useEffect(() => {
@@ -20,6 +21,7 @@ export const SelectedWorks: React.FC = () => {
         const firstRect = firstEl.getBoundingClientRect();
         if (firstRect.top > centerY + 80) {
           setActiveIndex(-1);
+          setDisplayIndex(0);
           ticking = false;
           return;
         }
@@ -30,6 +32,7 @@ export const SelectedWorks: React.FC = () => {
         const lastRect = lastEl.getBoundingClientRect();
         if (lastRect.bottom < centerY - 80) {
           setActiveIndex(-1);
+          setDisplayIndex(itemRefs.current.length - 1);
           ticking = false;
           return;
         }
@@ -50,7 +53,10 @@ export const SelectedWorks: React.FC = () => {
         }
       });
 
-      setActiveIndex((prev) => (prev !== closestIndex ? closestIndex : prev));
+      if (closestIndex >= 0) {
+        setActiveIndex(closestIndex);
+        setDisplayIndex(closestIndex);
+      }
       ticking = false;
     };
 
@@ -73,6 +79,7 @@ export const SelectedWorks: React.FC = () => {
 
   const scrollToProject = (index: number) => {
     setActiveIndex(index);
+    setDisplayIndex(index);
     const target = itemRefs.current[index];
     if (target) {
       target.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -80,7 +87,7 @@ export const SelectedWorks: React.FC = () => {
   };
 
   const total = projects.length;
-  const currentNum = activeIndex >= 0 ? activeIndex + 1 : 1;
+  const currentNum = displayIndex + 1;
 
   return (
     <section id="work" className="section-spacer selected-works-section">

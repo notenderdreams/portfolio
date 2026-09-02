@@ -1,9 +1,14 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select, .node-graph-node, .workbench-draggable, [data-cursor="grab"]';
+type CursorAction = 'PLAY' | 'CLICK' | 'DRAG' | null;
+
+const PLAY_SELECTOR = '[data-cursor="play"], video, .sound-preview, .landing-clip-preview, .about-story-video, .midi-preview';
+const DRAG_SELECTOR = '[data-cursor="grab"], [data-cursor="drag"], .workbench-draggable, .node-graph-node, [role="slider"]';
+const CLICK_SELECTOR = '.work-item, .works-name-btn, [data-cursor="click"], [data-cursor="pointer"], .btn-hero-cta';
 
 export const CursorFollower: React.FC = () => {
-  const cursorRef = useRef<HTMLSpanElement>(null);
+  const followerRef = useRef<HTMLDivElement>(null);
+  const [currentAction, setCurrentAction] = useState<CursorAction>(null);
 
   useEffect(() => {
     const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -11,75 +16,93 @@ export const CursorFollower: React.FC = () => {
 
     if (!finePointer.matches || reducedMotion.matches) return;
 
-    const cursor = cursorRef.current;
-    if (!cursor) return;
+    const follower = followerRef.current;
+    if (!follower) return;
 
-    let targetX = -100;
-    let targetY = -100;
-    let cursorX = -100;
-    let cursorY = -100;
+    let targetX = -200;
+    let targetY = -200;
+    let cursorX = -200;
+    let cursorY = -200;
     let animationFrame = 0;
     let isMouseDown = false;
 
-    document.body.classList.add('custom-cursor-active');
-
     const animateCursor = () => {
-      cursorX += (targetX - cursorX) * 0.6;
-      cursorY += (targetY - cursorY) * 0.6;
-      cursor.style.transform = `translate3d(${cursorX.toFixed(2)}px, ${cursorY.toFixed(2)}px, 0)`;
+      cursorX += (targetX - cursorX) * 0.55;
+      cursorY += (targetY - cursorY) * 0.55;
+      follower.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) translate(-50%, -50%)`;
       animationFrame = window.requestAnimationFrame(animateCursor);
     };
 
-    const updateCursorState = (target: EventTarget | null) => {
-      if (!(target instanceof Element)) return;
+    const updateCursorAction = (target: EventTarget | null) => {
+      if (!(target instanceof Element)) {
+        setCurrentAction(null);
+        document.body.classList.remove('has-cursor-label');
+        return;
+      }
 
-      const isPlayTarget = Boolean(target.closest('[data-cursor="play"]'));
-      const isInteractiveTarget = !isPlayTarget && Boolean(target.closest(INTERACTIVE_SELECTOR));
+      // Check for PLAY state
+      if (target.closest(PLAY_SELECTOR)) {
+        setCurrentAction('PLAY');
+        document.body.classList.add('has-cursor-label');
+        return;
+      }
 
-      cursor.classList.toggle('is-play', isPlayTarget);
-      cursor.classList.toggle('is-interactive', isInteractiveTarget);
-      cursor.classList.toggle('is-down', isMouseDown);
+      // Check for DRAG state
+      if (target.closest(DRAG_SELECTOR)) {
+        setCurrentAction('DRAG');
+        document.body.classList.add('has-cursor-label');
+        return;
+      }
+
+      // Check for CLICK state
+      if (target.closest(CLICK_SELECTOR)) {
+        setCurrentAction('CLICK');
+        document.body.classList.add('has-cursor-label');
+        return;
+      }
+
+      setCurrentAction(null);
+      document.body.classList.remove('has-cursor-label');
     };
 
     const handlePointerMove = (event: PointerEvent) => {
       targetX = event.clientX;
       targetY = event.clientY;
-      cursor.classList.add('is-visible');
 
-      // Failsafe: if mouse button was released outside window, clear down state immediately
       if (event.pointerType === 'mouse' && event.buttons === 0 && isMouseDown) {
         isMouseDown = false;
-        cursor.classList.remove('is-down');
+        follower.classList.remove('is-down');
       }
 
-      updateCursorState(event.target);
+      updateCursorAction(event.target);
     };
 
     const handlePointerDown = (event: PointerEvent) => {
       if (event.pointerType === 'mouse' && event.button !== 0) return;
       isMouseDown = true;
-      cursor.classList.add('is-down');
-      updateCursorState(event.target);
+      follower.classList.add('is-down');
     };
 
-    const handlePointerUp = (event: PointerEvent) => {
+    const handlePointerUp = () => {
       isMouseDown = false;
-      cursor.classList.remove('is-down');
-      updateCursorState(event.target);
+      follower.classList.remove('is-down');
     };
 
     const handlePointerOver = (event: PointerEvent) => {
-      updateCursorState(event.target);
+      updateCursorAction(event.target);
     };
 
     const handlePointerLeave = () => {
       isMouseDown = false;
-      cursor.classList.remove('is-visible', 'is-play', 'is-interactive', 'is-down');
+      setCurrentAction(null);
+      document.body.classList.remove('has-cursor-label');
     };
 
     const handleBlur = () => {
       isMouseDown = false;
-      cursor.classList.remove('is-down');
+      follower.classList.remove('is-down');
+      setCurrentAction(null);
+      document.body.classList.remove('has-cursor-label');
     };
 
     animationFrame = window.requestAnimationFrame(animateCursor);
@@ -90,10 +113,9 @@ export const CursorFollower: React.FC = () => {
     document.addEventListener('pointerover', handlePointerOver, { passive: true });
     document.documentElement.addEventListener('mouseleave', handlePointerLeave);
     window.addEventListener('blur', handleBlur);
-    window.addEventListener('contextmenu', handleBlur);
 
     return () => {
-      document.body.classList.remove('custom-cursor-active');
+      document.body.classList.remove('has-cursor-label');
       window.cancelAnimationFrame(animationFrame);
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerdown', handlePointerDown);
@@ -102,32 +124,18 @@ export const CursorFollower: React.FC = () => {
       document.removeEventListener('pointerover', handlePointerOver);
       document.documentElement.removeEventListener('mouseleave', handlePointerLeave);
       window.removeEventListener('blur', handleBlur);
-      window.removeEventListener('contextmenu', handleBlur);
     };
   }, []);
 
   return (
-    <div className="cursor-follower" aria-hidden="true">
-      <span ref={cursorRef} className="cursor-circle">
-        {/* Play dial for Gatekeeper MIDI preview */}
-        <svg className="cursor-play-copy" viewBox="0 0 100 100">
-          <defs>
-            <path
-              id="cursor-play-path"
-              d="M 50,50 m -42,0 a 42,42 0 1,1 84,0 a 42,42 0 1,1 -84,0"
-            />
-          </defs>
-          <text>
-            <textPath href="#cursor-play-path" startOffset="1%">
-              CLICK TO PLAY · CLICK TO PLAY ·
-            </textPath>
-          </text>
-        </svg>
-        <svg className="cursor-headphones" viewBox="0 0 24 24">
-          <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-          <path d="M4 14a2 2 0 0 1 2-2h1v7H6a2 2 0 0 1-2-2v-3ZM20 14a2 2 0 0 0-2-2h-1v7h1a2 2 0 0 0 2-2v-3Z" />
-        </svg>
-      </span>
+    <div
+      ref={followerRef}
+      className={`follow-cursor-desktop${currentAction ? ' is-visible' : ''}`}
+      aria-hidden="true"
+    >
+      <span className="cursor-bracket">(</span>
+      <span className="cursor-text">{currentAction || ''}</span>
+      <span className="cursor-bracket">)</span>
     </div>
   );
 };
