@@ -27,7 +27,7 @@ export const SelectedWorks: React.FC = () => {
         }
       });
 
-      setActiveIndex(closestIndex);
+      setActiveIndex((prev) => (prev !== closestIndex ? closestIndex : prev));
       ticking = false;
     };
 
@@ -89,6 +89,7 @@ export const SelectedWorks: React.FC = () => {
                 project={project}
                 delayIndex={index}
                 isSelected={index === activeIndex}
+                isPassed={index < activeIndex}
                 onSelect={() => scrollToProject(index)}
               />
             ))}

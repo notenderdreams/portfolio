@@ -5,15 +5,18 @@ interface WorkItemProps {
   project: ProjectItem;
   delayIndex?: number;
   isSelected?: boolean;
+  isPassed?: boolean;
   onSelect?: () => void;
 }
 
 export const WorkItem = forwardRef<HTMLElement, WorkItemProps>(
-  ({ project, isSelected = false, onSelect }, ref) => {
+  ({ project, isSelected = false, isPassed = false, onSelect }, ref) => {
+    const statusClass = isSelected ? ' is-selected' : isPassed ? ' is-passed' : ' is-upcoming';
+
     return (
       <article
         ref={ref}
-        className={`work-item${isSelected ? ' is-selected' : ''}`}
+        className={`work-item${statusClass}`}
         onClick={onSelect}
       >
         <div className="work-title-group">

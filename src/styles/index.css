@@ -1180,26 +1180,41 @@ a:hover {
   align-items: center;
   position: relative;
   isolation: isolate;
-  background-color: transparent;
+  cursor: pointer;
 }
 
+/* Obscura-Style Bottom-Up Curtain Reveal (Inverted for dark aesthetic: #cccccc fill with #08080c text) */
 .work-item::before {
   content: '';
   position: absolute;
   inset: 0;
   background-color: #cccccc;
-  opacity: 0;
   pointer-events: none;
   z-index: -1;
-  transition: opacity 0.6s cubic-bezier(0.25, 1, 0.4, 1);
+  clip-path: inset(100% 0 0% 0);
+  transition: clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: clip-path;
 }
 
 .work-item:last-child {
   border-bottom: none;
 }
 
-.work-item.is-selected::before {
-  opacity: 1;
+.work-item.is-upcoming::before {
+  clip-path: inset(100% 0 0% 0);
+}
+
+.work-item.is-selected::before,
+.work-item:hover::before {
+  clip-path: inset(0% 0 0% 0);
+}
+
+.work-item.is-passed::before {
+  clip-path: inset(0% 0 100% 0);
+}
+
+.work-item.is-passed:hover::before {
+  clip-path: inset(0% 0 0% 0);
 }
 
 .work-title-group h3 {
@@ -1210,10 +1225,11 @@ a:hover {
   letter-spacing: -0.025em;
   color: var(--ink);
   margin-bottom: 0.8rem;
-  transition: color 0.6s cubic-bezier(0.25, 1, 0.4, 1), text-shadow 0.6s cubic-bezier(0.25, 1, 0.4, 1);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.work-item.is-selected .work-title-group h3 {
+.work-item.is-selected .work-title-group h3,
+.work-item:hover .work-title-group h3 {
   color: #08080c;
   text-shadow: none;
 }
@@ -1223,10 +1239,11 @@ a:hover {
   color: var(--muted);
   line-height: 1.7;
   max-width: 26rem;
-  transition: color 0.6s cubic-bezier(0.25, 1, 0.4, 1);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.work-item.is-selected .work-title-group p {
+.work-item.is-selected .work-title-group p,
+.work-item:hover .work-title-group p {
   color: #383a42;
 }
 
@@ -1238,19 +1255,21 @@ a:hover {
   flex-direction: column;
   gap: 0.25rem;
   letter-spacing: 0.05em;
-  transition: color 0.6s cubic-bezier(0.25, 1, 0.4, 1);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.work-item.is-selected .work-meta {
+.work-item.is-selected .work-meta,
+.work-item:hover .work-meta {
   color: #4a4d56;
 }
 
 .work-meta .fav-tag {
   color: var(--ink);
-  transition: color 0.6s cubic-bezier(0.25, 1, 0.4, 1);
+  transition: color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.work-item.is-selected .work-meta .fav-tag {
+.work-item.is-selected .work-meta .fav-tag,
+.work-item:hover .work-meta .fav-tag {
   color: #08080c;
   font-weight: 500;
 }
