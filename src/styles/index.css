@@ -55,7 +55,7 @@ body {
   font-weight: 300;
   line-height: 1.8;
   letter-spacing: 0.03em;
-  overflow-x: hidden;
+  overflow-x: clip;
   position: relative;
   min-height: 100vh;
 }
@@ -198,16 +198,18 @@ a:hover {
 
 /* Landing Screen Container with Animated Looping Background Video */
 .landing-screen {
-  position: relative;
+  position: sticky;
+  top: 0;
   width: 100%;
-  min-height: 100vh;
-  min-height: 100dvh;
+  height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
-  padding-bottom: clamp(2.5rem, 5vh, 4rem);
+  padding-bottom: clamp(2rem, 4vh, 3.5rem);
   background-color: var(--bg);
+  z-index: 1;
 }
 
 /* Video Background Media Layer */
@@ -236,7 +238,7 @@ a:hover {
   inset: 0;
   background:
     linear-gradient(90deg, rgba(5, 5, 7, 0.42) 0%, rgba(5, 5, 7, 0.16) 34%, transparent 64%),
-    linear-gradient(180deg, transparent 62%, rgba(5, 5, 7, 0.34) 80%, #050507 100%);
+    radial-gradient(circle at 50% 40%, transparent 40%, rgba(5, 5, 7, 0.45) 100%);
   pointer-events: none;
 }
 
@@ -1274,9 +1276,27 @@ a:hover {
   font-weight: 500;
 }
 
-/* About & Profile Section */
+/* Main Content Stacking Context (Solid Dark Canvas) */
+main {
+  position: relative;
+  z-index: 10;
+  background-color: #050507;
+  width: 100%;
+}
+
+/* About & Profile Section - Solid Black Block that slides over Hero */
 .about-section {
-  padding-top: clamp(11rem, 23vh, 19rem);
+  position: relative;
+  width: 100%;
+  background-color: #050507;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  padding-top: clamp(6rem, 12vh, 10rem);
+  padding-bottom: clamp(6rem, 12vh, 10rem);
+  z-index: 10;
+}
+
+.about-container {
+  width: 100%;
 }
 
 .about-profile-grid {
