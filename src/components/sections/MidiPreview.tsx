@@ -114,12 +114,14 @@ export const MidiPreview: React.FC<MidiPreviewProps> = ({ embedded = false }) =>
             className="midi-preview-image midi-preview-image-dim"
             src="/images/gatekeeper-midi.png"
             alt="Gatekeeper Main MIDI piano roll"
+            draggable={false}
           />
           <img
             className="midi-preview-image midi-preview-image-bright"
             src="/images/gatekeeper-midi.png"
             alt=""
             aria-hidden="true"
+            draggable={false}
           />
           <span className="midi-preview-playhead" aria-hidden="true" />
         </span>

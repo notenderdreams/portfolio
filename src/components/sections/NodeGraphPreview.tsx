@@ -282,12 +282,16 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
     window.addEventListener('pointerup', handleGlobalPointerUp, { passive: true });
     window.addEventListener('pointercancel', handleGlobalPointerUp, { passive: true });
     window.addEventListener('blur', handleGlobalPointerUp);
+    window.addEventListener('visibilitychange', handleGlobalPointerUp);
+    window.addEventListener('contextmenu', handleGlobalPointerUp);
 
     return () => {
       window.removeEventListener('pointermove', handleGlobalPointerMove);
       window.removeEventListener('pointerup', handleGlobalPointerUp);
       window.removeEventListener('pointercancel', handleGlobalPointerUp);
       window.removeEventListener('blur', handleGlobalPointerUp);
+      window.removeEventListener('visibilitychange', handleGlobalPointerUp);
+      window.removeEventListener('contextmenu', handleGlobalPointerUp);
     };
   }, []);
 
@@ -304,6 +308,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             tabIndex={0}
             aria-label="Gaea terrain heightmap procedural node"
             onPointerDown={(e) => handlePointerDown('gaea', e)}
+            onDragStart={(e) => e.preventDefault()}
           >
             <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
             <rect x="22" y="318" width="548" height="307" fill="transparent" pointerEvents="all" />
@@ -320,6 +325,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             tabIndex={0}
             aria-label="Blender Principled Volume shader node"
             onPointerDown={(e) => handlePointerDown('principled', e)}
+            onDragStart={(e) => e.preventDefault()}
           >
             <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
             <rect x="650" y="138" width="365" height="478" fill="transparent" pointerEvents="all" />
@@ -336,6 +342,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             tabIndex={0}
             aria-label="DaVinci Resolve ACES transform color grade node"
             onPointerDown={(e) => handlePointerDown('davinci', e)}
+            onDragStart={(e) => e.preventDefault()}
           >
             <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
             <rect x="1228" y="32" width="430" height="98" fill="transparent" pointerEvents="all" />
@@ -355,6 +362,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
         viewBox="0 0 1698 652"
         role="img"
         aria-label="Gaea texture nodes connected to a Blender Principled Volume node and DaVinci Resolve color nodes"
+        onDragStart={(e) => e.preventDefault()}
       >
         <defs>
           <clipPath id="gaea-node-clip">

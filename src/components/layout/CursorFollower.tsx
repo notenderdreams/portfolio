@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select, .node-graph-node, [data-cursor="grab"]';
+const INTERACTIVE_SELECTOR = 'a, button:not([data-cursor="play"]), [role="button"]:not([data-cursor="play"]), input, textarea, select, .node-graph-node, .workbench-draggable, [data-cursor="grab"]';
 
 export const CursorFollower: React.FC = () => {
   const cursorRef = useRef<HTMLSpanElement>(null);
@@ -45,10 +45,18 @@ export const CursorFollower: React.FC = () => {
       targetX = event.clientX;
       targetY = event.clientY;
       cursor.classList.add('is-visible');
+
+      // Failsafe: if mouse button was released outside window, clear down state immediately
+      if (event.pointerType === 'mouse' && event.buttons === 0 && isMouseDown) {
+        isMouseDown = false;
+        cursor.classList.remove('is-down');
+      }
+
       updateCursorState(event.target);
     };
 
     const handlePointerDown = (event: PointerEvent) => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
       isMouseDown = true;
       cursor.classList.add('is-down');
       updateCursorState(event.target);
@@ -65,15 +73,24 @@ export const CursorFollower: React.FC = () => {
     };
 
     const handlePointerLeave = () => {
+      isMouseDown = false;
       cursor.classList.remove('is-visible', 'is-play', 'is-interactive', 'is-down');
+    };
+
+    const handleBlur = () => {
+      isMouseDown = false;
+      cursor.classList.remove('is-down');
     };
 
     animationFrame = window.requestAnimationFrame(animateCursor);
     window.addEventListener('pointermove', handlePointerMove, { passive: true });
     window.addEventListener('pointerdown', handlePointerDown, { passive: true });
     window.addEventListener('pointerup', handlePointerUp, { passive: true });
+    window.addEventListener('pointercancel', handlePointerUp, { passive: true });
     document.addEventListener('pointerover', handlePointerOver, { passive: true });
     document.documentElement.addEventListener('mouseleave', handlePointerLeave);
+    window.addEventListener('blur', handleBlur);
+    window.addEventListener('contextmenu', handleBlur);
 
     return () => {
       document.body.classList.remove('custom-cursor-active');
@@ -81,8 +98,11 @@ export const CursorFollower: React.FC = () => {
       window.removeEventListener('pointermove', handlePointerMove);
       window.removeEventListener('pointerdown', handlePointerDown);
       window.removeEventListener('pointerup', handlePointerUp);
+      window.removeEventListener('pointercancel', handlePointerUp);
       document.removeEventListener('pointerover', handlePointerOver);
       document.documentElement.removeEventListener('mouseleave', handlePointerLeave);
+      window.removeEventListener('blur', handleBlur);
+      window.removeEventListener('contextmenu', handleBlur);
     };
   }, []);
 

@@ -32,6 +32,15 @@
   padding: 0;
 }
 
+img,
+video,
+svg,
+canvas {
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 html {
   scroll-behavior: smooth;
   color-scheme: dark;
@@ -433,6 +442,9 @@ a:hover {
   filter: drop-shadow(0 1.4rem 2rem rgba(0, 0, 0, 0.36));
   animation: heroViewerEntrance 1.6s var(--ease-cinematic) 0.2s both;
   transition: filter 0.6s var(--ease-smooth);
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .workbench-stage:has(.workbench-midi:hover) .workbench-viewer,
@@ -449,14 +461,21 @@ a:hover {
   height: auto;
 }
 
+.workbench-viewer img {
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 .workbench-draggable {
   width: 100%;
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   will-change: transform;
-  transition: transform 1s var(--ease-smooth);
+  transition: transform 0.65s var(--ease-smooth);
 }
 
 .workbench-draggable.is-dragging {
@@ -467,6 +486,9 @@ a:hover {
 
 .workbench-draggable img {
   -webkit-user-drag: none;
+  user-select: none;
+  -webkit-user-select: none;
+  pointer-events: none;
 }
 
 .workbench-nodes {
@@ -500,7 +522,7 @@ a:hover {
 .node-graph-node {
   pointer-events: all;
   cursor: grab;
-  touch-action: pan-y;
+  touch-action: none;
   user-select: none;
   -webkit-user-select: none;
   transition: filter 0.35s var(--ease-smooth);

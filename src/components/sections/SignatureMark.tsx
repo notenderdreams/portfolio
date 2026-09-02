@@ -18,12 +18,14 @@ export const SignatureMark: React.FC<SignatureMarkProps> = ({ embedded = false }
               className="signature-image signature-image-base"
               src="/images/sign-bangla.png"
               alt="Sajid Al Nahian written in Bengali calligraphy"
+              draggable={false}
             />
             <img
               className="signature-image signature-image-glow"
               src="/images/sign-bangla.png"
               alt=""
               aria-hidden="true"
+              draggable={false}
             />
           </div>
         </DraggableWorkbenchItem>
@@ -56,6 +58,7 @@ export const SignatureMark: React.FC<SignatureMarkProps> = ({ embedded = false }
               src="/images/esp-mugdho.png"
               alt="ESP Mugdho"
               className="pixel-badge-img"
+              draggable={false}
             />
 
             <svg

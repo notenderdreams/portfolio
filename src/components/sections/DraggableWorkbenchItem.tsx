@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface DraggableWorkbenchItemProps {
   children: React.ReactNode;
@@ -6,7 +6,7 @@ interface DraggableWorkbenchItemProps {
   softLimit?: number;
 }
 
-const DRAG_THRESHOLD = 6;
+const DRAG_THRESHOLD = 4;
 
 export const DraggableWorkbenchItem: React.FC<DraggableWorkbenchItemProps> = ({
   children,
@@ -15,6 +15,7 @@ export const DraggableWorkbenchItem: React.FC<DraggableWorkbenchItemProps> = ({
 }) => {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const startRef = useRef<{
     pointerId: number;
     x: number;
@@ -23,8 +24,21 @@ export const DraggableWorkbenchItem: React.FC<DraggableWorkbenchItemProps> = ({
     offsetY: number;
   } | null>(null);
 
+  const resetDrag = () => {
+    startRef.current = null;
+    setIsDragging(false);
+    setOffset({ x: 0, y: 0 });
+  };
+
   const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (event.pointerType === 'mouse' && event.button !== 0) return;
+
+    // Immediately acquire pointer capture so all subsequent moves and releases route here
+    try {
+      event.currentTarget.setPointerCapture(event.pointerId);
+    } catch {
+      // Ignore if pointer capture is unsupported or already active
+    }
 
     startRef.current = {
       pointerId: event.pointerId,
@@ -39,16 +53,22 @@ export const DraggableWorkbenchItem: React.FC<DraggableWorkbenchItemProps> = ({
     const start = startRef.current;
     if (!start || start.pointerId !== event.pointerId) return;
 
+    // Failsafe: if mouse button was released without a pointerup event, cancel drag immediately
+    if (event.pointerType === 'mouse' && event.buttons === 0) {
+      handlePointerUp(event);
+      return;
+    }
+
     const deltaX = event.clientX - start.x;
     const deltaY = event.clientY - start.y;
-    if (!isDragging && Math.hypot(deltaX, deltaY) < DRAG_THRESHOLD) return;
+    const distance = Math.hypot(deltaX, deltaY);
+
+    if (!isDragging && distance < DRAG_THRESHOLD) return;
 
     if (!isDragging) {
-      event.currentTarget.setPointerCapture(event.pointerId);
       setIsDragging(true);
     }
 
-    const distance = Math.hypot(deltaX, deltaY);
     const limit = Math.min(softLimit, Math.min(window.innerWidth, window.innerHeight) * 0.22);
     const resistedDistance = distance <= limit
       ? distance
@@ -62,23 +82,61 @@ export const DraggableWorkbenchItem: React.FC<DraggableWorkbenchItemProps> = ({
   };
 
   const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
-    if (startRef.current?.pointerId !== event.pointerId) return;
-    startRef.current = null;
-    setIsDragging(false);
-    setOffset({ x: 0, y: 0 });
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId);
+    if (startRef.current && startRef.current.pointerId === event.pointerId) {
+      try {
+        if (event.currentTarget.hasPointerCapture(event.pointerId)) {
+          event.currentTarget.releasePointerCapture(event.pointerId);
+        }
+      } catch {
+        // Ignore release capture errors
+      }
+      resetDrag();
     }
   };
 
+  const handleLostPointerCapture = () => {
+    resetDrag();
+  };
+
+  // Global bulletproof safety listener on window
+  useEffect(() => {
+    const handleGlobalPointerUp = (event: PointerEvent) => {
+      if (startRef.current && startRef.current.pointerId === event.pointerId) {
+        resetDrag();
+      }
+    };
+
+    const handleGlobalBlur = () => {
+      if (startRef.current) {
+        resetDrag();
+      }
+    };
+
+    window.addEventListener('pointerup', handleGlobalPointerUp, { passive: true });
+    window.addEventListener('pointercancel', handleGlobalPointerUp, { passive: true });
+    window.addEventListener('blur', handleGlobalBlur);
+    window.addEventListener('contextmenu', handleGlobalBlur);
+
+    return () => {
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+      window.removeEventListener('pointercancel', handleGlobalPointerUp);
+      window.removeEventListener('blur', handleGlobalBlur);
+      window.removeEventListener('contextmenu', handleGlobalBlur);
+    };
+  }, []);
+
   return (
     <div
+      ref={containerRef}
       className={`workbench-draggable${isDragging ? ' is-dragging' : ''}${className ? ` ${className}` : ''}`}
       style={{ transform: `translate3d(${offset.x}px, ${offset.y}px, 0)` }}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
       onPointerCancel={handlePointerUp}
+      onLostPointerCapture={handleLostPointerCapture}
+      onDragStart={(e) => e.preventDefault()}
+      data-cursor="grab"
     >
       {children}
     </div>

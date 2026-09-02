@@ -16,10 +16,11 @@ export const CreativeWorkbench: React.FC<CreativeWorkbenchProps> = ({ embedded =
       aria-label="Creative workbench collage"
     >
       <div className="workbench-stage">
-        <figure className="workbench-viewer">
+        <figure className="workbench-viewer" aria-hidden="true">
           <img
             src="/images/viewer.png"
             alt="DaVinci Resolve viewer showing a motion-blurred dusk cityscape"
+            draggable={false}
           />
         </figure>
 
@@ -38,6 +39,7 @@ export const CreativeWorkbench: React.FC<CreativeWorkbenchProps> = ({ embedded =
             <img
               src="/images/pro-pic.png"
               alt="Sajid photographing his reflection in a night-time garden"
+              draggable={false}
             />
           </DraggableWorkbenchItem>
         </figure>
