@@ -1535,15 +1535,18 @@ main {
   flex-direction: column;
   justify-content: center;
   width: 100%;
-  min-height: clamp(44rem, 112vh, 64rem);
-  margin: clamp(5.5rem, 11vw, 8.5rem) 0 0;
-  padding: clamp(3rem, 8vh, 6rem) 0;
+  min-height: clamp(38rem, 90vh, 56rem);
+  margin: clamp(4rem, 8vw, 6.5rem) 0 0;
+  padding: clamp(2.5rem, 6vh, 4.5rem) 0;
 }
 
 .about-story-content {
   position: relative;
   z-index: 1;
   width: 100%;
+  max-width: min(84rem, 92vw);
+  margin: 0 auto;
+  padding: 0 clamp(1.5rem, 4vw, 3.5rem);
 }
 
 .about-story-backdrop {
@@ -1586,7 +1589,7 @@ main {
   margin-bottom: clamp(1rem, 2.4vw, 1.6rem);
   color: rgba(218, 230, 224, 0.62);
   font-family: var(--font-mono);
-  font-size: 0.64rem;
+  font-size: 0.68rem;
   font-weight: 400;
   letter-spacing: 0.16em;
   line-height: 1;
@@ -1594,14 +1597,14 @@ main {
 }
 
 .about-origin-story {
-  max-width: 48rem;
+  max-width: 100%;
   color: #f1eee5;
   text-shadow: 0 2px 24px rgba(0, 0, 0, 0.72);
   font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 2.45vw, 2rem);
+  font-size: clamp(1.68rem, 2.75vw, 2.35rem);
   font-weight: 300;
-  letter-spacing: -0.018em;
-  line-height: 1.52;
+  letter-spacing: -0.015em;
+  line-height: 1.62;
   text-wrap: pretty;
 }
 
@@ -1629,10 +1632,10 @@ main {
 .about-crab-viewport {
   display: inline-block;
   position: relative;
-  width: 3.9rem;
-  height: 2.85rem;
-  margin: 0 0.35em;
-  vertical-align: -0.65rem;
+  width: 5.2rem;
+  height: 3.8rem;
+  margin: 0 0.42em;
+  vertical-align: -0.9rem;
   overflow: visible;
   cursor: pointer;
   transform: translateY(-0.02rem);
@@ -1704,7 +1707,7 @@ main {
 
 /* Hover Interaction: Ferris grabs the official Vim icon and hoists it UP */
 .about-crab-viewport:is(:hover, .is-story-active) {
-  transform: translateY(-0.2rem) scale(1.15);
+  transform: translateY(-0.25rem) scale(1.18);
 }
 
 .about-crab-viewport:is(:hover, .is-story-active) .about-crab-legs {
@@ -1722,18 +1725,18 @@ main {
 .about-crab-viewport:is(:hover, .is-story-active) .about-crab-vim-wrap {
   opacity: 1;
   pointer-events: auto;
-  transform: translateY(-285px) scale(1.4);
+  transform: translateY(-305px) scale(1.5);
   filter:
-    drop-shadow(0 0 24px rgba(1, 104, 36, 0.95))
+    drop-shadow(0 0 26px rgba(1, 104, 36, 0.95))
     drop-shadow(0 12px 30px rgba(0, 0, 0, 0.95));
 }
 
 .about-crab-viewport:is(:hover, .is-story-active) .about-crab-claw-left {
-  transform: translate(-45px, -270px) rotate(-35deg) scale(1.15);
+  transform: translate(-50px, -290px) rotate(-35deg) scale(1.18);
 }
 
 .about-crab-viewport:is(:hover, .is-story-active) .about-crab-claw-right {
-  transform: translate(45px, -270px) rotate(35deg) scale(1.15);
+  transform: translate(50px, -290px) rotate(35deg) scale(1.18);
 }
 
 .about-music-control-wrap {
@@ -1881,9 +1884,9 @@ main {
 .about-inline-photo-stack {
   display: inline-block;
   position: relative;
-  width: 8rem;
-  height: 5.25rem;
-  margin: 0 0.34em;
+  width: 10.2rem;
+  height: 6.7rem;
+  margin: 0 0.42em;
   vertical-align: middle;
   animation: about-photo-stack-drift 6s ease-in-out infinite;
   will-change: transform;
@@ -1901,12 +1904,12 @@ main {
 .about-inline-photo-card {
   position: absolute;
   display: block;
-  padding: 0.2rem;
+  padding: 0.24rem;
   overflow: hidden;
   background: #f7f7f4;
   border: 1px solid rgba(255, 255, 255, 0.9);
-  border-radius: 0.42rem;
-  box-shadow: 0 0.55rem 1.1rem rgba(0, 0, 0, 0.3);
+  border-radius: 0.5rem;
+  box-shadow: 0 0.7rem 1.45rem rgba(0, 0, 0, 0.35);
   will-change: transform;
 }
 
@@ -1914,7 +1917,7 @@ main {
   display: block;
   width: 100%;
   height: 100%;
-  border-radius: 0.22rem;
+  border-radius: 0.3rem;
   object-fit: cover;
 }
 
@@ -1922,8 +1925,8 @@ main {
   z-index: 1;
   top: 0.08rem;
   left: 0.08rem;
-  width: 43%;
-  height: 85%;
+  width: 44%;
+  height: 86%;
   transform: rotate(-5deg);
 }
 
@@ -1931,19 +1934,19 @@ main {
   right: 0;
   bottom: 0.08rem;
   width: 70%;
-  height: 67%;
+  height: 68%;
   transform: rotate(4deg);
 }
 
 .about-lighting-cube {
-  --cube-size: 2.85rem;
-  --cube-depth: 1.425rem;
+  --cube-size: 3.55rem;
+  --cube-depth: 1.775rem;
   display: inline-block;
   position: relative;
-  width: 4.2rem;
-  height: 4.2rem;
-  margin: 0 0.3em;
-  perspective: 16rem;
+  width: 5.3rem;
+  height: 5.3rem;
+  margin: 0 0.38em;
+  perspective: 20rem;
   vertical-align: middle;
   z-index: 0;
 }
@@ -2011,29 +2014,29 @@ main {
 .about-resolve-clip-stack {
   display: inline-block;
   position: relative;
-  width: 6.4rem;
-  height: 2.65rem;
-  margin: 0 0.28em;
-  vertical-align: middle;
+  width: 7.6rem;
+  height: 2.85rem;
+  margin: 0 0.38em;
+  vertical-align: -0.65rem;
 }
 
 .about-resolve-wheels {
-  display: inline-flex;
-  position: relative;
-  z-index: 2;
+  display: flex;
   align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
   width: 100%;
   height: 100%;
-  padding: 0.28rem 0.36rem;
+  padding: 0.22rem 0.35rem;
   background:
     linear-gradient(145deg, #f2f3f5, #aeb3bc),
     #c7cbd1;
   border: 1px solid rgba(255, 255, 255, 0.74);
   border-radius: 0.78rem;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.48),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.3),
-    0 0.3em 0.9em rgba(0, 0, 0, 0.36);
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.28),
+    0 0.35em 1em rgba(0, 0, 0, 0.36);
   overflow: hidden;
   transition: transform 350ms var(--ease-smooth), box-shadow 350ms ease;
 }
@@ -2043,7 +2046,7 @@ main {
   top: 50%;
   left: 50%;
   z-index: 1;
-  width: 5.7rem;
+  width: 6.6rem;
   opacity: 0;
   pointer-events: none;
   transform: translate(-50%, -50%) scale(0.9);
@@ -2056,8 +2059,8 @@ main {
 .about-resolve-clip img {
   display: block;
   width: 100%;
-  border-radius: 0.14rem;
-  box-shadow: 0 0.3rem 0.75rem rgba(0, 0, 0, 0.36);
+  border-radius: 0.18rem;
+  box-shadow: 0 0.35rem 0.85rem rgba(0, 0, 0, 0.42);
 }
 
 .about-resolve-clip-stack:is(:hover, .is-story-active) .about-resolve-clip {
@@ -2065,20 +2068,20 @@ main {
 }
 
 .about-resolve-clip-stack:is(:hover, .is-story-active) .about-resolve-video-clip {
-  transform: translate(-50%, -50%) translate(-0.75rem, -2.2rem) rotate(-2deg) scale(1);
+  transform: translate(-50%, -50%) translate(-1.1rem, -2.9rem) rotate(-3deg) scale(1);
 }
 
 .about-resolve-video-clip-alt {
-  width: 3.1rem;
+  width: 3.6rem;
 }
 
 .about-resolve-clip-stack:is(:hover, .is-story-active) .about-resolve-video-clip-alt {
-  transform: translate(-50%, -50%) translate(1rem, -3rem) rotate(2deg) scale(1);
+  transform: translate(-50%, -50%) translate(1.25rem, -3.6rem) rotate(3deg) scale(1);
   transition-delay: 45ms;
 }
 
 .about-resolve-clip-stack:is(:hover, .is-story-active) .about-resolve-audio-clip {
-  transform: translate(-50%, -50%) translate(0.75rem, 2.2rem) rotate(2deg) scale(1);
+  transform: translate(-50%, -50%) translate(0.85rem, 2.6rem) rotate(2deg) scale(1);
   transition-delay: 50ms;
 }
 
@@ -2101,9 +2104,9 @@ main {
 .about-resolve-wheels:hover,
 .about-resolve-clip-stack.is-story-active .about-resolve-wheels {
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.58),
-    inset 0 -1px 1px rgba(0, 0, 0, 0.26),
-    0 0.42em 1.05em rgba(0, 0, 0, 0.42);
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.25),
+    0 0.45em 1.15em rgba(0, 0, 0, 0.45);
   transform: translateY(-0.08rem);
 }
 
@@ -2116,20 +2119,19 @@ main {
 .about-resolve-wheel {
   position: relative;
   display: block;
-  width: 1.98rem;
-  height: 1.98rem;
-  margin-left: -0.15rem;
+  width: 2.12rem;
+  height: 2.12rem;
+  margin-left: 0;
   background: conic-gradient(from 0deg, #f43c37, #ffcb29, #5cec42, #25dce6, #426cf5, #af45ed, #f43c37);
   border: 0;
   border-radius: 50%;
-  box-shadow:
-    0 0.1rem 0.28rem rgba(0, 0, 0, 0.28);
+  box-shadow: 0 0.1rem 0.28rem rgba(0, 0, 0, 0.28);
   transition: filter 300ms ease, transform 350ms var(--ease-smooth);
 }
 
 .about-resolve-wheel::before {
   position: absolute;
-  inset: 0.13rem;
+  inset: 0.14rem;
   content: '';
   background:
     radial-gradient(circle at center, rgba(17, 18, 22, 0.48) 0 25%, rgba(26, 27, 33, 0.76) 74%),
@@ -2139,7 +2141,7 @@ main {
 
 .about-resolve-wheel::after {
   position: absolute;
-  inset: 0.21rem;
+  inset: 0.22rem;
   content: '';
   background:
     linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)) center / 1px 100% no-repeat,
@@ -2162,15 +2164,15 @@ main {
 
 .about-resolve-wheels:hover .about-resolve-wheel,
 .about-resolve-clip-stack.is-story-active .about-resolve-wheel {
-  filter: saturate(1.13) brightness(1.08);
+  filter: saturate(1.18) brightness(1.1);
 }
 
 .about-unreal-viewport {
   display: inline-block;
   position: relative;
-  width: 5.6rem;
-  height: 4.7rem;
-  margin: 0 0.3em;
+  width: 7.1rem;
+  height: 6rem;
+  margin: 0 0.38em;
   overflow: visible;
   color: rgba(229, 233, 237, 0.72);
   background: none;
@@ -2318,82 +2320,7 @@ main {
   to { transform: translateX(900px) skewX(-16deg); }
 }
 
-/* Desktop story composition: keep every interactive object on the same visual scale. */
-@media (min-width: 900px) {
-  .about-origin-story {
-    max-width: 52rem;
-    font-size: clamp(1.55rem, 1.85vw, 1.82rem);
-    line-height: 1.72;
-  }
 
-  .about-music-control-wrap,
-  .about-inline-photo-stack,
-  .about-lighting-cube,
-  .about-resolve-clip-stack,
-  .about-unreal-viewport,
-  .about-crab-viewport {
-    margin-right: 0.5em;
-    margin-left: 0.5em;
-  }
-
-  .about-music-control-wrap {
-    vertical-align: -0.48rem;
-  }
-
-  .about-music-control {
-    gap: 0.55rem;
-    width: 8.6rem;
-    height: 2.65rem;
-    padding: 0 0.65rem 0 0.58rem;
-    border-radius: 0.78rem;
-    font-size: 1rem;
-  }
-
-  .about-music-waveform {
-    height: 1.35rem;
-  }
-
-  .about-inline-photo-stack {
-    width: 5.9rem;
-    height: 3.65rem;
-    vertical-align: -0.88rem;
-  }
-
-  .about-lighting-cube {
-    --cube-size: 2.1rem;
-    --cube-depth: 1.05rem;
-    width: 3.25rem;
-    height: 3.25rem;
-    vertical-align: -0.78rem;
-  }
-
-  .about-resolve-clip-stack {
-    width: 5rem;
-    height: 2.2rem;
-    vertical-align: -0.48rem;
-  }
-
-  .about-resolve-wheel {
-    width: 1.55rem;
-    height: 1.55rem;
-  }
-
-  .about-resolve-clip {
-    width: 4.8rem;
-  }
-
-  .about-unreal-viewport {
-    width: 4.25rem;
-    height: 3.45rem;
-    vertical-align: -0.88rem;
-  }
-
-  .about-crab-viewport {
-    width: 3.15rem;
-    height: 2.3rem;
-    vertical-align: -0.5rem;
-  }
-}
 
 .about-cube-face::after {
   position: absolute;

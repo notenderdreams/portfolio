@@ -524,11 +524,13 @@ export const AboutSection: React.FC = () => {
         ).length
       );
 
+      const storyContent = story.querySelector<HTMLElement>('.about-story-content') || story;
+
       const timeline = gsap.timeline({
         scrollTrigger: {
-          trigger: story,
-          start: 'top 62%',
-          end: 'top -28%',
+          trigger: storyContent,
+          start: 'top 78%',
+          end: 'top 18%',
           scrub: 0.18,
           onLeaveBack: () => setActiveStoryIcon(-1),
         },
@@ -536,7 +538,7 @@ export const AboutSection: React.FC = () => {
 
       timeline.eventCallback('onUpdate', () => {
         const timelineProgress = timeline.progress();
-        const revealProgress = Math.min(timelineProgress / 0.78, 1);
+        const revealProgress = Math.min(timelineProgress / 0.88, 1);
         const characterOffset = Math.floor(revealProgress * characters.length);
         const nextIcon = timelineProgress >= 0.98
           ? -1
@@ -550,11 +552,11 @@ export const AboutSection: React.FC = () => {
       timeline.to(characters, {
         color: getComputedStyle(story).getPropertyValue('--ink-warm').trim(),
         duration: 0.035,
-        stagger: { amount: 0.745 },
+        stagger: { amount: 0.85 },
         ease: 'none',
       });
 
-      timeline.to({}, { duration: 0.22 });
+      timeline.to({}, { duration: 0.15 });
 
     }, story);
 
@@ -644,8 +646,8 @@ export const AboutSection: React.FC = () => {
             <source src="/video/story-ascii-animation.mp4" type="video/mp4" />
           </video>
         </div>
-        <div className="container about-story-content">
-          <span className="about-story-label" aria-hidden="true">My story</span>
+        <div className="about-story-content">
+          <span className="about-story-label" aria-hidden="true">origin</span>
           <p className="about-origin-story">
             <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
             <span className="about-story-beat"><StoryText text="I wanted to make covers for my tracks, so I learned photo " /><span className="about-story-icon-marker"><PhotoManipulationStack isStoryActive={activeStoryIcon === 1} /></span><StoryText text=" manipulation. " /></span>
