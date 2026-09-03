@@ -442,7 +442,6 @@ export const NokiaScreen: React.FC = () => {
       onClick={handleScreenClick}
       role="button"
       tabIndex={0}
-      data-cursor="click"
       aria-label={copied ? 'Email copied to clipboard' : 'Connect - click to contact sajid al nahian'}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
