@@ -2762,24 +2762,323 @@ main {
   border-radius: inherit;
 }
 
-.site-footer-wrap {
+/* ==========================================================================
+   Architectural Editorial Footer Section (Stark White, Monospace Directory Grid)
+   ========================================================================== */
+
+.editorial-footer-section {
   width: 100%;
   position: relative;
   z-index: 10;
-  background-color: #050507;
+  background-color: #cccccc;
+  color: #000000;
+  padding: clamp(1.2rem, 2.5vw, 2.2rem) clamp(1rem, 3vw, 2.5rem);
+  box-sizing: border-box;
+  margin-top: clamp(2rem, 4vw, 3.5rem);
 }
 
-.site-footer {
-  max-width: var(--max-w);
+.editorial-footer-container {
+  position: relative;
+  max-width: 1680px;
   margin: 0 auto;
-  padding: 3rem var(--pad) 4rem;
-  border-top: 1px solid var(--border);
+  padding: clamp(1.2rem, 2.2vw, 1.8rem) clamp(1rem, 2vw, 2rem);
+  box-sizing: border-box;
+}
+
+/* Outer Architectural Crop Marks (Corner Ticks) */
+.crop-tick {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.crop-tl {
+  top: 0;
+  left: 0;
+  border-top: 1.5px solid #000000;
+  border-left: 1.5px solid #000000;
+}
+
+.crop-tr {
+  top: 0;
+  right: 0;
+  border-top: 1.5px solid #000000;
+  border-right: 1.5px solid #000000;
+}
+
+.crop-bl {
+  bottom: 0;
+  left: 0;
+  border-bottom: 1.5px solid #000000;
+  border-left: 1.5px solid #000000;
+}
+
+.crop-br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1.5px solid #000000;
+  border-right: 1.5px solid #000000;
+}
+
+/* Framing Horizontal Lines */
+.crop-line-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #000000;
+  pointer-events: none;
+}
+
+.crop-line-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: #000000;
+  pointer-events: none;
+}
+
+.editorial-footer-inner {
   display: flex;
+  align-items: stretch;
+  min-height: 200px;
+  position: relative;
+}
+
+/* Left Column: Brand Signature & Meta */
+.editorial-brand-col {
+  width: clamp(200px, 24%, 300px);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  font-size: 0.7rem;
-  color: var(--dim);
+  padding-right: clamp(1.2rem, 2.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+.editorial-brand-top {
+  padding-top: 0.2rem;
+}
+
+.editorial-signature-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.editorial-sign-bangla {
+  height: clamp(65px, 7vw, 105px);
+  width: auto;
+  max-width: 250px;
+  object-fit: contain;
+  filter: invert(1) contrast(1.3);
+  opacity: 0.95;
+  user-select: none;
+  pointer-events: none;
+  transform: rotate(-2deg);
+  display: block;
+}
+
+.editorial-brand-bottom {
+  padding-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
   letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.editorial-meta-line.editorial-copyright {
+  font-weight: 600;
+  color: #000000;
+}
+
+.editorial-meta-line.editorial-author,
+.editorial-meta-line.editorial-location {
+  color: #444444;
+}
+
+/* Vertical Architectural Divider with Cross Ticks */
+.editorial-divider {
+  position: relative;
+  width: 1px;
+  background-color: #000000;
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.divider-tick-top {
+  position: absolute;
+  top: -8px;
+  left: -1px;
+  width: 3px;
+  height: 16px;
+  background-color: #000000;
+  pointer-events: none;
+}
+
+.divider-tick-bottom {
+  position: absolute;
+  bottom: -8px;
+  left: -1px;
+  width: 3px;
+  height: 16px;
+  background-color: #000000;
+  pointer-events: none;
+}
+
+/* Right Directory Grid: 5 Clean Columns */
+.editorial-directory-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(1rem, 2vw, 2.5rem);
+  padding-left: clamp(1.2rem, 2.5vw, 3rem);
+  box-sizing: border-box;
+}
+
+.directory-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.column-heading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #000000;
+  white-space: nowrap;
+}
+
+.column-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.column-list li {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #111111;
+  line-height: 1.35;
+}
+
+.column-list li a {
+  color: #000000;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.column-list li a:hover {
+  opacity: 0.55;
+  transform: translateX(1px);
+}
+
+.column-list li span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #222222;
+}
+
+.has-arrow .arrow-icon {
+  font-size: 0.8rem;
+  line-height: 1;
+  display: inline-block;
+  color: #000000;
+}
+
+/* Responsive Breakpoints for Editorial Footer */
+@media (max-width: 1120px) {
+  .editorial-directory-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    row-gap: 1.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .editorial-footer-inner {
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+
+  .editorial-brand-col {
+    width: 100%;
+    padding-right: 0;
+    gap: 1.2rem;
+  }
+
+  .editorial-brand-bottom {
+    padding-top: 0.8rem;
+  }
+
+  .editorial-divider {
+    width: 100%;
+    height: 1px;
+    margin: 0;
+  }
+
+  .divider-tick-top {
+    top: -1px;
+    left: -8px;
+    width: 16px;
+    height: 3px;
+  }
+
+  .divider-tick-bottom {
+    bottom: -1px;
+    right: -8px;
+    left: auto;
+    width: 16px;
+    height: 3px;
+  }
+
+  .editorial-directory-grid {
+    padding-left: 0;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .editorial-footer-section {
+    padding: 1rem 0.5rem 1.6rem;
+    margin-top: 1.8rem;
+  }
+
+  .editorial-footer-container {
+    padding: 1.2rem 0.6rem;
+  }
+
+  .editorial-directory-grid {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+
+  .column-list {
+    gap: 0.6rem;
+  }
 }
 
 /* Scroll-Triggered Reveal Classes */

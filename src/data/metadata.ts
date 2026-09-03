@@ -21,7 +21,14 @@ export const navLinks: NavLink[] = [
 
 export const socialLinks: SocialLink[] = [
   { label: 'github', href: 'https://github.com/sajidalnahian', isExternal: true },
-  { label: 'x / twitter', href: 'https://x.com', isExternal: true },
-  { label: 'are.na', href: 'https://are.na', isExternal: true },
-  { label: 'spotify', href: 'https://spotify.com', isExternal: true },
+  { label: 'twitter', href: 'https://x.com', isExternal: true },
+  { label: 'facebook', href: 'https://facebook.com', isExternal: true },
+  { label: 'instagram', href: 'https://instagram.com', isExternal: true },
+];
+
+export const competitiveLinks: SocialLink[] = [
+  { label: 'codeforces', href: 'https://codeforces.com', isExternal: true },
+  { label: 'leetcode', href: 'https://leetcode.com', isExternal: true },
+  { label: 'codechef', href: 'https://www.codechef.com', isExternal: true },
+  { label: 'kaggle', href: 'https://www.kaggle.com', isExternal: true },
 ];
