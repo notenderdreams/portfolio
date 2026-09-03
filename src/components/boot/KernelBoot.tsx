@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { gsap } from 'gsap';
 import '../../styles/boot.css';
 
 interface KernelBootProps {
@@ -27,30 +28,17 @@ const ASSETS_TO_PRELOAD: PreloadItem[] = [
   { path: '/video/landing_bg.webm' },
 ];
 
-const BAR_WIDTH = 26;
+const TRACK_CHARS = 26;
+const EQUALS_STRING = '='.repeat(TRACK_CHARS + 2);
 
 export const KernelBoot: React.FC<KernelBootProps> = ({ onComplete }) => {
-  const [loadedCount, setLoadedCount] = useState(0);
+  const [isTextFading, setIsTextFading] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
-  const hasFinishedRef = useRef(false);
-  const totalCount = ASSETS_TO_PRELOAD.length + 1; // +1 for fonts
+  const equalsRef = useRef<HTMLDivElement>(null);
+  const arrowRef = useRef<HTMLSpanElement>(null);
 
-  const finishBoot = () => {
-    if (hasFinishedRef.current) return;
-    hasFinishedRef.current = true;
-
-    // Small pause on 100% full bar before curtain slides up
-    setTimeout(() => {
-      setIsExiting(true);
-      // Wait for upward slide animation to finish before unmounting
-      setTimeout(() => {
-        onComplete();
-      }, 750);
-    }, 200);
-  };
-
-  // Lock body scroll while loader is visible
+  // Lock body scroll while loader is active
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -58,91 +46,104 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onComplete }) => {
     };
   }, []);
 
-  // Preload assets and advance the progress bar smoothly
+  // Perfectly smooth, zero-lag, constant-velocity progression
   useEffect(() => {
     let isCancelled = false;
+    const equalsEl = equalsRef.current;
+    const arrowEl = arrowRef.current;
+    if (!equalsEl || !arrowEl) return;
 
-    // Trigger preloading
-    document.fonts.ready.catch(() => {});
-    ASSETS_TO_PRELOAD.forEach((item) => {
-      const img = new Image();
-      img.src = item.path;
-    });
-
-    const runProgress = async () => {
-      await new Promise((r) => setTimeout(r, 60));
-      if (isCancelled) return;
-
-      setLoadedCount(1);
-      await new Promise((r) => setTimeout(r, 60));
-      if (isCancelled) return;
-
-      for (let i = 0; i < ASSETS_TO_PRELOAD.length; i++) {
-        if (isCancelled) return;
-        setLoadedCount(i + 2);
-        await new Promise((r) => setTimeout(r, 55));
-      }
-
-      if (isCancelled) return;
-      finishBoot();
+    // Defer network image preloads to avoid blocking frame 0
+    const triggerPreloads = () => {
+      document.fonts.ready.catch(() => {});
+      ASSETS_TO_PRELOAD.forEach((item) => {
+        const img = new Image();
+        img.src = item.path;
+      });
     };
+    if ('requestIdleCallback' in window) {
+      (window as unknown as { requestIdleCallback: (cb: () => void) => void }).requestIdleCallback(triggerPreloads);
+    } else {
+      setTimeout(triggerPreloads, 50);
+    }
 
-    runProgress();
+    const progressObj = { value: 0 };
+
+    // Initial position: 0ch width, arrow at 0ch, starts instantly
+    equalsEl.style.width = '0ch';
+    arrowEl.style.transform = 'translate3d(0ch, 0, 0)';
+    arrowEl.style.opacity = '1';
+
+    // Linear ease ('none'): moves immediately from millisecond 0 with constant steady speed
+    const tween = gsap.to(progressObj, {
+      value: 1,
+      duration: 1.85,
+      ease: 'none',
+      onUpdate: () => {
+        if (isCancelled || !equalsEl || !arrowEl) return;
+        const p = progressObj.value;
+
+        if (p >= 0.995) {
+          equalsEl.style.width = `${TRACK_CHARS}ch`;
+          arrowEl.style.transform = `translate3d(${TRACK_CHARS - 1}ch, 0, 0)`;
+          arrowEl.style.opacity = '0';
+        } else {
+          // Continuous sub-pixel advance in lockstep
+          equalsEl.style.width = `${p * (TRACK_CHARS - 1)}ch`;
+          arrowEl.style.transform = `translate3d(${p * (TRACK_CHARS - 1)}ch, 0, 0)`;
+          arrowEl.style.opacity = '1';
+        }
+      },
+      onComplete: () => {
+        if (isCancelled) return;
+
+        // Stage 1: Hold on 100% full bar for 160ms, then evaporate text
+        setTimeout(() => {
+          if (isCancelled) return;
+          setIsTextFading(true);
+
+          // Stage 2: 220ms later, dissolve the dark screen into the hero stage
+          setTimeout(() => {
+            if (isCancelled) return;
+            setIsExiting(true);
+
+            // Stage 3: Complete and unmount after dissolve finishes
+            setTimeout(() => {
+              if (isCancelled) return;
+              onComplete();
+            }, 750);
+          }, 220);
+        }, 160);
+      },
+    });
 
     return () => {
       isCancelled = true;
+      tween.kill();
     };
-  }, []);
-
-  // Generate Cargo progress bar: [=======>       ]
-  // Arrow in green, equal signs in white
-  const renderCargoBar = () => {
-    const ratio = totalCount > 0 ? Math.min(Math.max(loadedCount / totalCount, 0), 1) : 0;
-    const filled = Math.round(ratio * BAR_WIDTH);
-
-    if (filled <= 0) {
-      return (
-        <span className="cargo-progress-track">
-          <span className="cargo-bracket-edge">[</span>
-          <span className="cargo-arrow">&gt;</span>
-          <span className="cargo-spaces">{' '.repeat(BAR_WIDTH - 1)}</span>
-          <span className="cargo-bracket-edge">]</span>
-        </span>
-      );
-    }
-
-    if (filled >= BAR_WIDTH) {
-      return (
-        <span className="cargo-progress-track">
-          <span className="cargo-bracket-edge">[</span>
-          <span className="cargo-equals">{'='.repeat(BAR_WIDTH)}</span>
-          <span className="cargo-bracket-edge">]</span>
-        </span>
-      );
-    }
-
-    const equalsCount = filled - 1;
-    const spacesCount = BAR_WIDTH - filled;
-
-    return (
-      <span className="cargo-progress-track">
-        <span className="cargo-bracket-edge">[</span>
-        {equalsCount > 0 && <span className="cargo-equals">{'='.repeat(equalsCount)}</span>}
-        <span className="cargo-arrow">&gt;</span>
-        {spacesCount > 0 && <span className="cargo-spaces">{' '.repeat(spacesCount)}</span>}
-        <span className="cargo-bracket-edge">]</span>
-      </span>
-    );
-  };
+  }, [onComplete]);
 
   return (
     <aside
-      className={`simple-loader-screen${isExiting ? ' is-slide-up' : ''}`}
+      className={`simple-loader-screen${isTextFading ? ' is-text-fading' : ''}${
+        isExiting ? ' is-exiting' : ''
+      }`}
       aria-label="Loading portfolio"
     >
-      <div className="simple-loader-center">
-        <div className="simple-loader-label">loading...</div>
-        <div className="simple-loader-bar">{renderCargoBar()}</div>
+      <div className="simple-loader-row">
+        <span className="simple-loader-label">loading</span>
+        <span className="cargo-bar-container">
+          <span className="cargo-bracket-edge">[</span>
+          <span className="cargo-track">
+            <span ref={equalsRef} className="cargo-equals-stream" aria-hidden="true">
+              {EQUALS_STRING}
+            </span>
+            <span ref={arrowRef} className="cargo-arrow-glide" aria-hidden="true">
+              &gt;
+            </span>
+          </span>
+          <span className="cargo-bracket-edge">]</span>
+        </span>
       </div>
     </aside>
   );
