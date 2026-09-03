@@ -82,6 +82,7 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #ffffff;
+  mix-blend-mode: difference;
   pointer-events: none;
   z-index: 10000;
   opacity: 0;
@@ -1741,9 +1742,31 @@ main {
 
 .about-music-control-wrap {
   display: inline-flex;
+  position: relative;
   margin: 0 0.4em;
   vertical-align: middle;
   animation: about-music-control-drift 3.6s ease-in-out infinite;
+}
+
+.about-music-track-title {
+  position: absolute;
+  bottom: calc(100% + 0.45rem);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #ffffff;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 280ms var(--ease-smooth), transform 280ms var(--ease-smooth);
+}
+
+.about-music-control-wrap:is(:hover, .is-story-active, .is-title-revealed) .about-music-track-title {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 .about-music-control {

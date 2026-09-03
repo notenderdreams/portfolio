@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-type CursorAction = 'PLAY' | 'CLICK' | 'DRAG' | null;
+type CursorAction = 'PLAY' | 'PAUSE' | 'CLICK' | 'DRAG' | null;
 
-const PLAY_SELECTOR = '[data-cursor="play"], video, .sound-preview, .landing-clip-preview, .about-story-video, .midi-preview';
+const PAUSE_SELECTOR = '[data-cursor="pause"], .about-music-control.is-playing';
+const PLAY_SELECTOR = '[data-cursor="play"], video, .sound-preview, .landing-clip-preview, .about-story-video, .midi-preview, .about-music-control';
 const DRAG_SELECTOR = '[data-cursor="grab"], [data-cursor="drag"], .workbench-draggable, .node-graph-node, [role="slider"]';
 const CLICK_SELECTOR = '.work-item, .works-name-btn, [data-cursor="click"], [data-cursor="pointer"], .btn-hero-cta';
 
@@ -37,6 +38,13 @@ export const CursorFollower: React.FC = () => {
       if (!(target instanceof Element)) {
         setCurrentAction(null);
         document.body.classList.remove('has-cursor-label');
+        return;
+      }
+
+      // Check for PAUSE state
+      if (target.closest(PAUSE_SELECTOR)) {
+        setCurrentAction('PAUSE');
+        document.body.classList.add('has-cursor-label');
         return;
       }
 

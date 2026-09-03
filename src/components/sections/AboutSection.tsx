@@ -108,7 +108,10 @@ const RustCrabVim: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = fa
   </span>
 );
 
-const MusicPlayButton: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => {
+const MusicPlayButton: React.FC<{ isStoryActive?: boolean; isTrackTitleShown?: boolean }> = ({
+  isStoryActive = false,
+  isTrackTitleShown = false,
+}) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -138,10 +141,18 @@ const MusicPlayButton: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive 
 
   return (
     <>
-      <span className={`about-music-control-wrap${isStoryActive ? ' is-story-active' : ''}`}>
+      <span
+        className={`about-music-control-wrap${isStoryActive ? ' is-story-active' : ''}${
+          isTrackTitleShown ? ' is-title-revealed' : ''
+        }`}
+      >
+        <span className="about-music-track-title" aria-hidden="true">
+          (alien shooter remix)
+        </span>
         <button
           className={`about-music-control${isPlaying ? ' is-playing' : ''}`}
           type="button"
+          data-cursor={isPlaying ? 'pause' : 'play'}
           aria-label={isPlaying ? 'Pause music' : 'Play music'}
           aria-pressed={isPlaying}
           onClick={togglePlayback}
@@ -432,6 +443,7 @@ export const AboutSection: React.FC = () => {
   const storyRef = useRef<HTMLDivElement>(null);
   const storyBackdropRef = useRef<HTMLDivElement>(null);
   const [activeStoryIcon, setActiveStoryIcon] = useState(-1);
+  const [isMusicTitleShown, setIsMusicTitleShown] = useState(false);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -532,7 +544,10 @@ export const AboutSection: React.FC = () => {
           start: 'top 78%',
           end: 'top 18%',
           scrub: 0.18,
-          onLeaveBack: () => setActiveStoryIcon(-1),
+          onLeaveBack: () => {
+            setActiveStoryIcon(-1);
+            setIsMusicTitleShown(false);
+          },
         },
       });
 
@@ -540,6 +555,10 @@ export const AboutSection: React.FC = () => {
         const timelineProgress = timeline.progress();
         const revealProgress = Math.min(timelineProgress / 0.88, 1);
         const characterOffset = Math.floor(revealProgress * characters.length);
+        const musicOffset = iconCharacterOffsets[0] ?? 0;
+
+        setIsMusicTitleShown(characterOffset >= musicOffset && timelineProgress > 0);
+
         const nextIcon = timelineProgress >= 0.98
           ? -1
           : iconCharacterOffsets.reduce(
@@ -649,13 +668,13 @@ export const AboutSection: React.FC = () => {
         <div className="about-story-content">
           <span className="about-story-label" aria-hidden="true">origin</span>
           <p className="about-origin-story">
-            <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} /></span><StoryText text=". " /></span>
+            <span className="about-story-beat"><StoryText text="When I was 15, I started learning music " /><span className="about-story-icon-marker"><MusicPlayButton isStoryActive={activeStoryIcon === 0} isTrackTitleShown={isMusicTitleShown} /></span><StoryText text=". " /></span>
             <span className="about-story-beat"><StoryText text="I wanted to make covers for my tracks, so I learned photo " /><span className="about-story-icon-marker"><PhotoManipulationStack isStoryActive={activeStoryIcon === 1} /></span><StoryText text=" manipulation. " /></span>
             <span className="about-story-beat"><StoryText text="I kept getting stuck trying to relight images " /><span className="about-story-icon-marker"><RelightingCube isStoryActive={activeStoryIcon === 2} /></span><StoryText text=", which is why I picked up Blender. " /></span>
             <span className="about-story-beat"><StoryText text="Then I learned DaVinci Resolve to edit videos and grade them " /><span className="about-story-icon-marker"><ResolveColorWheels isStoryActive={activeStoryIcon === 3} /></span><StoryText text=" properly. " /></span>
             <span className="about-story-beat"><StoryText text="Blender rendered slowly, so I moved into Unreal " /><span className="about-story-icon-marker"><UnrealRealtimeViewport isStoryActive={activeStoryIcon === 4} /></span><StoryText text=". " /></span>
-            <span className="about-story-beat"><StoryText text="In Unreal I found things I wanted to fix, and that is how I ended up learning programming " /><span className="about-story-icon-marker"><RustCrabVim isStoryActive={activeStoryIcon === 5} /></span><StoryText text=". " /></span>
-            <span className="about-story-beat"><StoryText text="That is pretty much how I got here." /></span>
+            <span className="about-story-beat"><StoryText text="In Unreal I found things I wanted to fix, and that is how I ended up learning programming. " /></span>
+            <span className="about-story-beat"><StoryText text="That is pretty much how I got here " /><span className="about-story-icon-marker"><RustCrabVim isStoryActive={activeStoryIcon === 5} /></span><StoryText text="." /></span>
           </p>
         </div>
       </div>
