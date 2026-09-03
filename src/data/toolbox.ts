@@ -73,6 +73,7 @@ export const toolTableGroups: ToolTableGroup[] = [
     section: 'Databases & ORM',
     tools: [
       { name: 'PostgreSQL', slug: 'postgres' },
+      { name: 'MongoDB', slug: 'mongodb' },
       { name: 'Redis', slug: 'redis' },
       { name: 'SQLite', slug: 'sqlite' },
       { name: 'Drizzle', slug: 'drizzle' },
