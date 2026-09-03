@@ -45,6 +45,21 @@ html {
   scroll-behavior: smooth;
   color-scheme: dark;
   background-color: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html,
+body,
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 body {
@@ -58,6 +73,8 @@ body {
   overflow-x: clip;
   position: relative;
   min-height: 100vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 
