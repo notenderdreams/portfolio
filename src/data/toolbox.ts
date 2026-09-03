@@ -88,6 +88,7 @@ export const toolTableGroups: ToolTableGroup[] = [
       { name: 'Bun', slug: 'bun' },
       { name: 'Docker', slug: 'docker' },
       { name: 'Git', slug: 'git' },
+      { name: 'GitHub Actions', slug: 'githubactions' },
       { name: 'CMake', slug: 'cmake' },
       { name: 'Gradle', slug: 'gradle' },
       { name: 'Maven', slug: 'maven' },
@@ -111,8 +112,8 @@ export const toolTableGroups: ToolTableGroup[] = [
 ];
 
 export const creativeTools: ToolEntry[] = [
-  { name: 'Unreal Engine 5', slug: 'unreal' },
-  { name: 'DaVinci Resolve', slug: 'davinci' },
+  { name: 'Unreal Engine', slug: 'unreal' },
+  { name: 'Resolve', slug: 'davinci' },
   { name: 'Affinity', slug: 'affinity' },
   { name: 'Ableton Live', slug: 'ableton' },
   { name: 'Figma', slug: 'figma' },

@@ -1545,6 +1545,32 @@ main {
   font-weight: 400;
 }
 
+/* Full-width Bio Narrative (Spans full container beneath profile grid) */
+.about-bio-fullwidth {
+  width: 100%;
+  max-width: 100%;
+  margin-top: clamp(6.5rem, 12vh, 10rem);
+}
+
+.about-bio-fullwidth p {
+  font-size: clamp(0.76rem, 1.2vw, 0.82rem);
+  line-height: 2.2;
+  color: rgba(244, 238, 226, 0.78);
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.about-bio-fullwidth .bio-sentence {
+  display: inline;
+  will-change: transform, opacity, filter;
+}
+
+.about-bio-fullwidth:hover p {
+  color: #ffffff;
+  text-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+}
+
 /* Origin Section (02 / origin) */
 .origin-section {
   isolation: isolate;

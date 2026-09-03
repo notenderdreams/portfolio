@@ -42,6 +42,30 @@ export const AboutSection: React.FC = () => {
         }
       );
 
+      const bioEl = section.querySelector('.about-bio-fullwidth');
+      const bioSentences = section.querySelectorAll('.bio-sentence');
+
+      if (bioEl && bioSentences.length > 0) {
+        gsap.fromTo(
+          bioSentences,
+          { autoAlpha: 0, y: 22, filter: 'blur(10px)' },
+          {
+            autoAlpha: 1,
+            y: 0,
+            filter: 'blur(0px)',
+            duration: 1.05,
+            stagger: 0.14,
+            ease: 'power3.out',
+            clearProps: 'opacity,visibility,transform,filter',
+            scrollTrigger: {
+              trigger: bioEl,
+              start: 'top 85%',
+              once: true,
+            },
+          }
+        );
+      }
+
       ScrollTrigger.create({
         trigger: section,
         start: 'top 80%',
@@ -117,15 +141,25 @@ export const AboutSection: React.FC = () => {
                 </dd>
               </div>
             </dl>
-
-            <div className="about-bio-text">
-              <p className="reveal-item reveal-delay-7">
-                I am a CSE undergraduate from Dhaka, building software from first principles. My work
-                gravitates toward <b>low-level software</b>, <b>3D environments</b>, and{' '}
-                <b>electronic music</b>.
-              </p>
-            </div>
           </div>
+        </div>
+
+        {/* Full-width Bio Paragraph below profile grid */}
+        <div className="about-bio-text about-bio-fullwidth">
+          <p className="bio-narrative-paragraph">
+            <span className="bio-sentence">
+              I'm a CSE undergraduate from Dhaka who builds software from first principles.
+            </span>{' '}
+            <span className="bio-sentence">
+              Outside of that, most of my time goes into listening to and making music along with 3D environment art and photography.
+            </span>{' '}
+            <span className="bio-sentence">
+              I like to experiment constantly without boxing myself into one lane.
+            </span>{' '}
+            <span className="bio-sentence">
+              If something's genuinely interesting, I'm all in.
+            </span>
+          </p>
         </div>
       </div>
     </section>
