@@ -116,5 +116,7 @@ export const creativeTools: ToolEntry[] = [
   { name: 'Ableton Live', slug: 'ableton' },
   { name: 'Figma', slug: 'figma' },
   { name: 'After Effects', slug: 'aftereffects' },
+  { name: 'Blender', slug: 'blender' },
+  { name: 'Houdini', slug: 'houdini' },
 ];
 
