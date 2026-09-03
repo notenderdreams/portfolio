@@ -15,7 +15,8 @@ export const siteMetadata = {
 };
 
 export const navLinks: NavLink[] = [
-  { label: 'about', href: '#about' },
+  { label: 'profile', href: '#about' },
+  { label: 'origin', href: '#origin' },
   { label: 'work', href: '#work' },
   { label: 'toolbox', href: '#toolbox' },
   { label: 'contact', href: '#contact' },

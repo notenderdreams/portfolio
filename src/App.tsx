@@ -4,6 +4,7 @@ import { CursorFollower } from './components/layout/CursorFollower';
 import { LandingScreen } from './components/hero/LandingScreen';
 import { SelectedWorks } from './components/sections/SelectedWorks';
 import { AboutSection } from './components/sections/AboutSection';
+import { OriginSection } from './components/sections/OriginSection';
 import { ToolboxSection } from './components/sections/ToolboxSection';
 import { ContactSection } from './components/sections/ContactSection';
 import { Footer } from './components/layout/Footer';
@@ -33,6 +34,7 @@ export const App: React.FC = () => {
       {/* Main Sections */}
       <main>
         <AboutSection />
+        <OriginSection />
         <SelectedWorks />
         <ToolboxSection />
         <ContactSection />

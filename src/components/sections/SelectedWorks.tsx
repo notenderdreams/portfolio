@@ -91,9 +91,7 @@ export const SelectedWorks: React.FC = () => {
 
   return (
     <section id="work" className="section-spacer selected-works-section">
-      <div className="container">
-        <SectionLabel label="02 / selected works" />
-      </div>
+      <SectionLabel label="03 / selected works" />
 
       <div className="works-outer-stage">
         {/* Left empty space: counter (e.g. 1/5) */}

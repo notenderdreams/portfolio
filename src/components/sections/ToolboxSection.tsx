@@ -4,11 +4,12 @@ import { SectionLabel } from '../common/SectionLabel';
 
 export const ToolboxSection: React.FC = () => {
   return (
-    <section id="toolbox" className="container section-spacer scroll-reveal">
-      <SectionLabel label="03 / drawer inventory" />
+    <section id="toolbox" className="section-spacer scroll-reveal">
+      <SectionLabel label="04 / drawer inventory" />
 
-      {/* Languages Heading */}
-      <h4 className="toolbox-subheading">languages</h4>
+      <div className="container">
+        {/* Languages Heading */}
+        <h4 className="toolbox-subheading">languages</h4>
 
       {/* Languages Table Grid: Partitioned square cells with high columns count */}
       <div className="languages-table-wrap">
@@ -86,6 +87,7 @@ export const ToolboxSection: React.FC = () => {
             <span className="creative-tool-name">{tool.name}</span>
           </div>
         ))}
+      </div>
       </div>
     </section>
   );

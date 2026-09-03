@@ -5,5 +5,9 @@ interface SectionLabelProps {
 }
 
 export const SectionLabel: React.FC<SectionLabelProps> = ({ label }) => {
-  return <div className="section-label">{label}</div>;
+  return (
+    <div className="section-header-outer">
+      <div className="section-label">{label}</div>
+    </div>
+  );
 };
