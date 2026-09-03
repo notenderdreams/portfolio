@@ -4,9 +4,13 @@ import { BackgroundVideo } from './BackgroundVideo';
 import { HeroStage } from './HeroStage';
 import { HeroProse } from './HeroProse';
 
-export const LandingScreen: React.FC = () => {
+interface LandingScreenProps {
+  isActive?: boolean;
+}
+
+export const LandingScreen: React.FC<LandingScreenProps> = ({ isActive = false }) => {
   return (
-    <div id="home" className="landing-screen">
+    <div id="home" className={`landing-screen${isActive ? ' is-active' : ''}`}>
       {/* Background Animated Video Layer */}
       <BackgroundVideo />
 

@@ -162,6 +162,28 @@ a:hover {
   z-index: 1;
 }
 
+/* ==========================================================================
+   LANDING ENTRANCE ORCHESTRATION
+   Hold all entrance animations until the boot screen begins its reveal
+   ========================================================================== */
+
+.landing-screen:not(.is-active) .landing-bg-video,
+.landing-screen:not(.is-active) .site-header,
+.landing-screen:not(.is-active) .site-nav a,
+.landing-screen:not(.is-active) .hero-top-thoughts .top-thought,
+.landing-screen:not(.is-active) .letterbox-stage,
+.landing-screen:not(.is-active) .workbench-viewer,
+.landing-screen:not(.is-active) .workbench-nodes,
+.landing-screen:not(.is-active) .workbench-midi,
+.landing-screen:not(.is-active) .workbench-portrait,
+.landing-screen:not(.is-active) .workbench-clip,
+.landing-screen:not(.is-active) .workbench-signature,
+.landing-screen:not(.is-active) .flank-note,
+.landing-screen:not(.is-active) .hero-meta-row {
+  opacity: 0 !important;
+  animation: none !important;
+}
+
 /* Video Background Media Layer */
 .landing-bg-media {
   position: absolute;
@@ -3648,12 +3670,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(0, -12px, 0);
-    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    filter: blur(0);
   }
 }
 
@@ -3661,12 +3681,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(0, 14px, 0);
-    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    filter: blur(0);
   }
 }
 
@@ -3674,12 +3692,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(-16px, 0, 0);
-    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    filter: blur(0);
   }
 }
 
@@ -3687,12 +3703,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(16px, 0, 0);
-    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0);
-    filter: blur(0);
   }
 }
 
@@ -3700,12 +3714,10 @@ main {
   0% {
     opacity: 0;
     transform: scale(0.96) translate3d(0, 10px, 0);
-    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: scale(1) translate3d(0, 0, 0);
-    filter: blur(0);
   }
 }
 
@@ -3713,12 +3725,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(0, 16px, 0) scale(0.96);
-    filter: drop-shadow(0 0.5rem 1rem rgba(0, 0, 0, 0.2)) blur(8px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
-    filter: drop-shadow(0 1.4rem 2rem rgba(0, 0, 0, 0.36)) blur(0);
   }
 }
 
@@ -3726,12 +3736,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(0, -16px, 0) scale(0.97);
-    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -3739,12 +3747,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(18px, -14px, 0) scale(0.94);
-    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
-    filter: blur(0);
   }
 }
 
@@ -3752,12 +3758,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(20px, -12px, 0) scale(0.94) rotate(1.2deg);
-    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    filter: blur(0);
   }
 }
 
@@ -3765,12 +3769,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(-18px, 16px, 0) scale(0.94) rotate(-1deg);
-    filter: blur(6px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    filter: blur(0);
   }
 }
 
@@ -3778,12 +3780,10 @@ main {
   0% {
     opacity: 0;
     transform: translate3d(6px, 8px, 0) scale(0.97) rotate(0.4deg);
-    filter: blur(4px);
   }
   100% {
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-    filter: blur(0);
   }
 }
 

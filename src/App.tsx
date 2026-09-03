@@ -13,9 +13,16 @@ import { useScrollReveal } from './hooks/useScrollReveal';
 
 export const App: React.FC = () => {
   const [isBooted, setIsBooted] = useState(false);
+  const [isLandingActive, setIsLandingActive] = useState(false);
   useScrollReveal('.scroll-reveal');
 
   useEffect(() => {
+    // Reset scroll to top on refresh/load so bootloader always starts at the home stage
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+
     // Globally prevent native HTML5 ghost image dragging
     const preventNativeDrag = (e: DragEvent) => {
       e.preventDefault();
@@ -25,7 +32,11 @@ export const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    const handleReboot = () => setIsBooted(false);
+    const handleReboot = () => {
+      window.scrollTo(0, 0);
+      setIsLandingActive(false);
+      setIsBooted(false);
+    };
     window.addEventListener('rebootKernel', handleReboot);
     return () => window.removeEventListener('rebootKernel', handleReboot);
   }, []);
@@ -33,14 +44,19 @@ export const App: React.FC = () => {
   return (
     <>
       {/* Low-Level Kernel Boot Animation & Runtime Asset Preloader */}
-      {!isBooted && <KernelBoot onComplete={() => setIsBooted(true)} />}
+      {!isBooted && (
+        <KernelBoot
+          onReveal={() => setIsLandingActive(true)}
+          onComplete={() => setIsBooted(true)}
+        />
+      )}
 
       {/* Film Grain Layer */}
       <FilmGrain />
       <CursorFollower />
 
       {/* Landing Screen with Animated Video Background */}
-      <LandingScreen />
+      <LandingScreen isActive={isLandingActive} />
 
       {/* Main Sections */}
       <main>

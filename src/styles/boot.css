@@ -1,6 +1,6 @@
 /* ==========================================================================
    MINIMALIST LOAD SCREEN (CENTERED LOADING & SUB-PIXEL CARGO PROGRESS BAR)
-   CINEMATIC APERTURE DISSOLVE
+   SOLID COVER SLIDE-UP REVEAL
    ========================================================================== */
 
 .simple-loader-screen {
@@ -21,20 +21,18 @@
   overflow: hidden;
   user-select: none;
   contain: strict;
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0px);
-  will-change: opacity, transform, filter;
-  transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.72s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.85);
+  transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);
 }
 
 .simple-loader-screen.is-exiting {
-  opacity: 0;
-  transform: scale(1.035);
-  filter: blur(8px);
-  pointer-events: none;
+  transform: translate3d(0, -100%, 0);
+  pointer-events: none !important;
 }
 
 /* Centered single line row */
@@ -46,20 +44,6 @@
   white-space: pre;
   text-align: center;
   line-height: 1;
-  opacity: 1;
-  transform: scale(1);
-  filter: blur(0px);
-  will-change: opacity, transform, filter;
-  transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.32s cubic-bezier(0.16, 1, 0.3, 1),
-              filter 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Text evaporates softly into darkness before the dark veil lifts */
-.simple-loader-screen.is-text-fading .simple-loader-row {
-  opacity: 0;
-  transform: scale(0.96);
-  filter: blur(5px);
 }
 
 /* "loading" label */

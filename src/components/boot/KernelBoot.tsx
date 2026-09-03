@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import '../../styles/boot.css';
 
 interface KernelBootProps {
+  onReveal?: () => void;
   onComplete: () => void;
 }
 
@@ -31,8 +32,7 @@ const ASSETS_TO_PRELOAD: PreloadItem[] = [
 const TRACK_CHARS = 26;
 const EQUALS_STRING = '='.repeat(TRACK_CHARS + 2);
 
-export const KernelBoot: React.FC<KernelBootProps> = ({ onComplete }) => {
-  const [isTextFading, setIsTextFading] = useState(false);
+export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) => {
   const [isExiting, setIsExiting] = useState(false);
 
   const equalsRef = useRef<HTMLDivElement>(null);
@@ -97,23 +97,19 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onComplete }) => {
       onComplete: () => {
         if (isCancelled) return;
 
-        // Stage 1: Hold on 100% full bar for 160ms, then evaporate text
+        // Clean pause on full bar before the cover slides up
         setTimeout(() => {
           if (isCancelled) return;
-          setIsTextFading(true);
+          setIsExiting(true);
+          document.body.style.overflow = '';
+          onReveal?.();
 
-          // Stage 2: 220ms later, dissolve the dark screen into the hero stage
+          // Wait for the 0.85s slide-up animation to complete before unmounting
           setTimeout(() => {
             if (isCancelled) return;
-            setIsExiting(true);
-
-            // Stage 3: Complete and unmount after dissolve finishes
-            setTimeout(() => {
-              if (isCancelled) return;
-              onComplete();
-            }, 750);
-          }, 220);
-        }, 160);
+            onComplete();
+          }, 850);
+        }, 180);
       },
     });
 
@@ -121,13 +117,11 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onComplete }) => {
       isCancelled = true;
       tween.kill();
     };
-  }, [onComplete]);
+  }, [onReveal, onComplete]);
 
   return (
     <aside
-      className={`simple-loader-screen${isTextFading ? ' is-text-fading' : ''}${
-        isExiting ? ' is-exiting' : ''
-      }`}
+      className={`simple-loader-screen${isExiting ? ' is-exiting' : ''}`}
       aria-label="Loading portfolio"
     >
       <div className="simple-loader-row">
