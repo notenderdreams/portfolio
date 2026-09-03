@@ -2706,6 +2706,10 @@ main {
   transform: scale(1.15);
 }
 
+.tool-icon-jupyter {
+  transform: scale(1.22);
+}
+
 .tool-name-text {
   line-height: 1;
   color: #f4f4f7;

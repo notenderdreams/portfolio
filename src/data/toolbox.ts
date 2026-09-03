@@ -83,7 +83,6 @@ export const toolTableGroups: ToolTableGroup[] = [
   {
     section: 'DevOps & Build Systems',
     tools: [
-      { name: 'Neovim', slug: 'nvim' },
       { name: 'Cargo', slug: 'cargo' },
       { name: 'Bun', slug: 'bun' },
       { name: 'Docker', slug: 'docker' },
@@ -91,6 +90,21 @@ export const toolTableGroups: ToolTableGroup[] = [
       { name: 'CMake', slug: 'cmake' },
       { name: 'Gradle', slug: 'gradle' },
       { name: 'Maven', slug: 'maven' },
+    ],
+  },
+  {
+    section: 'Cockpit & Crew',
+    tools: [
+      { name: 'Antigravity', slug: 'antigravity' },
+      { name: 'Neovim', slug: 'nvim' },
+      { name: 'Zed Editor', slug: 'zed' },
+      { name: 'Ghostty', slug: 'ghostty' },
+      { name: 'RustRover', slug: 'rustrover' },
+      { name: 'VS Code', slug: 'vscode' },
+      { name: 'Visual Studio', slug: 'visualstudio' },
+      { name: 'Jupyter Notebook', slug: 'jupyter' },
+      { name: 'Claude', slug: 'claude' },
+      { name: 'Codex', slug: 'codex' },
     ],
   },
 ];
