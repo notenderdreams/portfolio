@@ -2524,48 +2524,216 @@ main {
   text-transform: uppercase;
 }
 
-/* Toolbox Grid */
-.toolbox-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3.5rem;
-}
+/* ==========================================================================
+   Toolbox: Wrapping Languages Grid & Boxed Markdown Table
+   ========================================================================== */
 
-.toolbox-column h4 {
-  font-size: 0.7rem;
+.toolbox-subheading {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
   text-transform: uppercase;
   letter-spacing: 0.16em;
   color: var(--dim);
-  margin-bottom: 1.2rem;
+  margin-top: clamp(1.8rem, 3.5vw, 2.5rem);
+  margin-bottom: clamp(0.9rem, 2vw, 1.3rem);
+  font-weight: 500;
 }
 
-.tool-list {
-  list-style: none;
+.languages-table-wrap {
+  width: 100%;
+  margin-top: 0.75rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.languages-grid-table {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  background-color: rgba(255, 255, 255, 0.1);
+  gap: 1px;
+}
+
+.language-grid-cell {
+  background-color: var(--bg);
+  aspect-ratio: 1 / 1;
   display: flex;
   flex-direction: column;
-  gap: 0.7rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.85rem;
+  transition: background-color 0.18s ease;
+  user-select: none;
+}
+
+.language-grid-cell:hover {
+  background-color: rgba(255, 255, 255, 0.035);
+}
+
+.language-icon-container {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.lang-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.lang-icon-go {
+  transform: scale(1.35);
+}
+
+.lang-icon-rust {
+  transform: scale(1.2);
+}
+
+.lang-icon-c,
+.lang-icon-cpp {
+  transform: scale(1.15);
+}
+
+.language-cell-name {
+  font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: var(--muted);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #f4f4f7;
+  text-align: center;
+  white-space: nowrap;
 }
 
-.tool-list li {
-  transition: transform 0.2s var(--ease-smooth), color 0.2s ease;
+@media (max-width: 800px) {
+  .languages-grid-table {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-.tool-list li:hover {
-  transform: translateX(3px);
-  color: var(--ink);
+@media (max-width: 520px) {
+  .languages-grid-table {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
-.tool-list li span.fav-star {
-  color: var(--ink);
-  margin-left: 0.4rem;
-  font-size: 0.72rem;
+/* Minimal Boxed Markdown Table (Only Rectangular Strokes & Clean Text) */
+.tools-markdown-table-wrap {
+  width: 100%;
+  margin-top: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 2px;
+  overflow: hidden;
 }
 
-.tool-list li b {
-  color: var(--ink);
+.tools-markdown-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-mono);
+  font-size: 0.86rem;
+  line-height: 1.6;
+}
+
+.markdown-table-row {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.markdown-table-row:last-child {
+  border-bottom: none;
+}
+
+.markdown-table-section {
+  vertical-align: top;
+  padding: 1.15rem 1.6rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  width: 270px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-weight: 500;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.markdown-table-tools {
+  vertical-align: top;
+  padding: 1.15rem 1.6rem;
+}
+
+/* Vertically Stacked Items with Icons - Crisp, Bright, and Clear */
+.tools-vertical-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.tool-stack-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #f4f4f7;
+  font-size: 0.84rem;
+  letter-spacing: 0.02em;
   font-weight: 400;
+}
+
+.tool-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+.tool-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.tool-icon-bubbletea {
+  transform: scale(1.15);
+}
+
+.tool-name-text {
+  line-height: 1;
+  color: #f4f4f7;
+}
+
+@media (max-width: 680px) {
+  .tools-markdown-table,
+  .tools-markdown-table tbody,
+  .markdown-table-row {
+    display: block;
+  }
+
+  .markdown-table-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+  }
+
+  .markdown-table-section {
+    display: block;
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 0.85rem 1.1rem;
+  }
+
+  .markdown-table-tools {
+    display: block;
+    padding: 0.85rem 1.1rem;
+  }
 }
 
 /* Contact Block */
@@ -3660,10 +3828,6 @@ main {
     text-align: left;
     margin-top: 0.3rem;
     font-size: 0.68rem;
-  }
-  .toolbox-grid {
-    grid-template-columns: 1fr;
-    gap: 2.2rem;
   }
 }
 
