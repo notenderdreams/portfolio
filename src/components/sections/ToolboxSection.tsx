@@ -1,5 +1,5 @@
 import React from 'react';
-import { languages, toolTableGroups } from '../../data/toolbox';
+import { languages, toolTableGroups, creativeTools } from '../../data/toolbox';
 import { SectionLabel } from '../common/SectionLabel';
 
 export const ToolboxSection: React.FC = () => {
@@ -64,6 +64,28 @@ export const ToolboxSection: React.FC = () => {
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* Creative Suite Heading */}
+      <h4 className="toolbox-subheading">creative suite</h4>
+
+      {/* Single clean line displaying creative tools: icons with names below, justified between */}
+      <div className="creative-tools-strip">
+        {creativeTools.map((tool) => (
+          <div key={tool.name} className="creative-tool-item" title={tool.name}>
+            {tool.slug && (
+              <span className="creative-tool-icon-wrap" aria-hidden="true">
+                <img
+                  src={`/icons/devicon/${tool.slug}.svg`}
+                  alt={tool.name}
+                  className={`creative-tool-img creative-tool-${tool.slug}`}
+                  draggable={false}
+                />
+              </span>
+            )}
+            <span className="creative-tool-name">{tool.name}</span>
+          </div>
+        ))}
       </div>
     </section>
   );

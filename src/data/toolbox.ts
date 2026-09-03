@@ -94,3 +94,13 @@ export const toolTableGroups: ToolTableGroup[] = [
     ],
   },
 ];
+
+export const creativeTools: ToolEntry[] = [
+  { name: 'Unreal Engine 5', slug: 'unreal' },
+  { name: 'DaVinci Resolve', slug: 'davinci' },
+  { name: 'Affinity', slug: 'affinity' },
+  { name: 'Ableton Live', slug: 'ableton' },
+  { name: 'Figma', slug: 'figma' },
+  { name: 'After Effects', slug: 'aftereffects' },
+];
+
