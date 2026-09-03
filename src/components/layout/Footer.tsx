@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { siteMetadata, socialLinks, competitiveLinks } from '../../data/metadata';
+import { projects } from '../../data/projects';
 
 export const Footer: React.FC = () => {
   const footerRef = useRef<HTMLElement>(null);
@@ -133,7 +134,26 @@ export const Footer: React.FC = () => {
               </ul>
             </div>
 
-            {/* Column 4: Navigation */}
+            {/* Column 4: Selected Projects */}
+            <div className="directory-column">
+              <div className="column-heading">[SELECTED]</div>
+              <ul className="column-list">
+                {projects.map((project) => (
+                  <li key={project.id}>
+                    <a
+                      href={project.githubUrl || '#work'}
+                      target={project.githubUrl ? '_blank' : undefined}
+                      rel={project.githubUrl ? 'noopener noreferrer' : undefined}
+                      className={project.githubUrl ? 'has-arrow' : undefined}
+                    >
+                      {project.githubUrl && <span className="arrow-icon">↗</span>} {project.title.toUpperCase()}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Column 5: Navigation (Far Right) */}
             <div className="directory-column">
               <div className="column-heading">[NAVIGATION]</div>
               <ul className="column-list">
@@ -148,22 +168,11 @@ export const Footer: React.FC = () => {
                     HOME
                   </a>
                 </li>
-                <li><a href="#about">ABOUT ME</a></li>
+                <li><a href="#about">PROFILE</a></li>
+                <li><a href="#origin">ORIGIN</a></li>
                 <li><a href="#work">SELECTED WORKS</a></li>
-                <li><a href="#toolbox">TOOLBOX / STACK</a></li>
+                <li><a href="#toolbox">TOOLBOX</a></li>
                 <li><a href="#contact">CONNECT</a></li>
-              </ul>
-            </div>
-
-            {/* Column 4: Selected Projects */}
-            <div className="directory-column">
-              <div className="column-heading">[SELECTED]</div>
-              <ul className="column-list">
-                <li><a href="#work">GATEKEEPER (DSP)</a></li>
-                <li><a href="#work">AETHERIA (UE5)</a></li>
-                <li><a href="#work">MONOLITH (KERNEL)</a></li>
-                <li><a href="#work">CHROMA (ACES)</a></li>
-                <li><a href="#work">SPECTRA (SYNTH)</a></li>
               </ul>
             </div>
           </div>

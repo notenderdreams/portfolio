@@ -505,13 +505,13 @@ export const NokiaScreen: React.FC = () => {
       handPixelsRef.current = pixels;
     };
 
-    // Initialize floating pixel cubes for the intro
+    // Initialize floating pixel cubes for the intro (positioned in flanks away from central text)
     cubesRef.current = [
-      { x: 0.16, y: 0.28, vx: 0.00014, vy: -0.00012, size: 4.5, rotX: 0.4, rotY: 0.2, rotZ: 0.1, vRotX: 0.012, vRotY: 0.018, vRotZ: 0.008 },
-      { x: 0.84, y: 0.72, vx: -0.00016, vy: 0.00015, size: 5.0, rotX: 1.1, rotY: 0.8, rotZ: 0.3, vRotX: -0.015, vRotY: 0.02, vRotZ: 0.01 },
-      { x: 0.22, y: 0.74, vx: 0.00013, vy: 0.00014, size: 3.5, rotX: 0.2, rotY: 1.5, rotZ: 0.5, vRotX: 0.018, vRotY: -0.012, vRotZ: 0.014 },
-      { x: 0.80, y: 0.26, vx: -0.00015, vy: -0.00016, size: 4.0, rotX: 0.9, rotY: 0.3, rotZ: 0.7, vRotX: 0.014, vRotY: 0.016, vRotZ: -0.01 },
-      { x: 0.50, y: 0.14, vx: 0.0001, vy: 0.0001, size: 3.0, rotX: 0.6, rotY: 0.9, rotZ: 0.2, vRotX: 0.02, vRotY: 0.01, vRotZ: 0.015 },
+      { x: 0.14, y: 0.22, vx: 0.00014, vy: -0.00012, size: 4.2, rotX: 0.4, rotY: 0.2, rotZ: 0.1, vRotX: 0.012, vRotY: 0.018, vRotZ: 0.008 },
+      { x: 0.86, y: 0.76, vx: -0.00016, vy: 0.00015, size: 4.6, rotX: 1.1, rotY: 0.8, rotZ: 0.3, vRotX: -0.015, vRotY: 0.02, vRotZ: 0.01 },
+      { x: 0.18, y: 0.78, vx: 0.00013, vy: 0.00014, size: 3.5, rotX: 0.2, rotY: 1.5, rotZ: 0.5, vRotX: 0.018, vRotY: -0.012, vRotZ: 0.014 },
+      { x: 0.82, y: 0.22, vx: -0.00015, vy: -0.00016, size: 3.8, rotX: 0.9, rotY: 0.3, rotZ: 0.7, vRotX: 0.014, vRotY: 0.016, vRotZ: -0.01 },
+      { x: 0.50, y: 0.84, vx: 0.00012, vy: 0.00008, size: 3.2, rotX: 0.6, rotY: 0.9, rotZ: 0.2, vRotX: 0.02, vRotY: 0.01, vRotZ: 0.015 },
     ];
 
     // Initialize 72 floating square pixel dust particles (denser retro particulate field)
@@ -593,11 +593,58 @@ export const NokiaScreen: React.FC = () => {
             cube.x += cube.vx;
             cube.y += cube.vy;
 
-            if (cube.x < 0.06 || cube.x > 0.94) cube.vx *= -1;
-            if (cube.y < 0.12 || cube.y > 0.88) cube.vy *= -1;
+            if (cube.x < 0.06) {
+              cube.x = 0.06;
+              cube.vx = Math.abs(cube.vx);
+            } else if (cube.x > 0.94) {
+              cube.x = 0.94;
+              cube.vx = -Math.abs(cube.vx);
+            }
+
+            if (cube.y < 0.08) {
+              cube.y = 0.08;
+              cube.vy = Math.abs(cube.vy);
+            } else if (cube.y > 0.92) {
+              cube.y = 0.92;
+              cube.vy = -Math.abs(cube.vy);
+            }
 
             let cx = cube.x * W;
             let cy = cube.y * H;
+
+            // Strict text exclusion zone: cubes bounce away so they never overlap or obscure "have an idea?"
+            const textZoneMarginX = (cube.size * 1.6 + 22) * pxSize;
+            const textZoneMarginY = (cube.size * 1.6 + 10) * pxSize;
+            const textZoneLeft = midBetweenHands - textZoneMarginX;
+            const textZoneRight = midBetweenHands + textZoneMarginX;
+            const textZoneTop = verticalOffset + 11 * pxSize - textZoneMarginY;
+            const textZoneBottom = verticalOffset + 27 * pxSize + textZoneMarginY;
+
+            if (cx >= textZoneLeft && cx <= textZoneRight && cy >= textZoneTop && cy <= textZoneBottom) {
+              const distLeft = cx - textZoneLeft;
+              const distRight = textZoneRight - cx;
+              const distTop = cy - textZoneTop;
+              const distBottom = textZoneBottom - cy;
+              const minDist = Math.min(distLeft, distRight, distTop, distBottom);
+
+              if (minDist === distLeft) {
+                cube.vx = -Math.abs(cube.vx);
+                cx = textZoneLeft;
+                cube.x = cx / W;
+              } else if (minDist === distRight) {
+                cube.vx = Math.abs(cube.vx);
+                cx = textZoneRight;
+                cube.x = cx / W;
+              } else if (minDist === distTop) {
+                cube.vy = -Math.abs(cube.vy);
+                cy = textZoneTop;
+                cube.y = cy / H;
+              } else {
+                cube.vy = Math.abs(cube.vy);
+                cy = textZoneBottom;
+                cube.y = cy / H;
+              }
+            }
 
             // Disperse outward when transition triggers
             if (progress > 0) {
@@ -728,6 +775,16 @@ export const NokiaScreen: React.FC = () => {
             curX += (dx / dist) * force * 24;
             curY += (dy / dist) * force * 24;
           }
+        }
+
+        // Avoid rendering particle dust directly over the central text
+        if (
+          curX >= midBetweenHands - 24 * pxSize &&
+          curX <= midBetweenHands + 24 * pxSize &&
+          curY >= verticalOffset + 9 * pxSize &&
+          curY <= verticalOffset + 29 * pxSize
+        ) {
+          return;
         }
 
         const snapX = Math.round(curX / pxSize) * pxSize;

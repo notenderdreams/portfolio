@@ -61,7 +61,7 @@ export const projects: ProjectItem[] = [
   {
     id: 'nour',
     num: '04',
-    title: 'NOUR',
+    title: 'Nour',
     description: 'High-performance incremental build system written in C. Engineered for minimal overhead, fast dependency graph resolution, and low-level compilation workflows.',
     tags: ['C', 'Build System', 'Systems Programming'],
     category: 'Low-Level Systems',
@@ -72,8 +72,8 @@ export const projects: ProjectItem[] = [
     num: '05',
     title: 'Project Miruku',
     description: 'HTML-based presentation maker that renders clean, responsive slide decks and compiles pixel-perfect presentation exports to standalone PDF files.',
-    tags: ['Web Engineering', 'PDF Renderer', 'TypeScript'],
-    category: 'Document Engineering',
+    tags: ['Web', 'PDF Renderer', 'TypeScript'],
+    category: 'Presentation Maker',
     githubUrl: 'https://github.com/notenderdreams/ProjectMiruku',
   },
 ];

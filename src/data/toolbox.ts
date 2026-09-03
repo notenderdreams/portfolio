@@ -20,26 +20,26 @@ export const languages: LanguageItem[] = [
   { name: 'Zig', slug: 'zig' },
   { name: 'Go', slug: 'go' },
   { name: 'Python', slug: 'python' },
-  { name: 'Java', slug: 'java' },
   { name: 'TypeScript', slug: 'typescript' },
   { name: 'JavaScript', slug: 'javascript' },
   { name: 'Lua', slug: 'lua' },
   { name: 'SQL', slug: 'sql' },
   { name: 'Bash', slug: 'bash' },
+  { name: 'Java', slug: 'java' },
 ];
 
 export const toolTableGroups: ToolTableGroup[] = [
   {
     section: 'GUI & Native Frameworks',
     tools: [
+      { name: 'Tauri', slug: 'tauri' },
       { name: 'Qt', slug: 'qt' },
-      { name: 'JavaFX', slug: 'javafx' },
-      { name: 'Swing', slug: 'swing' },
       { name: 'Raylib', slug: 'raylib' },
       { name: 'SDL3', slug: 'sdl' },
-      { name: 'Tauri', slug: 'tauri' },
       { name: 'Slint', slug: 'slint' },
       { name: 'egui', slug: 'egui' },
+      { name: 'JavaFX', slug: 'javafx' },
+      { name: 'Swing', slug: 'swing' },
     ],
   },
   {
@@ -96,16 +96,16 @@ export const toolTableGroups: ToolTableGroup[] = [
   {
     section: 'Cockpit & Crew',
     tools: [
-      { name: 'Antigravity', slug: 'antigravity' },
       { name: 'Neovim', slug: 'nvim' },
       { name: 'Zed Editor', slug: 'zed' },
       { name: 'Ghostty', slug: 'ghostty' },
       { name: 'RustRover', slug: 'rustrover' },
+      { name: 'Antigravity', slug: 'antigravity' },
       { name: 'VS Code', slug: 'vscode' },
       { name: 'Visual Studio', slug: 'visualstudio' },
-      { name: 'Jupyter Notebook', slug: 'jupyter' },
       { name: 'Claude', slug: 'claude' },
       { name: 'Codex', slug: 'codex' },
+      { name: 'Jupyter Notebook', slug: 'jupyter' },
     ],
   },
 ];
