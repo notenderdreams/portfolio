@@ -12,8 +12,10 @@ export const Footer: React.FC = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           el.classList.add('is-revealed');
+          window.dispatchEvent(new CustomEvent('footerReveal', { detail: { revealed: true } }));
         } else {
           el.classList.remove('is-revealed');
+          window.dispatchEvent(new CustomEvent('footerReveal', { detail: { revealed: false } }));
         }
       },
       {

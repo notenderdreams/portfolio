@@ -16,6 +16,39 @@ interface Particle {
   phase: number;
 }
 
+interface PixelCube {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  rotX: number;
+  rotY: number;
+  rotZ: number;
+  vRotX: number;
+  vRotY: number;
+  vRotZ: number;
+}
+
+// 8 vertices of a unit cube
+const CUBE_VERTICES: [number, number, number][] = [
+  [-1, -1, -1],
+  [1, -1, -1],
+  [1, 1, -1],
+  [-1, 1, -1],
+  [-1, -1, 1],
+  [1, -1, 1],
+  [1, 1, 1],
+  [-1, 1, 1],
+];
+
+// 12 edges connecting the vertices
+const CUBE_EDGES: [number, number][] = [
+  [0, 1], [1, 2], [2, 3], [3, 0], // back face
+  [4, 5], [5, 6], [6, 7], [7, 4], // front face
+  [0, 4], [1, 5], [2, 6], [3, 7], // cross struts
+];
+
 // Authentic 5x7 Retro Nokia Dot-Matrix Bitmap Font
 const BITMAP_FONT: Record<string, string[]> = {
   c: [
@@ -126,7 +159,194 @@ const BITMAP_FONT: Record<string, string[]> = {
     '00000',
     '00100',
   ],
+  h: [
+    '10000',
+    '10000',
+    '10110',
+    '11001',
+    '10001',
+    '10001',
+    '10001',
+  ],
+  a: [
+    '00000',
+    '00000',
+    '01110',
+    '00001',
+    '01111',
+    '10001',
+    '01111',
+  ],
+  v: [
+    '00000',
+    '00000',
+    '10001',
+    '10001',
+    '10001',
+    '01010',
+    '00100',
+  ],
+  '?': [
+    '01110',
+    '10001',
+    '00010',
+    '00100',
+    '00100',
+    '00000',
+    '00100',
+  ],
+  ' ': [
+    '00000',
+    '00000',
+    '00000',
+    '00000',
+    '00000',
+    '00000',
+    '00000',
+  ],
+  u: [
+    '00000',
+    '00000',
+    '10001',
+    '10001',
+    '10001',
+    '10001',
+    '01111',
+  ],
+  y: [
+    '00000',
+    '00000',
+    '10001',
+    '10001',
+    '01111',
+    '00001',
+    '01110',
+  ],
+  r: [
+    '00000',
+    '00000',
+    '10110',
+    '11001',
+    '10000',
+    '10000',
+    '10000',
+  ],
+  w: [
+    '00000',
+    '00000',
+    '10001',
+    '10001',
+    '10101',
+    '10101',
+    '01010',
+  ],
+  k: [
+    '10000',
+    '10010',
+    '10100',
+    '11000',
+    '10100',
+    '10010',
+    '10001',
+  ],
 };
+
+function drawBitmapText(
+  ctx: CanvasRenderingContext2D,
+  text: string,
+  startX: number,
+  startY: number,
+  pxSize: number,
+  effectiveSize: number,
+  dissolveRatio: number = 1,
+  seedOffset: number = 0
+) {
+  const charWidth = 5;
+  const charGap = 1;
+
+  for (let i = 0; i < text.length; i++) {
+    const ch = text[i];
+    if (ch === ' ') continue;
+    const bitmap = BITMAP_FONT[ch];
+    if (!bitmap) continue;
+
+    const charX = startX + i * (charWidth + charGap) * pxSize;
+
+    for (let r = 0; r < 7; r++) {
+      const rowStr = bitmap[r];
+      const py = startY + r * pxSize;
+
+      for (let c = 0; c < 5; c++) {
+        if (rowStr[c] === '1') {
+          if (dissolveRatio < 1) {
+            const hash = Math.sin((i * 37 + r * 13 + c * 7 + seedOffset) * 12.9898) * 43758.5453;
+            const frac = hash - Math.floor(hash);
+            if (frac > dissolveRatio) continue;
+          }
+          const px = charX + c * pxSize;
+          ctx.fillRect(px, py, effectiveSize, effectiveSize);
+        }
+      }
+    }
+  }
+}
+
+function renderPixelCube(
+  ctx: CanvasRenderingContext2D,
+  cube: PixelCube,
+  centerX: number,
+  centerY: number,
+  pxSize: number,
+  effectiveSize: number,
+  alpha: number
+) {
+  const S = cube.size * pxSize;
+
+  const projVertices: [number, number][] = CUBE_VERTICES.map((v) => {
+    // 3D rotation
+    const y1 = v[1] * Math.cos(cube.rotX) - v[2] * Math.sin(cube.rotX);
+    const z1 = v[1] * Math.sin(cube.rotX) + v[2] * Math.cos(cube.rotX);
+
+    const x2 = v[0] * Math.cos(cube.rotY) + z1 * Math.sin(cube.rotY);
+
+    const x3 = x2 * Math.cos(cube.rotZ) - y1 * Math.sin(cube.rotZ);
+    const y3 = x2 * Math.sin(cube.rotZ) + y1 * Math.cos(cube.rotZ);
+
+    return [centerX + x3 * S, centerY + y3 * S];
+  });
+
+  // Rasterize 12 cube edges onto LCD pixel grid
+  CUBE_EDGES.forEach(([i1, i2]) => {
+    const [x1, y1] = projVertices[i1];
+    const [x2, y2] = projVertices[i2];
+    const dist = Math.hypot(x2 - x1, y2 - y1);
+    const steps = Math.max(1, Math.ceil(dist / (pxSize * 0.9)));
+
+    for (let s = 0; s <= steps; s++) {
+      if (alpha < 1) {
+        const hash = Math.sin((i1 * 19 + i2 * 31 + s * 17) * 12.9898) * 43758.5453;
+        if (hash - Math.floor(hash) > alpha) continue;
+      }
+      const t = s / steps;
+      const lx = x1 + (x2 - x1) * t;
+      const ly = y1 + (y2 - y1) * t;
+      const snapX = Math.round(lx / pxSize) * pxSize;
+      const snapY = Math.round(ly / pxSize) * pxSize;
+      ctx.fillRect(snapX, snapY, effectiveSize, effectiveSize);
+    }
+  });
+
+  // Draw cube corner vertices
+  projVertices.forEach(([vx, vy], idx) => {
+    if (alpha < 1) {
+      const hash = Math.sin((idx * 43) * 12.9898) * 43758.5453;
+      if (hash - Math.floor(hash) > alpha) return;
+    }
+    const snapX = Math.round(vx / pxSize) * pxSize;
+    const snapY = Math.round(vy / pxSize) * pxSize;
+    ctx.fillRect(snapX, snapY, effectiveSize, effectiveSize);
+  });
+}
 
 export const NokiaScreen: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -138,6 +358,12 @@ export const NokiaScreen: React.FC = () => {
   const handPixelsRef = useRef<HandPixel[]>([]);
   const particlesRef = useRef<Particle[]>([]);
   const mouseRef = useRef<{ x: number; y: number; active: boolean }>({ x: -100, y: -100, active: false });
+
+  // Animation lifecycle states
+  const stageRef = useRef<'intro' | 'transitioning' | 'connected'>('intro');
+  const transitionStartRef = useRef<number>(0);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cubesRef = useRef<PixelCube[]>([]);
 
   // Synthesize authentic 8-bit retro Nokia keypad click tone
   const playNokiaBeep = () => {
@@ -161,8 +387,18 @@ export const NokiaScreen: React.FC = () => {
     }
   };
 
+  const triggerTransition = () => {
+    if (stageRef.current === 'connected' || stageRef.current === 'transitioning') return;
+    stageRef.current = 'transitioning';
+    transitionStartRef.current = performance.now();
+  };
+
   const handleScreenClick = () => {
     playNokiaBeep();
+    // Fast-forward to connected state if clicked during intro or transition
+    if (stageRef.current !== 'connected') {
+      stageRef.current = 'connected';
+    }
     if (navigator.clipboard) {
       void navigator.clipboard.writeText(siteMetadata.email);
       setCopied(true);
@@ -174,6 +410,56 @@ export const NokiaScreen: React.FC = () => {
     }
     window.location.href = `mailto:${siteMetadata.email}`;
   };
+
+  // Scroll visibility observer:
+  // - Nokia Screen in intro stage shows "have an idea?" and floating pixel cubes.
+  // - When scrolling down to the bottom and the footer animation triggers (.is-revealed),
+  //   the screen transitions to "lets connect" and the connecting hands grow at that exact same time.
+  // - Closing or scrolling past the footer does NOT snap the screen back to intro.
+  // - The Nokia screen only resets back to its initial "have an idea?" state once the Nokia
+  //   screen itself completely scrolls out of the viewport.
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    // Listen to the moment the footer animation triggers
+    const handleFooterReveal = (e: Event) => {
+      const customEv = e as CustomEvent<{ revealed: boolean }>;
+      if (customEv.detail?.revealed) {
+        triggerTransition();
+      }
+      // When footer is closed/unrevealed, do NOT reset - remain in connected state as requested
+    };
+
+    window.addEventListener('footerReveal', handleFooterReveal);
+
+    // Initial check in case page loaded already scrolled to footer
+    const footerEl = document.querySelector('.editorial-footer-section');
+    if (footerEl?.classList.contains('is-revealed')) {
+      triggerTransition();
+    }
+
+    // Only reset to intro state when the Nokia screen itself leaves the viewport
+    const containerObserver = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || entry.intersectionRatio <= 0) {
+          if (stageRef.current === 'connected' || stageRef.current === 'transitioning') {
+            stageRef.current = 'intro';
+          }
+        }
+      },
+      {
+        threshold: [0],
+      }
+    );
+    containerObserver.observe(container);
+
+    return () => {
+      window.removeEventListener('footerReveal', handleFooterReveal);
+      containerObserver.disconnect();
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -187,7 +473,7 @@ export const NokiaScreen: React.FC = () => {
 
     img.onload = () => {
       const offscreen = document.createElement('canvas');
-      const step = 16; // Sample resolution matching the artwork pixel blocks
+      const step = 16;
       const cols = Math.floor(img.naturalWidth / step);
       const rows = Math.floor(img.naturalHeight / step);
       offscreen.width = cols;
@@ -219,15 +505,24 @@ export const NokiaScreen: React.FC = () => {
       handPixelsRef.current = pixels;
     };
 
-    // Initialize 36 floating square pixel dust particles
+    // Initialize floating pixel cubes for the intro
+    cubesRef.current = [
+      { x: 0.16, y: 0.28, vx: 0.00014, vy: -0.00012, size: 4.5, rotX: 0.4, rotY: 0.2, rotZ: 0.1, vRotX: 0.012, vRotY: 0.018, vRotZ: 0.008 },
+      { x: 0.84, y: 0.72, vx: -0.00016, vy: 0.00015, size: 5.0, rotX: 1.1, rotY: 0.8, rotZ: 0.3, vRotX: -0.015, vRotY: 0.02, vRotZ: 0.01 },
+      { x: 0.22, y: 0.74, vx: 0.00013, vy: 0.00014, size: 3.5, rotX: 0.2, rotY: 1.5, rotZ: 0.5, vRotX: 0.018, vRotY: -0.012, vRotZ: 0.014 },
+      { x: 0.80, y: 0.26, vx: -0.00015, vy: -0.00016, size: 4.0, rotX: 0.9, rotY: 0.3, rotZ: 0.7, vRotX: 0.014, vRotY: 0.016, vRotZ: -0.01 },
+      { x: 0.50, y: 0.14, vx: 0.0001, vy: 0.0001, size: 3.0, rotX: 0.6, rotY: 0.9, rotZ: 0.2, vRotX: 0.02, vRotY: 0.01, vRotZ: 0.015 },
+    ];
+
+    // Initialize 72 floating square pixel dust particles (denser retro particulate field)
     const particles: Particle[] = [];
-    for (let i = 0; i < 36; i++) {
+    for (let i = 0; i < 72; i++) {
       particles.push({
-        x: 0.15 + Math.random() * 0.7,
-        y: 0.2 + Math.random() * 0.55,
-        vx: (Math.random() - 0.5) * 0.0004,
-        vy: (Math.random() - 0.5) * 0.0004,
-        size: Math.random() > 0.5 ? 5 : 3.5,
+        x: 0.12 + Math.random() * 0.76,
+        y: 0.16 + Math.random() * 0.68,
+        vx: (Math.random() - 0.5) * 0.0006,
+        vy: (Math.random() - 0.5) * 0.0006,
+        size: Math.random() > 0.4 ? 5 : 3.5,
         phase: Math.random() * Math.PI * 2,
       });
     }
@@ -244,10 +539,9 @@ export const NokiaScreen: React.FC = () => {
       ctx.fillStyle = '#8ba346';
       ctx.fillRect(0, 0, W, H);
 
-      // 2. Compute exact square pixel size based on canvas height
-      // Reference grid is ~48 rows
+      // 2. Compute exact square pixel size based on canvas height (48 rows)
       const pxSize = Math.max(3, Math.floor(H / 48));
-      const pixelGap = 1; // Authentic LCD dot-matrix gap
+      const pixelGap = 1;
       const effectiveSize = Math.max(2, pxSize - pixelGap);
       const verticalOffset = Math.round((H - 48 * pxSize) / 2);
 
@@ -255,100 +549,162 @@ export const NokiaScreen: React.FC = () => {
       const rightMaxCol = 86;
       const rightHandWidth = (rightMaxCol - rightMinCol + 1) * pxSize;
 
-      // Layout text: Line 1 "lets" on top, Line 2 "connect" (or "copied!") below
-      // Both lines are left-aligned as if inside a bounding box
-      const line1 = 'lets';
-      const line2 = copiedRef.current ? 'copied!' : 'connect';
-      const charWidth = 5;
-      const charGap = 1;
-
-      // The bounding box width is defined by the longest word ("connect" / "copied!" = 41 cols)
-      const boxCols = Math.max(
-        line1.length * charWidth + (line1.length - 1) * charGap,
-        line2.length * charWidth + (line2.length - 1) * charGap
-      );
+      // Canonical hands resting anchors
+      const handGap = 3 * pxSize;
+      const boxCols = 41;
       const boxWidth = boxCols * pxSize;
+      const baseStartX = Math.round((W - boxWidth) / 2);
+      const leftStartX = Math.min(0, baseStartX - (43 * pxSize) - handGap);
+      const rightStartX = Math.max(W - rightHandWidth, baseStartX + boxWidth + handGap - (3 * pxSize));
 
-      // Center the bounding box horizontally on the canvas
-      const boxStartX = Math.round((W - boxWidth) / 2);
+      // Compute exact middle center between left hand tip (~col 44) and right hand tip (~col 46)
+      const leftHandEnd = leftStartX + 44 * pxSize;
+      const rightHandStart = rightStartX;
+      const midBetweenHands = (leftHandEnd + rightHandStart) / 2;
 
-      // Line 1 ("lets") on top (row 11), Line 2 ("connect") moved below (row 20)
+      // Line 1 on row 11, Line 2 on row 20
       const textStartY1 = verticalOffset + 11 * pxSize;
       const textStartY2 = verticalOffset + 20 * pxSize;
 
-      // Hands position: frame the bounding box with breathing room, anchoring outward
-      const handGap = 3 * pxSize;
-      const leftStartX = Math.min(0, boxStartX - (43 * pxSize) - handGap);
-      const rightStartX = Math.max(W - rightHandWidth, boxStartX + boxWidth + handGap - (3 * pxSize));
-
-      // Draw hand pixels with strict 1:1 SQUARE dimensions matching Nokia LCD matrix
       const pixels = handPixelsRef.current;
-      ctx.fillStyle = '#161d0e';
-
-      for (let i = 0; i < pixels.length; i++) {
-        const p = pixels[i];
-        let px = 0;
-        const py = verticalOffset + p.row * pxSize;
-
-        if (p.isLeft) {
-          px = leftStartX + p.col * pxSize;
-        } else {
-          px = rightStartX + (p.col - rightMinCol) * pxSize;
-        }
-
-        // Draw pure square block with subtle LCD sub-pixel gap
-        ctx.fillRect(px, py, effectiveSize, effectiveSize);
-      }
-
-      // 3. Render pixelated lines: "lets" and "connect" (left-aligned within the bounding box)
       ctx.fillStyle = isHoveredRef.current ? '#0c1206' : '#161d0e';
 
-      // Draw Line 1: "lets" (left-aligned at boxStartX)
-      for (let i = 0; i < line1.length; i++) {
-        const ch = line1[i];
-        const bitmap = BITMAP_FONT[ch];
-        if (!bitmap) continue;
-
-        const charX = boxStartX + i * (charWidth + charGap) * pxSize;
-
-        for (let r = 0; r < 7; r++) {
-          const rowStr = bitmap[r];
-          const py = textStartY1 + r * pxSize;
-
-          for (let c = 0; c < 5; c++) {
-            if (rowStr[c] === '1') {
-              const px = charX + c * pxSize;
-              ctx.fillRect(px, py, effectiveSize, effectiveSize);
-            }
-          }
+      // Compute animation progress (faster 2000ms duration for energetic generation)
+      let progress = 0;
+      if (stageRef.current === 'connected') {
+        progress = 1;
+      } else if (stageRef.current === 'transitioning') {
+        const elapsed = performance.now() - transitionStartRef.current;
+        progress = Math.min(1, elapsed / 2000);
+        if (progress >= 1) {
+          stageRef.current = 'connected';
         }
       }
 
-      // Draw Line 2: "connect" or "copied!" (left-aligned at boxStartX)
-      for (let i = 0; i < line2.length; i++) {
-        const ch = line2[i];
-        const bitmap = BITMAP_FONT[ch];
-        if (!bitmap) continue;
+      // 3. Render floating 3D pixel cubes (active in intro, disperses during transition)
+      if (progress < 0.38) {
+        const cubeAlpha = Math.max(0, 1 - progress / 0.3);
+        if (cubeAlpha > 0) {
+          cubesRef.current.forEach((cube) => {
+            cube.rotX += cube.vRotX;
+            cube.rotY += cube.vRotY;
+            cube.rotZ += cube.vRotZ;
 
-        const charX = boxStartX + i * (charWidth + charGap) * pxSize;
+            cube.x += cube.vx;
+            cube.y += cube.vy;
 
-        for (let r = 0; r < 7; r++) {
-          const rowStr = bitmap[r];
-          const py = textStartY2 + r * pxSize;
+            if (cube.x < 0.06 || cube.x > 0.94) cube.vx *= -1;
+            if (cube.y < 0.12 || cube.y > 0.88) cube.vy *= -1;
 
-          for (let c = 0; c < 5; c++) {
-            if (rowStr[c] === '1') {
-              const px = charX + c * pxSize;
-              ctx.fillRect(px, py, effectiveSize, effectiveSize);
+            let cx = cube.x * W;
+            let cy = cube.y * H;
+
+            // Disperse outward when transition triggers
+            if (progress > 0) {
+              const dirX = cube.x < 0.5 ? -1 : 1;
+              const dirY = cube.y < 0.5 ? -1 : 1;
+              cx += dirX * progress * 90;
+              cy += dirY * progress * 90;
             }
-          }
+
+            renderPixelCube(ctx, cube, cx, cy, pxSize, effectiveSize, cubeAlpha);
+          });
         }
       }
 
-      // 4. Render animated floating square pixel dust
+      // 4. Render hand pixels:
+      // Left hand pixel blocks rise up from the bottom!
+      // Right hand pixel blocks drop down from the top!
+      if (stageRef.current === 'connected') {
+        for (let i = 0; i < pixels.length; i++) {
+          const p = pixels[i];
+          let px = 0;
+          const py = verticalOffset + p.row * pxSize;
+
+          if (p.isLeft) {
+            px = leftStartX + p.col * pxSize;
+          } else {
+            px = rightStartX + (p.col - rightMinCol) * pxSize;
+          }
+
+          ctx.fillRect(px, py, effectiveSize, effectiveSize);
+        }
+      } else if (stageRef.current === 'transitioning' && progress > 0.03) {
+        // Energetic retro growth wave generating multiple square clusters simultaneously across the grid (~1.5s)
+        const growT = Math.min(1, Math.max(0, (progress - 0.03) / 0.88));
+
+        for (let i = 0; i < pixels.length; i++) {
+          const p = pixels[i];
+          let targetX = 0;
+          const targetY = verticalOffset + p.row * pxSize;
+          let dist = 0;
+
+          if (p.isLeft) {
+            targetX = leftStartX + p.col * pxSize;
+            // Radial growth distance from bottom-left corner (wrist origin: col 0, row 47)
+            dist = Math.hypot(p.col, 47 - p.row) / 54;
+          } else {
+            targetX = rightStartX + (p.col - rightMinCol) * pxSize;
+            // Radial growth distance from top-right corner (wrist origin: col 86, row 0)
+            dist = Math.hypot(86 - p.col, p.row) / 50;
+          }
+
+          // Dense stochastic multi-source matrix variation so many pixel squares generate simultaneously in parallel clusters
+          const noise = (Math.sin(p.col * 0.55) * Math.cos(p.row * 0.55) + Math.sin((p.col * 0.3 + p.row * 0.4))) * 0.09;
+          const hash = (((p.col * 41 + p.row * 23) % 29) / 29 - 0.5) * 0.12;
+          const pixelThreshold = Math.max(0, dist * 0.82 + noise + hash);
+
+          // Authentic retro Nokia LCD: pixels are binary discrete grid elements.
+          // Pixels do NOT scale up in size. When the growing wave reaches a grid cell,
+          // the pixel is immediately visible at full 1:1 square matrix block size.
+          if (growT < pixelThreshold) continue;
+
+          // Full-size visible retro pixel block
+          ctx.fillRect(targetX, targetY, effectiveSize, effectiveSize);
+        }
+      }
+
+      // 5. Render LCD Text (Centered exactly in the middle between the two hands):
+      const charWidth = 5;
+      const charGap = 1;
+
+      // Helper to compute centered X position for any text string between the two hands
+      const getCenteredX = (text: string) => {
+        const textCols = text.length * charWidth + (text.length - 1) * charGap;
+        const textPixelWidth = textCols * pxSize;
+        return Math.round(midBetweenHands - textPixelWidth / 2);
+      };
+
+      // Intro: "have an" and "idea?"
+      // Transition: "have an idea?" dissolves -> "lets connect" assembles
+      // Connected: "lets" and "connect" (or "copied!")
+      if (stageRef.current === 'intro') {
+        drawBitmapText(ctx, 'have an', getCenteredX('have an'), textStartY1, pxSize, effectiveSize, 1, 10);
+        drawBitmapText(ctx, 'idea?', getCenteredX('idea?'), textStartY2, pxSize, effectiveSize, 1, 20);
+      } else if (stageRef.current === 'transitioning') {
+        if (progress < 0.22) {
+          const introDissolve = Math.max(0, 1 - progress / 0.16);
+          drawBitmapText(ctx, 'have an', getCenteredX('have an'), textStartY1, pxSize, effectiveSize, introDissolve, 10);
+          drawBitmapText(ctx, 'idea?', getCenteredX('idea?'), textStartY2, pxSize, effectiveSize, introDissolve, 20);
+        }
+
+        if (progress > 0.08) {
+          const connectAssemble = Math.min(1, Math.max(0, (progress - 0.08) / 0.22));
+          const line1 = 'lets';
+          const line2 = copiedRef.current ? 'copied!' : 'connect';
+          drawBitmapText(ctx, line1, getCenteredX(line1), textStartY1, pxSize, effectiveSize, connectAssemble, 30);
+          drawBitmapText(ctx, line2, getCenteredX(line2), textStartY2, pxSize, effectiveSize, connectAssemble, 40);
+        }
+      } else {
+        const line1 = 'lets';
+        const line2 = copiedRef.current ? 'copied!' : 'connect';
+        drawBitmapText(ctx, line1, getCenteredX(line1), textStartY1, pxSize, effectiveSize, 1, 30);
+        drawBitmapText(ctx, line2, getCenteredX(line2), textStartY2, pxSize, effectiveSize, 1, 40);
+      }
+
+      // 6. Render animated floating square pixel dust
       const mouse = mouseRef.current;
       const t = time * 0.0012;
-      ctx.fillStyle = '#161d0e';
 
       particlesRef.current.forEach((pt) => {
         pt.x += pt.vx + Math.sin(t + pt.phase) * 0.0002;
@@ -374,13 +730,12 @@ export const NokiaScreen: React.FC = () => {
           }
         }
 
-        // Strict square pixel block
         const snapX = Math.round(curX / pxSize) * pxSize;
         const snapY = Math.round(curY / pxSize) * pxSize;
         ctx.fillRect(snapX, snapY, effectiveSize, effectiveSize);
       });
 
-      // 5. Matrix subpixel grid overlay
+      // 7. Matrix subpixel grid overlay
       ctx.fillStyle = 'rgba(0, 0, 0, 0.035)';
       for (let x = 0; x < W; x += pxSize) {
         ctx.fillRect(x, 0, 1, H);
@@ -442,7 +797,13 @@ export const NokiaScreen: React.FC = () => {
       onClick={handleScreenClick}
       role="button"
       tabIndex={0}
-      aria-label={copied ? 'Email copied to clipboard' : 'Connect - click to contact sajid al nahian'}
+      aria-label={
+        copied
+          ? 'Email copied to clipboard'
+          : stageRef.current === 'intro'
+            ? 'Nokia screen - have an idea? click to connect'
+            : 'Connect - click to contact sajid al nahian'
+      }
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
