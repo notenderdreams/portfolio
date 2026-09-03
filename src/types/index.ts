@@ -13,6 +13,13 @@ export interface TitleSegment {
   hasSpaceAfter?: boolean;
 }
 
+export interface ProjectPrototypeImage {
+  src: string;
+  alt: string;
+  title?: string;
+  caption?: string;
+}
+
 export interface ProjectItem {
   id: string;
   num: string;
@@ -21,6 +28,10 @@ export interface ProjectItem {
   description: string;
   tags: string[];
   category: string;
+  githubUrl?: string;
+  isPrototype?: boolean;
+  prototypeLabel?: string;
+  prototypeImages?: ProjectPrototypeImage[];
 }
 
 export interface ToolItem {
