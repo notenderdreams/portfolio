@@ -17,19 +17,19 @@ export const projects: ProjectItem[] = [
     prototypeLabel: 'Early Prototype Build',
     prototypeImages: [
       {
-        src: '/images/projects/voidcrate_home.png',
+        src: '/images/projects/voidcrate_home.webp',
         alt: 'VoidCrate Home Dashboard Prototype',
         title: 'Home & Storage Analytics',
         caption: 'Storage overview, duplicate detection, and quick-launch workspaces.',
       },
       {
-        src: '/images/projects/voidcrate_assets.png',
+        src: '/images/projects/voidcrate_assets.webp',
         alt: 'VoidCrate Asset Library Prototype',
         title: 'Asset Library & Cache Engine',
         caption: 'Asset inspection, dependency tracking, and cross-project asset resolution.',
       },
       {
-        src: '/images/projects/voidcrate_projects.png',
+        src: '/images/projects/voidcrate_projects.webp',
         alt: 'VoidCrate Projects Pipeline Prototype',
         title: 'Project Pipeline & Sync',
         caption: 'Multi-project repository synchronization with centralized cache management.',

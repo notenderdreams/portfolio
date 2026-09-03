@@ -34,7 +34,7 @@ export const BackgroundVideo: React.FC = () => {
         loop
         muted
         playsInline
-        poster="/images/landing_poster.jpg"
+        poster="/images/landing_poster.webp"
         preload="auto"
         disablePictureInPicture
         // @ts-expect-error standard webkit / non-standard attribute

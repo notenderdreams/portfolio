@@ -1,0 +1,110 @@
+/* ==========================================================================
+   MINIMALIST LOAD SCREEN (CENTERED LOADING & CARGO PROGRESS BAR)
+   SLIDE-UP REVEAL
+   ========================================================================== */
+
+.simple-loader-screen {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  z-index: 999999;
+  background-color: #050507;
+  color: #e4e4e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
+  transform: translateY(0);
+  will-change: transform;
+  transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.85);
+}
+
+.simple-loader-screen.is-slide-up {
+  transform: translateY(-100%);
+  pointer-events: none;
+}
+
+/* Centered content box */
+.simple-loader-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+/* "loading..." label */
+.simple-loader-label {
+  font-family: 'JetBrains Mono', 'Geist Mono', monospace;
+  font-size: clamp(0.78rem, 1.8vw, 0.88rem);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: #a1a1aa;
+  text-transform: lowercase;
+}
+
+/* Progress bar container */
+.simple-loader-bar {
+  font-family: 'JetBrains Mono', 'Geist Mono', monospace;
+  font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+  white-space: pre;
+  letter-spacing: 0.03em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cargo-progress-track {
+  display: inline-flex;
+  align-items: baseline;
+  white-space: pre;
+  font-feature-settings: 'tnum';
+}
+
+.cargo-bracket-edge {
+  color: #71717a;
+  font-weight: 400;
+}
+
+/* Equal signs in white */
+.cargo-equals {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+/* Arrow in green */
+.cargo-arrow {
+  color: #22c55e;
+  font-weight: 700;
+}
+
+.cargo-spaces {
+  white-space: pre;
+}
+
+/* Footer Reboot Action */
+.editorial-reboot-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted, #787c88);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.68rem;
+  letter-spacing: 0.08em;
+  padding: 0;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  text-transform: lowercase;
+  transition: color 0.2s ease;
+  display: block;
+  text-align: left;
+}
+
+.editorial-reboot-btn:hover {
+  color: #22c55e;
+}

@@ -306,10 +306,10 @@ const PhotoManipulationStack: React.FC<{ isStoryActive?: boolean }> = ({ isStory
       }}
     >
       <span ref={carRef} className="about-inline-photo-card about-inline-photo-card-car">
-        <img src="/images/photo-manipulation-car.jpg" alt="" />
+        <img src="/images/photo-manipulation-car.webp" alt="" />
       </span>
       <span ref={fallingRef} className="about-inline-photo-card about-inline-photo-card-falling">
-        <img src="/images/photo-manipulation-falling.png" alt="" />
+        <img src="/images/photo-manipulation-falling.webp" alt="" />
       </span>
     </span>
   );
@@ -331,10 +331,10 @@ const RelightingCube: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive =
 const ResolveColorWheels: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActive = false }) => (
   <span className={`about-resolve-clip-stack${isStoryActive ? ' is-story-active' : ''}`} role="img" aria-label="Three colour grading wheels with video and audio timeline clips">
     <span className="about-resolve-clip about-resolve-video-clip" aria-hidden="true">
-      <img src="/images/resolve-video-clip.png" alt="" />
+      <img src="/images/resolve-video-clip.webp" alt="" />
     </span>
     <span className="about-resolve-clip about-resolve-video-clip-alt" aria-hidden="true">
-      <img src="/images/resolve-video-clip-alt.png" alt="" />
+      <img src="/images/resolve-video-clip-alt.webp" alt="" />
     </span>
     <span className="about-resolve-wheels" aria-hidden="true">
       <span className="about-resolve-wheel about-resolve-wheel-shadow" />
@@ -342,7 +342,7 @@ const ResolveColorWheels: React.FC<{ isStoryActive?: boolean }> = ({ isStoryActi
       <span className="about-resolve-wheel about-resolve-wheel-highlight" />
     </span>
     <span className="about-resolve-clip about-resolve-audio-clip" aria-hidden="true">
-      <img src="/images/resolve-audio-clip.png" alt="" />
+      <img src="/images/resolve-audio-clip.webp" alt="" />
     </span>
   </span>
 );

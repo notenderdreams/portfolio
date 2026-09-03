@@ -469,7 +469,7 @@ export const NokiaScreen: React.FC = () => {
 
     // Load base artwork and sample dark pixels into discrete 1-bit grid cells
     const img = new Image();
-    img.src = '/images/nokia-connecting-screen.jpg';
+    img.src = '/images/nokia-connecting-screen.webp';
 
     img.onload = () => {
       const offscreen = document.createElement('canvas');

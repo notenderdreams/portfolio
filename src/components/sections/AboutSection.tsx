@@ -65,7 +65,7 @@ export const AboutSection: React.FC = () => {
           <figure className="about-portrait-col">
             <div className="about-portrait-frame">
               <img
-                src="/images/nahian.jpg"
+                src="/images/nahian.webp"
                 alt="Sajid Al Nahian"
                 className="about-portrait-img"
                 loading="lazy"

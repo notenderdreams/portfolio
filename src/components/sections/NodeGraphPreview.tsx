@@ -310,7 +310,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             onPointerDown={(e) => handlePointerDown('gaea', e)}
             onDragStart={(e) => e.preventDefault()}
           >
-            <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
+            <image href="/images/node-graph.webp" width="1698" height="652" pointerEvents="none" />
             <rect x="22" y="318" width="548" height="307" fill="transparent" pointerEvents="all" />
           </g>
         );
@@ -327,7 +327,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             onPointerDown={(e) => handlePointerDown('principled', e)}
             onDragStart={(e) => e.preventDefault()}
           >
-            <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
+            <image href="/images/node-graph.webp" width="1698" height="652" pointerEvents="none" />
             <rect x="650" y="138" width="365" height="478" fill="transparent" pointerEvents="all" />
           </g>
         );
@@ -344,7 +344,7 @@ export const NodeGraphPreview: React.FC<NodeGraphPreviewProps> = ({ embedded = f
             onPointerDown={(e) => handlePointerDown('davinci', e)}
             onDragStart={(e) => e.preventDefault()}
           >
-            <image href="/images/node-graph.png" width="1698" height="652" pointerEvents="none" />
+            <image href="/images/node-graph.webp" width="1698" height="652" pointerEvents="none" />
             <rect x="1228" y="32" width="430" height="98" fill="transparent" pointerEvents="all" />
           </g>
         );
