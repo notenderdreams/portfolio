@@ -60,63 +60,7 @@ body {
   min-height: 100vh;
 }
 
-/* Custom Contextual Cursor Labels */
-@media (hover: hover) and (pointer: fine) {
-  body.has-cursor-label,
-  body.has-cursor-label * {
-    cursor: none !important;
-  }
-}
 
-.follow-cursor-desktop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #ffffff;
-  mix-blend-mode: difference;
-  pointer-events: none;
-  z-index: 10000;
-  opacity: 0;
-  white-space: nowrap;
-  user-select: none;
-  transition: opacity 0.22s ease;
-  will-change: transform, opacity;
-}
-
-.follow-cursor-desktop.is-visible {
-  opacity: 1;
-}
-
-.follow-cursor-desktop .cursor-bracket {
-  color: #ffffff;
-  opacity: 1;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.follow-cursor-desktop .cursor-bracket:first-child {
-  margin-right: 3px;
-}
-
-.follow-cursor-desktop .cursor-bracket:last-child {
-  margin-left: 3px;
-}
-
-.follow-cursor-desktop.is-down .cursor-bracket:first-child {
-  transform: translateX(1px);
-}
-
-.follow-cursor-desktop.is-down .cursor-bracket:last-child {
-  transform: translateX(-1px);
-}
 
 ::selection {
   background: var(--ink);
@@ -2569,24 +2513,11 @@ main {
 
 /* Contact Block */
 .contact-block {
-  padding: 4rem 0 6rem;
+  padding: 4rem 0 2rem;
 }
 
-.contact-email {
-  font-family: var(--font-serif);
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  font-weight: 300;
-  color: var(--ink);
-  display: inline-block;
-  margin-bottom: 2rem;
-  transition: transform 0.35s var(--ease-out-expo), color 0.35s ease, text-shadow 0.35s ease;
-}
-
-.contact-email:hover {
-  opacity: 1;
-  transform: translateX(4px);
-  color: #ffffff;
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.35);
+.contact-block .section-label {
+  margin-bottom: 1.25rem;
 }
 
 .contact-links {
@@ -2606,6 +2537,174 @@ main {
 .contact-links a:hover {
   color: var(--ink);
   transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   Retro Nokia LCD Screen Component (Full Width, No Outer Shell, Deep Inset Shadow)
+   ========================================================================== */
+
+.contact-section {
+  position: relative;
+  width: 100%;
+  overflow-x: clip;
+}
+
+.contact-nokia-wrap {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+  padding: 0 clamp(0.8rem, 2.5vw, 2.5rem);
+  box-sizing: border-box;
+}
+
+.nokia-screen-display {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 24 / 9;
+  min-height: clamp(15rem, 30vw, 26rem);
+  border-radius: clamp(1rem, 2.5vw, 1.8rem);
+  overflow: hidden;
+  background-color: #8ba346;
+  border: 1px solid rgba(0, 0, 0, 0.45);
+  box-shadow:
+    inset 0 8px 26px rgba(0, 0, 0, 0.78),
+    inset 0 2px 6px rgba(0, 0, 0, 0.95),
+    inset 0 -4px 14px rgba(0, 0, 0, 0.45),
+    inset 4px 0 10px rgba(0, 0, 0, 0.35),
+    inset -4px 0 10px rgba(0, 0, 0, 0.35);
+  user-select: none;
+  cursor: pointer;
+  outline: none;
+  transition: filter 0.3s ease;
+}
+
+.nokia-screen-display:hover {
+  filter: brightness(1.02);
+}
+
+.nokia-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  filter: contrast(1.08) saturate(1.04);
+}
+
+/* Authentic Nokia LCD Status Bar (Top) */
+.nokia-status-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(0.55rem, 1.4vw, 1rem) clamp(0.9rem, 2.5vw, 2rem);
+  pointer-events: none;
+}
+
+.nokia-signal-meter {
+  display: flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 0.85rem;
+}
+
+.nokia-bar {
+  display: block;
+  width: 3px;
+  background: #161d0e;
+}
+.nokia-bar.bar-1 { height: 35%; }
+.nokia-bar.bar-2 { height: 55%; }
+.nokia-bar.bar-3 { height: 75%; }
+.nokia-bar.bar-4 { height: 100%; }
+
+.nokia-carrier {
+  margin-left: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: clamp(0.58rem, 1.1vw, 0.78rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #161d0e;
+  line-height: 1;
+}
+
+.nokia-battery-meter {
+  display: flex;
+  align-items: center;
+}
+
+.nokia-battery-body {
+  display: flex;
+  align-items: center;
+  gap: 1.5px;
+  padding: 1.5px;
+  border: 1.5px solid #161d0e;
+  border-radius: 1.5px;
+  height: 0.72rem;
+}
+
+.nokia-bat-fill {
+  display: block;
+  width: 3px;
+  height: 100%;
+  background: #161d0e;
+}
+
+.nokia-battery-tip {
+  display: block;
+  width: 2px;
+  height: 4px;
+  background: #161d0e;
+  border-radius: 0 1px 1px 0;
+}
+
+/* Authentic CRT / LCD Horizontal Matrix Scanlines */
+.nokia-screen-scanlines {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.08) 0px,
+    rgba(0, 0, 0, 0.08) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  opacity: 0.72;
+  mix-blend-mode: multiply;
+}
+
+/* Subtle Glass Glare Reflection */
+.nokia-screen-glare {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 26%,
+    transparent 50%
+  );
+  border-radius: inherit;
+}
+
+.site-footer-wrap {
+  width: 100%;
+  position: relative;
+  z-index: 10;
+  background-color: #050507;
 }
 
 .site-footer {
@@ -3099,12 +3198,7 @@ main {
     margin: 0.3rem 0;
   }
   .contact-block {
-    padding: 2.5rem 0 3.5rem;
-  }
-  .contact-email {
-    font-size: clamp(1.4rem, 6.5vw, 2.2rem);
-    word-break: break-word;
-    margin-bottom: 1.5rem;
+    padding: 2rem 0 1rem;
   }
   .contact-links {
     flex-wrap: wrap;

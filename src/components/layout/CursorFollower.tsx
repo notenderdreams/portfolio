@@ -28,9 +28,10 @@ export const CursorFollower: React.FC = () => {
     let isMouseDown = false;
 
     const animateCursor = () => {
-      cursorX += (targetX - cursorX) * 0.55;
-      cursorY += (targetY - cursorY) * 0.55;
-      follower.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) translate(-50%, -50%)`;
+      cursorX += (targetX - cursorX) * 0.65;
+      cursorY += (targetY - cursorY) * 0.65;
+      const downOffset = isMouseDown ? 1 : 0;
+      follower.style.transform = `translate3d(${(cursorX + downOffset).toFixed(1)}px, ${(cursorY + downOffset).toFixed(1)}px, 0)`;
       animationFrame = window.requestAnimationFrame(animateCursor);
     };
 
@@ -141,9 +142,15 @@ export const CursorFollower: React.FC = () => {
       className={`follow-cursor-desktop${currentAction ? ' is-visible' : ''}`}
       aria-hidden="true"
     >
-      <span className="cursor-bracket">(</span>
-      <span className="cursor-text">{currentAction || ''}</span>
-      <span className="cursor-bracket">)</span>
+      <svg className="cursor-pixel-arrow" width="16" height="16" viewBox="0 0 16 16" shapeRendering="crispEdges">
+        <path fill="#000" d="M0 0h1v1h-1zM0 1h2v1h-2zM0 2h1v1h-1zM2 2h1v1h-1zM0 3h1v1h-1zM4 3h1v1h-1zM0 4h1v1h-1zM6 4h1v1h-1zM0 5h1v1h-1zM8 5h1v1h-1zM0 6h1v1h-1zM10 6h1v1h-1zM0 7h1v1h-1zM12 7h1v1h-1zM0 8h1v1h-1zM14 8h1v1h-1zM0 9h1v1h-1zM7 9h6v1h-6zM0 10h1v1h-1zM4 10h1v1h-1zM8 10h1v1h-1zM0 11h1v1h-1zM3 11h1v1h-1zM5 11h1v1h-1zM9 11h1v1h-1zM0 12h1v1h-1zM2 12h1v1h-1zM6 12h1v1h-1zM10 12h1v1h-1zM0 13h2v1h-2zM7 13h1v1h-1zM11 13h1v1h-1zM0 14h1v1h-1zM8 14h4v1h-4z" />
+        <path fill="#fff" d="M1 2h1v1h-1zM1 3h3v1h-3zM1 4h5v1h-5zM1 5h7v1h-7zM1 6h9v1h-9zM1 7h11v1h-11zM1 8h13v1h-13zM1 9h6v1h-6zM1 10h3v1h-3zM5 10h3v1h-3zM1 11h2v1h-2zM6 11h3v1h-3zM1 12h1v1h-1zM7 12h3v1h-3zM8 13h3v1h-3z" />
+      </svg>
+      <div className="cursor-pixel-badge">
+        <span className="cursor-bracket">[</span>
+        <span className="cursor-text">{currentAction || ''}</span>
+        <span className="cursor-bracket">]</span>
+      </div>
     </div>
   );
 };
