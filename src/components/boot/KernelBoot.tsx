@@ -33,10 +33,19 @@ const TRACK_CHARS = 26;
 const EQUALS_STRING = '='.repeat(TRACK_CHARS + 2);
 
 export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) => {
+  const [isFinished, setIsFinished] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
   const equalsRef = useRef<HTMLDivElement>(null);
   const arrowRef = useRef<HTMLSpanElement>(null);
+
+  const onRevealRef = useRef(onReveal);
+  const onCompleteRef = useRef(onComplete);
+
+  useEffect(() => {
+    onRevealRef.current = onReveal;
+    onCompleteRef.current = onComplete;
+  });
 
   // Lock body scroll while loader is active
   useEffect(() => {
@@ -46,7 +55,7 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
     };
   }, []);
 
-  // Perfectly smooth, zero-lag, constant-velocity progression
+  // Run progress once on mount - never restarts on parent re-renders
   useEffect(() => {
     let isCancelled = false;
     const equalsEl = equalsRef.current;
@@ -74,7 +83,7 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
     arrowEl.style.transform = 'translate3d(0ch, 0, 0)';
     arrowEl.style.opacity = '1';
 
-    // Linear ease ('none'): moves immediately from millisecond 0 with constant steady speed
+    // Linear progress tween
     const tween = gsap.to(progressObj, {
       value: 1,
       duration: 1.85,
@@ -88,7 +97,6 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
           arrowEl.style.transform = `translate3d(${TRACK_CHARS - 1}ch, 0, 0)`;
           arrowEl.style.opacity = '0';
         } else {
-          // Continuous sub-pixel advance in lockstep
           equalsEl.style.width = `${p * (TRACK_CHARS - 1)}ch`;
           arrowEl.style.transform = `translate3d(${p * (TRACK_CHARS - 1)}ch, 0, 0)`;
           arrowEl.style.opacity = '1';
@@ -97,19 +105,22 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
       onComplete: () => {
         if (isCancelled) return;
 
-        // Clean pause on full bar before the cover slides up
+        // 1. Switch from progress bar to Cargo "Finished" line
+        setIsFinished(true);
+
+        // 2. Hold on "Finished" line for 520ms so user clearly sees the Cargo result
         setTimeout(() => {
           if (isCancelled) return;
           setIsExiting(true);
           document.body.style.overflow = '';
-          onReveal?.();
+          onRevealRef.current?.();
 
-          // Wait for the 0.85s slide-up animation to complete before unmounting
+          // 3. Wait for 0.85s slide-up animation to finish before unmounting
           setTimeout(() => {
             if (isCancelled) return;
-            onComplete();
+            onCompleteRef.current?.();
           }, 850);
-        }, 180);
+        }, 520);
       },
     });
 
@@ -117,28 +128,35 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
       isCancelled = true;
       tween.kill();
     };
-  }, [onReveal, onComplete]);
+  }, []);
 
   return (
     <aside
       className={`simple-loader-screen${isExiting ? ' is-exiting' : ''}`}
       aria-label="Loading portfolio"
     >
-      <div className="simple-loader-row">
-        <span className="simple-loader-label">loading</span>
-        <span className="cargo-bar-container">
-          <span className="cargo-bracket-edge">[</span>
-          <span className="cargo-track">
-            <span ref={equalsRef} className="cargo-equals-stream" aria-hidden="true">
-              {EQUALS_STRING}
+      {isFinished ? (
+        <div className="cargo-finished-line">
+          <span className="cargo-finished-tag">Finished</span>
+          <span className="cargo-finished-details">`notenderdreams` portfolio [optimized] in 1.85s</span>
+        </div>
+      ) : (
+        <div className="simple-loader-row">
+          <span className="simple-loader-label">loading</span>
+          <span className="cargo-bar-container">
+            <span className="cargo-bracket-edge">[</span>
+            <span className="cargo-track">
+              <span ref={equalsRef} className="cargo-equals-stream" aria-hidden="true">
+                {EQUALS_STRING}
+              </span>
+              <span ref={arrowRef} className="cargo-arrow-glide" aria-hidden="true">
+                &gt;
+              </span>
             </span>
-            <span ref={arrowRef} className="cargo-arrow-glide" aria-hidden="true">
-              &gt;
-            </span>
+            <span className="cargo-bracket-edge">]</span>
           </span>
-          <span className="cargo-bracket-edge">]</span>
-        </span>
-      </div>
+        </div>
+      )}
     </aside>
   );
 };

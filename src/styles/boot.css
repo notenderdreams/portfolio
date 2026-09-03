@@ -46,6 +46,32 @@
   line-height: 1;
 }
 
+/* Cargo Finished State (Replaces progress bar upon completion) */
+.cargo-finished-line {
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: clamp(0.82rem, 1.8vw, 0.95rem);
+  line-height: 1;
+  white-space: pre;
+  text-align: center;
+  user-select: none;
+}
+
+.cargo-finished-tag {
+  color: #22c55e;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.cargo-finished-details {
+  color: #e4e4e7;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
 /* "loading" label */
 .simple-loader-label {
   font-family: 'JetBrains Mono', 'Geist Mono', monospace;

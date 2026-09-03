@@ -41,13 +41,21 @@ export const App: React.FC = () => {
     return () => window.removeEventListener('rebootKernel', handleReboot);
   }, []);
 
+  const handleReveal = React.useCallback(() => {
+    setIsLandingActive(true);
+  }, []);
+
+  const handleComplete = React.useCallback(() => {
+    setIsBooted(true);
+  }, []);
+
   return (
     <>
       {/* Low-Level Kernel Boot Animation & Runtime Asset Preloader */}
       {!isBooted && (
         <KernelBoot
-          onReveal={() => setIsLandingActive(true)}
-          onComplete={() => setIsBooted(true)}
+          onReveal={handleReveal}
+          onComplete={handleComplete}
         />
       )}
 
