@@ -9,7 +9,9 @@ export const siteMetadata = {
   university: 'Islamic University of Technology',
   degree: 'B.Sc. in Computer Science and Engineering',
   term: 'Year 2, Semester 2',
-  email: 'sajidalnahian@gmail.com',
+  email: 'san.mugdho@gmail.com',
+  secondaryEmail: 'mugdho@iut-dhaka.edu',
+  emails: ['san.mugdho@gmail.com', 'mugdho@iut-dhaka.edu'],
 };
 
 export const navLinks: NavLink[] = [
@@ -20,15 +22,15 @@ export const navLinks: NavLink[] = [
 ];
 
 export const socialLinks: SocialLink[] = [
-  { label: 'github', href: 'https://github.com/sajidalnahian', isExternal: true },
-  { label: 'twitter', href: 'https://x.com', isExternal: true },
-  { label: 'facebook', href: 'https://facebook.com', isExternal: true },
-  { label: 'instagram', href: 'https://instagram.com', isExternal: true },
+  { label: 'twitter', href: 'https://x.com/notenderdreams', isExternal: true },
+  { label: 'facebook', href: 'https://www.facebook.com/enderdreams', isExternal: true },
+  { label: 'instagram', href: 'https://www.instagram.com/enderdreams.dll/', isExternal: true },
+  { label: 'reddit', href: 'https://www.reddit.com/user/notenderdreams/', isExternal: true },
 ];
 
 export const competitiveLinks: SocialLink[] = [
-  { label: 'codeforces', href: 'https://codeforces.com', isExternal: true },
-  { label: 'leetcode', href: 'https://leetcode.com', isExternal: true },
-  { label: 'codechef', href: 'https://www.codechef.com', isExternal: true },
-  { label: 'kaggle', href: 'https://www.kaggle.com', isExternal: true },
+  { label: 'github', href: 'https://github.com/notenderdreams/', isExternal: true },
+  { label: 'codeforces', href: 'https://codeforces.com/profile/enderdreams', isExternal: true },
+  { label: 'leetcode', href: 'https://leetcode.com/u/notenderdreams/', isExternal: true },
+  { label: 'kaggle', href: 'https://www.kaggle.com/miscspace', isExternal: true },
 ];

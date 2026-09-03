@@ -6,7 +6,7 @@ import { HeroProse } from './HeroProse';
 
 export const LandingScreen: React.FC = () => {
   return (
-    <div className="landing-screen">
+    <div id="home" className="landing-screen">
       {/* Background Animated Video Layer */}
       <BackgroundVideo />
 
