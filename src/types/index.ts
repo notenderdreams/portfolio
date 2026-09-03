@@ -8,10 +8,16 @@ export interface ThoughtAnnotation {
   isSmall?: boolean;
 }
 
+export interface TitleSegment {
+  text: string;
+  hasSpaceAfter?: boolean;
+}
+
 export interface ProjectItem {
   id: string;
   num: string;
   title: string;
+  titleSegments?: TitleSegment[];
   description: string;
   tags: string[];
   category: string;

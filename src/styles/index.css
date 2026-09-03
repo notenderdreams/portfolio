@@ -1254,9 +1254,10 @@ a:hover {
 /* Description - Hidden when unselected, blur-fade in when selected */
 .work-title-group p {
   font-size: 0.78rem;
+  font-weight: 500;
   color: #2b2d35;
   line-height: 1.7;
-  max-width: 26rem;
+  max-width: 30rem;
   visibility: hidden;
   opacity: 0;
   filter: blur(12px);
@@ -1272,6 +1273,8 @@ a:hover {
 .work-item.is-selected .work-title-group p {
   visibility: visible;
   opacity: 1;
+  color: #2b2d35;
+  font-weight: 500;
   filter: blur(0px);
   transform: translateY(0);
   pointer-events: auto;

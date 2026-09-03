@@ -18,7 +18,16 @@ export const WorkItem = forwardRef<HTMLElement, WorkItemProps>(
       >
         <div className="work-title-group">
           <h3>
-            {project.title.split(' ').map((word, wIndex, arr) => {
+            {(project.titleSegments
+              ? project.titleSegments.map((seg, sIdx, sArr) => ({
+                  word: seg.text,
+                  hasSpace: seg.hasSpaceAfter ?? sIdx < sArr.length - 1,
+                }))
+              : project.title.split(' ').map((w, wIdx, wArr) => ({
+                  word: w,
+                  hasSpace: wIdx < wArr.length - 1,
+                }))
+            ).map((item, wIndex) => {
               const isOdd = wIndex % 2 !== 0;
               const directionClass = isOdd ? 'roll-dir-down' : 'roll-dir-up';
 
@@ -29,17 +38,17 @@ export const WorkItem = forwardRef<HTMLElement, WorkItemProps>(
                       className="roll-line roll-line-1"
                       style={{ transitionDelay: `${wIndex * 0.08}s` }}
                     >
-                      {word}
+                      {item.word}
                     </span>
                     <span
                       className="roll-line roll-line-2"
                       aria-hidden="true"
                       style={{ transitionDelay: `${wIndex * 0.08}s` }}
                     >
-                      {word}
+                      {item.word}
                     </span>
                   </span>
-                  {wIndex < arr.length - 1 && ' '}
+                  {item.hasSpace && ' '}
                 </span>
               );
             })}
