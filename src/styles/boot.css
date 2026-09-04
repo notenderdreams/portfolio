@@ -146,23 +146,3 @@
   pointer-events: none;
 }
 
-/* Footer Reboot Action */
-.editorial-reboot-btn {
-  background: transparent;
-  border: none;
-  color: var(--muted, #787c88);
-  font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
-  letter-spacing: 0.08em;
-  padding: 0;
-  margin-top: 0.4rem;
-  cursor: pointer;
-  text-transform: lowercase;
-  transition: color 0.2s ease;
-  display: block;
-  text-align: left;
-}
-
-.editorial-reboot-btn:hover {
-  color: #22c55e;
-}

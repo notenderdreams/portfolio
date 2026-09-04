@@ -68,17 +68,6 @@ export const Footer: React.FC = () => {
               <div className="editorial-meta-line editorial-copyright">
                 NOTENDERDREAMS &copy; {new Date().getFullYear()}
               </div>
-              <button
-                type="button"
-                className="editorial-reboot-btn"
-                onClick={() => {
-                  window.scrollTo({ top: 0, behavior: 'instant' });
-                  window.dispatchEvent(new CustomEvent('rebootKernel'));
-                }}
-                title="Restart kernel boot sequence"
-              >
-                [reboot kernel]
-              </button>
             </div>
           </div>
 
