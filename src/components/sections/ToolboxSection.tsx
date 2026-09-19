@@ -88,7 +88,7 @@ export const ToolboxSection: React.FC = () => {
         }
       }
 
-      // 3. Core Dependencies Block (Heading + Table Wrap + Staggered Rows)
+      // 3. Core Dependencies Block (Heading + Table Frame + Silky Smooth Row-by-Row Cascade)
       const depsHeading = section.querySelector('.toolbox-subheading-dependencies');
       const depsWrap = section.querySelector('.tools-markdown-table-wrap');
       const depRows = section.querySelectorAll('.markdown-table-row');
@@ -97,7 +97,7 @@ export const ToolboxSection: React.FC = () => {
         const depsTl = gsap.timeline({
           scrollTrigger: {
             trigger: depsWrap,
-            start: 'top 86%',
+            start: 'top 84%',
             end: 'bottom 12%',
             toggleActions: 'play reverse play reverse',
           },
@@ -106,32 +106,48 @@ export const ToolboxSection: React.FC = () => {
         if (depsHeading) {
           depsTl.fromTo(
             depsHeading,
-            { autoAlpha: 0, y: 12, filter: 'blur(8px)' },
-            { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.8, ease: 'power2.out' },
+            { autoAlpha: 0, y: 14, filter: 'blur(6px)' },
+            {
+              autoAlpha: 1,
+              y: 0,
+              filter: 'blur(0px)',
+              duration: 0.8,
+              ease: 'power3.out',
+              clearProps: 'filter',
+            },
             0
           );
         }
 
         depsTl.fromTo(
           depsWrap,
-          { autoAlpha: 0, y: 16, filter: 'blur(10px)' },
-          { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.9, ease: 'power2.out' },
+          { borderColor: 'rgba(255, 255, 255, 0)' },
+          {
+            borderColor: 'rgba(255, 255, 255, 0.14)',
+            duration: 0.8,
+            ease: 'power3.out',
+          },
           0.04
         );
 
         if (depRows.length > 0) {
           depsTl.fromTo(
             depRows,
-            { autoAlpha: 0, y: 14, filter: 'blur(8px)' },
+            {
+              autoAlpha: 0,
+              y: 26,
+              filter: 'blur(6px)',
+            },
             {
               autoAlpha: 1,
               y: 0,
               filter: 'blur(0px)',
               duration: 0.85,
-              stagger: 0.07,
-              ease: 'power2.out',
+              stagger: 0.14,
+              ease: 'power3.out',
+              clearProps: 'filter',
             },
-            0.12
+            0.1
           );
         }
       }

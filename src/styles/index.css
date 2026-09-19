@@ -2763,13 +2763,20 @@ main {
 
 .tools-markdown-table {
   width: 100%;
-  border-collapse: collapse;
+  display: block;
   font-family: var(--font-mono);
   font-size: 0.86rem;
   line-height: 1.6;
 }
 
+.tools-markdown-table tbody {
+  display: block;
+  width: 100%;
+}
+
 .markdown-table-row {
+  display: flex;
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   will-change: transform, filter, opacity;
   transition: background-color 0.45s var(--ease-smooth);
@@ -2788,6 +2795,8 @@ main {
   padding: 1.15rem 1.6rem;
   border-right: 1px solid rgba(255, 255, 255, 0.1);
   width: 270px;
+  flex-shrink: 0;
+  box-sizing: border-box;
 }
 
 .section-title {
@@ -2807,6 +2816,8 @@ main {
 .markdown-table-tools {
   vertical-align: top;
   padding: 1.15rem 1.6rem;
+  flex: 1;
+  box-sizing: border-box;
 }
 
 /* Vertically Stacked Items with Icons - Crisp, Bright, and Clear */
