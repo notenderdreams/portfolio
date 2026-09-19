@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 import { FilmGrain } from './components/layout/FilmGrain';
 import { CursorFollower } from './components/layout/CursorFollower';
 import { KernelBoot } from './components/boot/KernelBoot';
@@ -59,6 +61,10 @@ export const App: React.FC = () => {
       {/* Film Grain Layer */}
       <FilmGrain />
       <CursorFollower />
+
+      {/* Vercel Insights & Analytics for real-time view counts and performance telemetry */}
+      <Analytics />
+      <SpeedInsights />
 
       {/* Landing Screen with Animated Video Background */}
       <LandingScreen isActive={isLandingActive} />
