@@ -33,6 +33,7 @@ export const Footer: React.FC = () => {
   return (
     <footer
       ref={footerRef}
+      id="footer"
       className="editorial-footer-section"
       aria-label="Archive and Directory"
     >

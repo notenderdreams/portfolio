@@ -3,18 +3,15 @@ import { FilmGrain } from './components/layout/FilmGrain';
 import { CursorFollower } from './components/layout/CursorFollower';
 import { KernelBoot } from './components/boot/KernelBoot';
 import { LandingScreen } from './components/hero/LandingScreen';
-import { SelectedWorks } from './components/sections/SelectedWorks';
-import { AboutSection } from './components/sections/AboutSection';
-import { OriginSection } from './components/sections/OriginSection';
-import { ToolboxSection } from './components/sections/ToolboxSection';
-import { ContactSection } from './components/sections/ContactSection';
-import { Footer } from './components/layout/Footer';
 import { useScrollReveal } from './hooks/useScrollReveal';
+import { useSectionLoader, SECTION_SPECS } from './hooks/useSectionLoader';
+import { SectionSlot } from './components/common/SectionSlot';
 
 export const App: React.FC = () => {
   const [isBooted, setIsBooted] = useState(false);
   const [isLandingActive, setIsLandingActive] = useState(false);
   useScrollReveal('.scroll-reveal');
+  const { loadedMap, prioritizeUpTo } = useSectionLoader(true);
 
   useEffect(() => {
     // Reset scroll to top on refresh/load so bootloader always starts at the home stage
@@ -66,14 +63,22 @@ export const App: React.FC = () => {
       {/* Landing Screen with Animated Video Background */}
       <LandingScreen isActive={isLandingActive} />
 
-      {/* Main Sections */}
+      {/* Main Sections (Loaded progressively section-by-section) */}
       <main>
-        <AboutSection />
-        <OriginSection />
-        <SelectedWorks />
-        <ToolboxSection />
-        <ContactSection />
-        <Footer />
+        {SECTION_SPECS.map((spec) => {
+          const LoadedComponent = loadedMap[spec.id];
+          if (LoadedComponent) {
+            return <LoadedComponent key={spec.id} />;
+          }
+          return (
+            <SectionSlot
+              key={spec.id}
+              id={spec.id}
+              minHeight={spec.minHeight}
+              onNearViewport={() => prioritizeUpTo(spec.id)}
+            />
+          );
+        })}
       </main>
     </>
   );

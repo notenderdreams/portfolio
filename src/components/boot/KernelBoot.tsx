@@ -12,20 +12,7 @@ interface PreloadItem {
 }
 
 const ASSETS_TO_PRELOAD: PreloadItem[] = [
-  { path: '/images/viewer.webp' },
-  { path: '/images/pro-pic.webp' },
-  { path: '/images/nahian.webp' },
-  { path: '/images/gatekeeper-midi.webp' },
-  { path: '/images/sign-bangla.webp' },
-  { path: '/images/node-graph.webp' },
-  { path: '/images/esp-mugdho.webp' },
   { path: '/images/landing_poster.webp' },
-  { path: '/images/photo-manipulation-falling.webp' },
-  { path: '/images/photo-manipulation-car.webp' },
-  { path: '/images/nokia-connecting-screen.webp' },
-  { path: '/images/projects/voidcrate_home.webp' },
-  { path: '/images/projects/voidcrate_assets.webp' },
-  { path: '/images/projects/voidcrate_projects.webp' },
   { path: '/video/landing_bg.webm' },
 ];
 
