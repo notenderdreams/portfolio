@@ -35,6 +35,131 @@
   pointer-events: none !important;
 }
 
+/* Centered container holding the ASCII art and status row */
+.simple-loader-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.2rem, 3vh, 1.85rem);
+  text-align: center;
+  max-width: 95vw;
+  box-sizing: border-box;
+}
+
+/* Container holding the stacked cross-fading ASCII art layers */
+.loader-ascii-wrapper {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* Shared typography and text-clipping for ASCII art layers */
+.loader-ascii-art {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  font-family: 'JetBrains Mono', 'Geist Mono', monospace;
+  font-size: clamp(0.42rem, 1.35vw, 0.76rem);
+  line-height: 1.15;
+  letter-spacing: 0;
+  font-variant-ligatures: none;
+  -webkit-font-variant-ligatures: none;
+  font-feature-settings: 'liga' 0, 'calt' 0;
+  white-space: pre;
+  text-align: left;
+  user-select: none;
+  pointer-events: none;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+/* Layer 1: Specular White Chrome (Active during boot loading) */
+.loader-ascii-chrome {
+  position: relative;
+  color: #ffffff;
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.28) 0%,
+    rgba(255, 255, 255, 0.28) 38%,
+    rgba(255, 255, 255, 0.62) 46%,
+    #ffffff 50%,
+    rgba(255, 255, 255, 0.62) 54%,
+    rgba(255, 255, 255, 0.28) 62%,
+    rgba(255, 255, 255, 0.28) 100%
+  );
+  background-size: 300% 100%;
+  animation:
+    ascii-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) both,
+    ascii-specular-sweep 3.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  will-change: background-position, opacity;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  opacity: 1;
+}
+
+.loader-ascii-chrome.is-dimmed {
+  opacity: 0;
+}
+
+/* Layer 2: Colorful Purple-and-Red Completed State (Smoothly crossfades in) */
+.loader-ascii-colorful {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  color: #f43f5e;
+  background-image: linear-gradient(
+    115deg,
+    #8b5cf6 0%,
+    #c084fc 22%,
+    #ec4899 48%,
+    #f43f5e 74%,
+    #ff2a55 100%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: ascii-completed-flow 2s ease-in-out infinite alternate;
+  will-change: opacity, background-position;
+}
+
+.loader-ascii-colorful.is-active {
+  opacity: 1;
+}
+
+@keyframes ascii-enter {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 4px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes ascii-specular-sweep {
+  0% {
+    background-position: 92% 0;
+  }
+  100% {
+    background-position: 8% 0;
+  }
+}
+
+@keyframes ascii-completed-flow {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
+}
+
+
 /* Centered single line row */
 .simple-loader-row {
   display: inline-flex;

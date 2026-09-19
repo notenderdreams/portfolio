@@ -19,6 +19,18 @@ const ASSETS_TO_PRELOAD: PreloadItem[] = [
 const TRACK_CHARS = 26;
 const EQUALS_STRING = '='.repeat(TRACK_CHARS + 2);
 
+const ASCII_ART = [
+  '                __                 __         ',
+  '   ____  ____  / /____  ____  ____/ /__  _____',
+  '  / __ \\/ __ \\/ __/ _ \\/ __ \\/ __  / _ \\/ ___/',
+  ' / / / / /_/ / /_/  __/ / / / /_/ /  __/ /    ',
+  '/_/ /_/\\____/\\__/\\___/_/ /_/\\__,_/\\___/_/     ',
+  '  ____/ /_______  ____ _____ ___  _____       ',
+  ' / __  / ___/ _ \\/ __ `/ __ `__ \\/ ___/       ',
+  '/ /_/ / /  /  __/ /_/ / / / / / (__  )        ',
+  '\\__,_/_/   \\___/\\__,_/_/ /_/ /_/____/',
+].join('\n');
+
 export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) => {
   const [isFinished, setIsFinished] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -122,28 +134,44 @@ export const KernelBoot: React.FC<KernelBootProps> = ({ onReveal, onComplete }) 
       className={`simple-loader-screen${isExiting ? ' is-exiting' : ''}`}
       aria-label="Loading portfolio"
     >
-      {isFinished ? (
-        <div className="cargo-finished-line">
-          <span className="cargo-finished-tag">Finished</span>
-          <span className="cargo-finished-details">`notenderdreams` portfolio [optimized] in 1.85s</span>
+      <div className="simple-loader-content">
+        <div className="loader-ascii-wrapper">
+          <pre
+            className={`loader-ascii-art loader-ascii-chrome${isFinished ? ' is-dimmed' : ''}`}
+            aria-hidden="true"
+          >
+            {ASCII_ART}
+          </pre>
+          <pre
+            className={`loader-ascii-art loader-ascii-colorful${isFinished ? ' is-active' : ''}`}
+            aria-hidden="true"
+          >
+            {ASCII_ART}
+          </pre>
         </div>
-      ) : (
-        <div className="simple-loader-row">
-          <span className="simple-loader-label">loading</span>
-          <span className="cargo-bar-container">
-            <span className="cargo-bracket-edge">[</span>
-            <span className="cargo-track">
-              <span ref={equalsRef} className="cargo-equals-stream" aria-hidden="true">
-                {EQUALS_STRING}
+        {isFinished ? (
+          <div className="cargo-finished-line">
+            <span className="cargo-finished-tag">Finished</span>
+            <span className="cargo-finished-details">`notenderdreams` portfolio [optimized] in 1.85s</span>
+          </div>
+        ) : (
+          <div className="simple-loader-row">
+            <span className="simple-loader-label">loading</span>
+            <span className="cargo-bar-container">
+              <span className="cargo-bracket-edge">[</span>
+              <span className="cargo-track">
+                <span ref={equalsRef} className="cargo-equals-stream" aria-hidden="true">
+                  {EQUALS_STRING}
+                </span>
+                <span ref={arrowRef} className="cargo-arrow-glide" aria-hidden="true">
+                  &gt;
+                </span>
               </span>
-              <span ref={arrowRef} className="cargo-arrow-glide" aria-hidden="true">
-                &gt;
-              </span>
+              <span className="cargo-bracket-edge">]</span>
             </span>
-            <span className="cargo-bracket-edge">]</span>
-          </span>
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </aside>
   );
 };
