@@ -128,10 +128,12 @@ export const MidiPreview: React.FC<MidiPreviewProps> = ({ embedded = false }) =>
 
         <audio
           ref={audioRef}
-          src="/audio/gatekeeper_main.mp3"
           preload="auto"
           onEnded={handleEnded}
-        />
+        >
+          <source src="/audio/gatekeeper_main.opus" type="audio/ogg; codecs=opus" />
+          <source src="/audio/gatekeeper_main.mp3" type="audio/mpeg" />
+        </audio>
       </button>
     </section>
   );

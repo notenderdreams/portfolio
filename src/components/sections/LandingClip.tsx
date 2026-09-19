@@ -40,6 +40,7 @@ export const LandingClip: React.FC<LandingClipProps> = ({ embedded = false }) =>
             preload="auto"
             disablePictureInPicture
           >
+            <source src="/video/clip-preview.webm" type="video/webm" />
             <source src="/video/clip-preview.mp4" type="video/mp4" />
           </video>
         </div>

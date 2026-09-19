@@ -427,6 +427,25 @@ export const OriginSection: React.FC = () => {
   const storyBackdropRef = useRef<HTMLDivElement>(null);
   const [activeStoryIcon, setActiveStoryIcon] = useState(-1);
   const [isMusicTitleShown, setIsMusicTitleShown] = useState(false);
+  const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+
+  useEffect(() => {
+    const backdrop = storyBackdropRef.current;
+    if (!backdrop) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShouldLoadVideo(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '400px' }
+    );
+
+    observer.observe(backdrop);
+    return () => observer.disconnect();
+  }, []);
 
   useLayoutEffect(() => {
     const section = sectionRef.current;
@@ -542,9 +561,11 @@ export const OriginSection: React.FC = () => {
 
       <div className="about-story" ref={storyRef}>
         <div ref={storyBackdropRef} className="about-story-backdrop" aria-hidden="true">
-          <video className="about-story-video" autoPlay muted loop playsInline preload="metadata">
-            <source src="/video/story-ascii-animation.mp4" type="video/mp4" />
-          </video>
+          {shouldLoadVideo && (
+            <video className="about-story-video" autoPlay muted loop playsInline>
+              <source src="/video/story-ascii-animation.mp4" type="video/mp4" />
+            </video>
+          )}
         </div>
         <div className="about-story-content">
           <p className="about-origin-story">
